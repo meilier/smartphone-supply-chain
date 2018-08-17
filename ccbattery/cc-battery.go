@@ -10,20 +10,20 @@ import (
 	pb "github.com/hyperledger/fabric/protos/peer"
 )
 
-
 type MaterialChaincode struct {
 }
 
-type MaterilaInfo struct{
-	Type 	 		 string `json:"Type"`
-	Capacity 		 string `json:"Capacity"`
+type MaterilaInfo struct {
+	Type             string `json:"Type"`
+	Capacity         string `json:"Capacity"`
 	Applicable_model string `json:"Applicable_model"`
-	Performance		 string `json:"Performance"`
-	Purchaser		 string `json:"Purchaser"`
+	Performance      string `json:"Performance"`
+	Purchaser        string `json:"Purchaser"`
 }
+
 func (t *MaterialChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
 	fmt.Println("ex02 Init")
-	var A string    
+	var A string
 	var Aval int
 	var err error
 
@@ -51,14 +51,13 @@ func (t *MaterialChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response
 	return shim.Error("Invalid invoke function name. Expecting \"record\" \"query\"")
 }
 
-
 func (t *MaterialChaincode) record(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	var B string 
-	var Bval int 
+	var B string
+	var Bval int
 
-	var record = MaterilaInfo{Type:args[1],Capacity:args[2],Applicable_model:args[3],Performance:args[4],Purchaser:args[5]}
+	var record = MaterilaInfo{Type: args[1], Capacity: args[2], Applicable_model: args[3], Performance: args[4], Purchaser: args[5]}
 
-	recordbyte,_ := json.Marshal(record)
+	recordbyte, _ := json.Marshal(record)
 	err := stub.PutState(args[0], recordbyte)
 	if err != nil {
 		return shim.Error(err.Error())
@@ -66,14 +65,14 @@ func (t *MaterialChaincode) record(stub shim.ChaincodeStubInterface, args []stri
 
 	B = "Total"
 	Bvalbytes, err := stub.GetState(B)
-    Bval, _ = strconv.Atoi(string(Bvalbytes))
+	Bval, _ = strconv.Atoi(string(Bvalbytes))
 
 	Bval += 1
 
 	err = stub.PutState(B, []byte(strconv.Itoa(Bval)))
-        if err != nil {
-                return shim.Error(err.Error())
-        }
+	if err != nil {
+		return shim.Error(err.Error())
+	}
 
 	return shim.Success(nil)
 }
@@ -81,7 +80,6 @@ func (t *MaterialChaincode) record(stub shim.ChaincodeStubInterface, args []stri
 func (t *MaterialChaincode) query(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	var A string // Entities
 	var err error
-
 
 	A = args[0]
 
