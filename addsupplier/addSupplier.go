@@ -56,10 +56,18 @@ func (t *AddSupplierChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Respo
 // ============================================================
 func (t *AddSupplierChaincode) addSupplier(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
 	if len(args) != 3 {
-		return shim.Error("Incorrect number of arguments. Expecting 4")
+		return shim.Error("Incorrect number of arguments. Expecting 3")
 	}
 	var ccompany CompanyInfo
 	var record = BaseCompanyInfo{Name: args[1], Location: args[2]}
+
+	// Get the state from the ledger first
+	ccompanyBeforAsBytes, err := APIstub.GetState(args[0])
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+	json.Unmarshal(ccompanyBeforAsBytes, &ccompany)
+
 	ccompany.ConcreteCompanyInfo = append(ccompany.ConcreteCompanyInfo, record)
 
 	ccompanyAsBytes, _ := json.Marshal(ccompany)
@@ -90,6 +98,6 @@ func (t *AddSupplierChaincode) getSupplier(APIstub shim.ChaincodeStubInterface, 
 func main() {
 	err := shim.Start(new(AddSupplierChaincode))
 	if err != nil {
-		fmt.Printf("Error starting Consensual Letter chaincode: %s", err)
+		fmt.Printf("Error starting AddSupplier chaincode: %s", err)
 	}
 }
