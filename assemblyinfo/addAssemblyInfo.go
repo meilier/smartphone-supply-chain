@@ -1,5 +1,5 @@
 /*
-This chaincode is implemented to add First-tier suppliers to ledger.
+This chaincode is implemented to add assembly info to ledger.
 */
 
 package main
@@ -16,36 +16,32 @@ import (
 	pb "github.com/hyperledger/fabric/protos/peer"
 )
 
-//AddSupplierChaincode chaincode implement
-type AddSupplierChaincode struct {
+//AddAssemblyInfoChaincode chaincode implement
+type AddAssemblyInfoChaincode struct {
 }
 
-//CompanyInfo define the company structure, with x properties.  Structure tags are used by encoding/json library
-type CompanyInfo struct {
-	ConcreteCompanyInfo []BaseCompanyInfo `json:"concretecompanyinfo"`
-}
-
-//BaseCompanyInfo define basic company info
-type BaseCompanyInfo struct {
+//AssemblyInfo define basic assembly information in factory
+type AssemblyInfo struct {
 	Name     string `json:"name"`
 	Location string `json:"location"`
+	Manager  string `json:"manager"`
 }
 
 //Init init fuction
-func (t *AddSupplierChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
+func (t *AddAssemblyInfoChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
 	return shim.Success(nil)
 }
 
 // Invoke function
-func (t *AddSupplierChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
+func (t *AddAssemblyInfoChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	fmt.Println("ex02 Invoke")
 	// Retrieve the requested Smart Contract function , arguments and transient
 	function, args := stub.GetFunctionAndParameters()
 	// Route to the appropriate handler function to interact with the ledger appropriately
-	if function == "addSupplier" {
-		return t.addSupplier(stub, args)
-	} else if function == "getSupplier" {
-		return t.getSupplier(stub, args)
+	if function == "addAssemblyInfo" {
+		return t.addAssemblyInfo(stub, args)
+	} else if function == "getAssemblyInfo" {
+		return t.getAssemblyInfo(stub, args)
 	}
 	return shim.Error("Invalid invoke function name. Expecting \"addRecord\" \"getRecord\"")
 }
@@ -54,41 +50,39 @@ func (t *AddSupplierChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Respo
 // // update First-Tier Suppliers information
 // // key smartisan U2 pro - battery
 // ============================================================
-func (t *AddSupplierChaincode) addSupplier(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *AddAssemblyInfoChaincode) addAssemblyInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
 	if len(args) != 3 {
 		return shim.Error("Incorrect number of arguments. Expecting 4")
 	}
-	var ccompany CompanyInfo
-	var record = BaseCompanyInfo{Name: args[1], Location: args[2]}
-	ccompany.ConcreteCompanyInfo = append(ccompany.ConcreteCompanyInfo, record)
+	var assemblyinfo AssemblyInfo
 
-	ccompanyAsBytes, _ := json.Marshal(ccompany)
-	APIstub.PutState(args[0], ccompanyAsBytes)
+	assemblyInfoAsBytes, _ := json.Marshal(assemblyinfo)
+	APIstub.PutState(args[0], assemblyInfoAsBytes)
 
 	return shim.Success(nil)
 
 }
 
-func (t *AddSupplierChaincode) getSupplier(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *AddAssemblyInfoChaincode) getAssemblyInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}
 
 	// Get the state from the ledger
-	ccompanyAsBytes, err := APIstub.GetState(args[0])
+	assemblyInfoAsBytes, err := APIstub.GetState(args[0])
 
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 
-	return shim.Success(ccompanyAsBytes)
+	return shim.Success(assemblyInfoAsBytes)
 }
 
-// ======================================AddSupplierChaincode=============================================
+// ======================================AddAssemblyInfoChaincode=============================================
 // Main
 // ===================================================================================
 func main() {
-	err := shim.Start(new(AddSupplierChaincode))
+	err := shim.Start(new(AddAssemblyInfoChaincode))
 	if err != nil {
 		fmt.Printf("Error starting Consensual Letter chaincode: %s", err)
 	}
