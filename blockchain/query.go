@@ -13,7 +13,7 @@ func (setup *FabricSetup) QuerySupplier() (string, error) {
 	var args []string
 	args = append(args, "smartisan-u2-pro-zuzhuang")
 
-	response, err := setup.client.Query(channel.Request{ChaincodeID: setup.cc, Fcn: "getSupplier", Args: [][]byte{[]byte(args[0])}})
+	response, err := setup.client.Query(channel.Request{ChaincodeID: setup.Cc, Fcn: "getSupplier", Args: [][]byte{[]byte(args[0])}})
 	if err != nil {
 		return "", fmt.Errorf("failed to query: %v", err)
 	}

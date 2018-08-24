@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/chainHero/heroes-service/web/controllers"
+	"github.com/meilier/smartphone-supply-chain/web/controllers"
 )
 
 func Serve(app *controllers.Application) {

@@ -14,9 +14,13 @@ func (app *Application) RequestHandler(w http.ResponseWriter, r *http.Request) {
 		Success:       false,
 		Response:      false,
 	}
+	var passargs []string
 	if r.FormValue("submitted") == "true" {
-		helloValue := r.FormValue("hello")
-		txid, err := app.Fabric.InvokeSupplier(helloValue)
+		nameValue := r.FormValue("cname")
+		locationVaule := r.FormValue("clocation")
+		passargs = append(passargs, nameValue)
+		passargs = append(passargs, locationVaule)
+		txid, err := app.Fabric.InvokeSupplier(passargs)
 		if err != nil {
 			http.Error(w, "Unable to invoke hello in the blockchain", 500)
 		}

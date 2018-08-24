@@ -13,10 +13,10 @@ import (
 
 // FabricSetup implementation
 type FabricSetup struct {
-	user        string
-	secret      string
-	channelName string
-	cc          string
+	User        string
+	Secret      string
+	ChannelName string
+	Cc          string
 	ConfigFile  string
 	initialized bool
 	client      *channel.Client
@@ -42,7 +42,7 @@ func (setup *FabricSetup) Initialize() error {
 	setup.setupLogLevel()
 	setup.enrollUser(sdk)
 
-	clientChannelContext := setup.sdk.ChannelContext(setup.channelName, fabsdk.WithUser(setup.user))
+	clientChannelContext := setup.sdk.ChannelContext(setup.ChannelName, fabsdk.WithUser(setup.User))
 
 	fmt.Println("\n====== Chaincode =========")
 
@@ -61,21 +61,21 @@ func (setup *FabricSetup) enrollUser(sdk *fabsdk.FabricSDK) {
 		fmt.Printf("Failed to create msp client: %s\n", err)
 	}
 
-	_, err = mspClient.GetSigningIdentity(setup.user)
+	_, err = mspClient.GetSigningIdentity(setup.User)
 	if err == msp.ErrUserNotFound {
 		fmt.Println("Going to enroll user")
-		err = mspClient.Enroll(setup.user, msp.WithSecret(setup.secret))
+		err = mspClient.Enroll(setup.User, msp.WithSecret(setup.Secret))
 
 		if err != nil {
 			fmt.Printf("Failed to enroll user: %s\n", err)
 		} else {
-			fmt.Printf("Success enroll user: %s\n", setup.user)
+			fmt.Printf("Success enroll user: %s\n", setup.User)
 		}
 
 	} else if err != nil {
 		fmt.Printf("Failed to get user: %s\n", err)
 	} else {
-		fmt.Printf("User %s already enrolled, skip enrollment.\n", setup.user)
+		fmt.Printf("User %s already enrolled, skip enrollment.\n", setup.User)
 	}
 }
 

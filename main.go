@@ -3,19 +3,19 @@ package main
 import (
 	"fmt"
 
-	"github.com/chainHero/heroes-service/blockchain"
-	"github.com/chainHero/heroes-service/web"
-	"github.com/chainHero/heroes-service/web/controllers"
+	"github.com/meilier/smartphone-supply-chain/blockchain"
+	"github.com/meilier/smartphone-supply-chain/web"
+	"github.com/meilier/smartphone-supply-chain/web/controllers"
 )
 
 func main() {
 	// Definition of the Fabric SDK properties
 	fSetup := blockchain.FabricSetup{
-		user : "user1"
-		secret : "arclabw401"
-		channelName : "supplychannel"
-		cc : "addsupplier"
-		ConfigFile: "connection-profile.yaml",
+		User:        "user1",
+		Secret:      "arclabw401",
+		ChannelName: "supplychannel",
+		Cc:          "addsupplier",
+		ConfigFile:  "connection-profile.yaml",
 	}
 
 	// Initialization of the Fabric SDK from the previously set properties
