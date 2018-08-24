@@ -14,6 +14,8 @@ func (app *Application) RequestHandler(w http.ResponseWriter, r *http.Request) {
 		Success:       false,
 		Response:      false,
 	}
+
+	//befor send request we need to check session
 	var passargs []string
 	if r.FormValue("submitted") == "true" {
 		nameValue := r.FormValue("cname")

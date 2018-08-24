@@ -33,7 +33,6 @@ type OrdererConfig struct {
 // PeerConfig defines a peer configuration
 type PeerConfig struct {
 	URL         string
-	EventURL    string
 	GRPCOptions map[string]interface{}
 	TLSCACerts  endpoint.TLSConfig
 }
@@ -66,9 +65,10 @@ type ChannelPolicies struct {
 
 //QueryChannelConfigPolicy defines opts for channelConfigBlock
 type QueryChannelConfigPolicy struct {
-	MinResponses int
-	MaxTargets   int
-	RetryOpts    retry.Opts
+	MinResponses   int
+	MaxTargets     int
+	QueryDiscovery int
+	RetryOpts      retry.Opts
 }
 
 // PeerChannelConfig defines the peer capabilities
@@ -86,10 +86,12 @@ type MatchConfig struct {
 
 	// these are used for hostname mapping
 	URLSubstitutionExp                  string
-	EventURLSubstitutionExp             string
 	SSLTargetOverrideURLSubstitutionExp string
 	MappedHost                          string
 
 	// this is used for Name mapping instead of hostname mappings
 	MappedName string
+
+	//IgnoreEndpoint option to exclude given entity from any kind of search or from entity list
+	IgnoreEndpoint bool
 }

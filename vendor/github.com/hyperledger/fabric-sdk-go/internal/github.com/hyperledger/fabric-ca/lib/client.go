@@ -126,7 +126,7 @@ func (c *Client) Init() error {
 
 		c.csp = cfg.CSP
 		// Create http.Client object and associate it with this client
-		err = c.initHTTPClient()
+		err = c.initHTTPClient(cfg.ServerName)
 		if err != nil {
 			return err
 		}
@@ -137,7 +137,7 @@ func (c *Client) Init() error {
 	return nil
 }
 
-func (c *Client) initHTTPClient() error {
+func (c *Client) initHTTPClient(serverName string) error {
 	tr := new(http.Transport)
 	if c.Config.TLS.Enabled {
 		log.Info("TLS Enabled")
@@ -148,6 +148,9 @@ func (c *Client) initHTTPClient() error {
 		}
 		// set the default ciphers
 		tlsConfig.CipherSuites = tls.DefaultCipherSuites
+		//set the host name override
+		tlsConfig.ServerName = serverName
+
 		tr.TLSClientConfig = tlsConfig
 	}
 	c.httpClient = &http.Client{Transport: tr}
@@ -166,7 +169,7 @@ func (c *Client) GenCSR(req *api.CSRInfo, id string) ([]byte, core.Key, error) {
 	cr := c.newCertificateRequest(req)
 	cr.CN = id
 
-	if cr.KeyRequest == nil {
+	if (cr.KeyRequest == nil) || (cr.KeyRequest.Size() == 0 && cr.KeyRequest.Algo() == "") {
 		cr.KeyRequest = newCfsslBasicKeyRequest(api.NewBasicKeyRequest())
 	}
 
@@ -207,20 +210,20 @@ func (c *Client) net2LocalCAInfo(net *common.CAInfoResponseNet, local *GetCAInfo
 	if err != nil {
 		return errors.WithMessage(err, "Failed to decode CA chain")
 	}
-	// if net.IssuerPublicKey != "" {
-	// 	ipk, err := util.B64Decode(net.IssuerPublicKey)
-	// 	if err != nil {
-	// 		return errors.WithMessage(err, "Failed to decode issuer public key")
-	// 	}
-	// 	local.IssuerPublicKey = ipk
-	// }
-	// if net.IssuerRevocationPublicKey != "" {
-	// 	rpk, err := util.B64Decode(net.IssuerRevocationPublicKey)
-	// 	if err != nil {
-	// 		return errors.WithMessage(err, "Failed to decode issuer revocation key")
-	// 	}
-	// 	local.IssuerRevocationPublicKey = rpk
-	// }
+	if net.IssuerPublicKey != "" {
+		ipk, err := util.B64Decode(net.IssuerPublicKey)
+		if err != nil {
+			return errors.WithMessage(err, "Failed to decode issuer public key")
+		}
+		local.IssuerPublicKey = ipk
+	}
+	if net.IssuerRevocationPublicKey != "" {
+		rpk, err := util.B64Decode(net.IssuerRevocationPublicKey)
+		if err != nil {
+			return errors.WithMessage(err, "Failed to decode issuer revocation key")
+		}
+		local.IssuerRevocationPublicKey = rpk
+	}
 	local.CAName = net.CAName
 	local.CAChain = caChain
 	local.Version = net.Version

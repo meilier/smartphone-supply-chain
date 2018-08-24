@@ -39,9 +39,10 @@ type ChannelPolicies struct {
 
 //QueryChannelConfigPolicy defines opts for channelConfigBlock
 type QueryChannelConfigPolicy struct {
-	MinResponses int
-	MaxTargets   int
-	RetryOpts    retry.Opts
+	MinResponses   int
+	MaxTargets     int
+	QueryDiscovery int
+	RetryOpts      retry.Opts
 }
 
 // PeerChannelConfig defines the peer capabilities
@@ -83,7 +84,6 @@ type OrdererConfig struct {
 // PeerConfig defines a peer configuration
 type PeerConfig struct {
 	URL         string
-	EventURL    string
 	GRPCOptions map[string]interface{}
 	TLSCACert   *x509.Certificate
 }

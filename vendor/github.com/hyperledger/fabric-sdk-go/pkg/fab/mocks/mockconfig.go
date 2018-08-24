@@ -30,7 +30,8 @@ type MockConfig struct {
 	customPeerCfg          *fab.PeerConfig
 	customOrdererCfg       *fab.OrdererConfig
 	customRandomOrdererCfg *fab.OrdererConfig
-	EvtServiceType         fab.EventServiceType
+	EvtServiceConfig       fab.EventServiceConfig
+	CustomTLSCACertPool    fab.CertPool
 }
 
 // NewMockCryptoConfig ...
@@ -72,8 +73,8 @@ func (c *MockConfig) Client() *msp.ClientConfig {
 	}
 
 	if c.mutualTLSEnabled {
-		key := endpoint.TLSConfig{Path: "../../../test/fixtures/config/mutual_tls/client_sdk_go-key.pem"}
-		cert := endpoint.TLSConfig{Path: "../../../test/fixtures/config/mutual_tls/client_sdk_go.pem"}
+		key := endpoint.TLSConfig{Path: "../../../pkg/core/config/testdata/certs/client_sdk_go-key.pem"}
+		cert := endpoint.TLSConfig{Path: "../../../pkg/core/config/testdata/certs/client_sdk_go.pem"}
 
 		err := key.LoadBytes()
 		if err != nil {
@@ -145,6 +146,8 @@ func (c *MockConfig) PeerConfig(nameOrURL string) (*fab.PeerConfig, bool) {
 func (c *MockConfig) TLSCACertPool() fab.CertPool {
 	if c.errorCase {
 		return &mockfab.MockCertPool{Err: errors.New("just to test error scenario")}
+	} else if c.CustomTLSCACertPool != nil {
+		return c.CustomTLSCACertPool
 	}
 	return &mockfab.MockCertPool{CertPool: x509.NewCertPool()}
 }
@@ -238,7 +241,14 @@ func (c *MockConfig) NetworkConfig() *fab.NetworkConfig {
 
 // ChannelConfig returns the channel configuration
 func (c *MockConfig) ChannelConfig(name string) (*fab.ChannelEndpointConfig, bool) {
-	return &fab.ChannelEndpointConfig{Policies: fab.ChannelPolicies{}}, true
+	queryDiscovery := 1
+	chPeers, ok := c.ChannelPeers(name)
+	if ok && len(chPeers) > 0 {
+		queryDiscovery = len(chPeers)
+	}
+	return &fab.ChannelEndpointConfig{Policies: fab.ChannelPolicies{QueryChannelConfig: fab.QueryChannelConfigPolicy{
+		QueryDiscovery: queryDiscovery,
+	}}}, true
 }
 
 // ChannelPeers returns the channel peers configuration
@@ -303,9 +313,12 @@ func (c *MockConfig) TLSClientCerts() []tls.Certificate {
 	return nil
 }
 
-// EventServiceType returns the type of event service client to use
-func (c *MockConfig) EventServiceType() fab.EventServiceType {
-	return c.EvtServiceType
+// EventServiceConfig returns the type of event service client to use
+func (c *MockConfig) EventServiceConfig() fab.EventServiceConfig {
+	if c.EvtServiceConfig != nil {
+		return c.EvtServiceConfig
+	}
+	return &MockEventServiceConfig{}
 }
 
 // Lookup gets the Value from config file by Key
@@ -318,4 +331,27 @@ func (c *MockConfig) Lookup(key string) (interface{}, bool) {
 		return nil, false
 	}
 	return value, true
+}
+
+// MockEventServiceConfig contains configuration options for the event service
+type MockEventServiceConfig struct {
+	LagThreshold          int
+	ReconnectLagThreshold int
+	HeightMonitorPeriod   time.Duration
+}
+
+// BlockHeightLagThreshold returns the block height lag threshold.
+func (c *MockEventServiceConfig) BlockHeightLagThreshold() int {
+	return c.LagThreshold
+}
+
+// ReconnectBlockHeightLagThreshold sets the ReconnectBlockHeightLagThreshold.
+func (c *MockEventServiceConfig) ReconnectBlockHeightLagThreshold() int {
+	return c.ReconnectLagThreshold
+}
+
+// BlockHeightMonitorPeriod is the period in which the connected peer's block height is monitored. Note that this
+// value is only relevant if reconnectBlockHeightLagThreshold >0.
+func (c *MockEventServiceConfig) BlockHeightMonitorPeriod() time.Duration {
+	return c.HeightMonitorPeriod
 }

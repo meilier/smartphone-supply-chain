@@ -7,6 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 package dynamicdiscovery
 
 import (
+	"math/rand"
+
 	discclient "github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/discovery/client"
 	coptions "github.com/hyperledger/fabric-sdk-go/pkg/common/options"
 	contextAPI "github.com/hyperledger/fabric-sdk-go/pkg/common/providers/context"
@@ -21,20 +23,23 @@ import (
 // are currently joined to the given channel.
 type ChannelService struct {
 	*service
-	channelID string
+	channelID  string
+	membership fab.ChannelMembership
 }
 
 // NewChannelService creates a Discovery Service to query the list of member peers on a given channel.
-func NewChannelService(ctx contextAPI.Client, channelID string, opts ...coptions.Opt) (*ChannelService, error) {
+func NewChannelService(ctx contextAPI.Client, membership fab.ChannelMembership, channelID string, opts ...coptions.Opt) (*ChannelService, error) {
 	logger.Debug("Creating new dynamic discovery service")
 	s := &ChannelService{
-		channelID: channelID,
+		channelID:  channelID,
+		membership: membership,
 	}
 	s.service = newService(ctx.EndpointConfig(), s.queryPeers, opts...)
 	err := s.service.initialize(ctx)
 	if err != nil {
 		return nil, err
 	}
+
 	return s, nil
 }
 
@@ -72,17 +77,18 @@ func (s *ChannelService) queryPeers() ([]fab.Peer, error) {
 }
 
 func (s *ChannelService) getTargets(ctx contextAPI.Client) ([]fab.PeerConfig, error) {
-	// TODO: The number of peers to query should be retrieved from the channel policy.
-	// This will done in a future patch.
-	chpeers, ok := ctx.EndpointConfig().ChannelPeers(s.channelID)
+	chPeers, ok := ctx.EndpointConfig().ChannelPeers(s.channelID)
 	if !ok {
-		return nil, errors.Errorf("failed to get peer configs for channel [%s]", s.channelID)
+		return nil, errors.Errorf("failed to get channel peer configs for channel [%s]", s.channelID)
 	}
-	targets := make([]fab.PeerConfig, len(chpeers))
-	for i := 0; i < len(targets); i++ {
-		targets[i] = chpeers[i].NetworkPeer.PeerConfig
+
+	chConfig, ok := ctx.EndpointConfig().ChannelConfig(s.channelID)
+	if !ok {
+		return nil, errors.Errorf("failed to get channel endpoint configs for channel [%s]", s.channelID)
 	}
-	return targets, nil
+
+	//pick number of peers given in channel policy
+	return pickRandomNPeerConfigs(chPeers, chConfig.Policies.QueryChannelConfig.QueryDiscovery), nil
 }
 
 // evaluate validates the responses and returns the peers
@@ -103,7 +109,48 @@ func (s *ChannelService) evaluate(ctx contextAPI.Client, responses []fabdiscover
 			logger.Warn(lastErr.Error())
 			continue
 		}
-		return asPeers(ctx, endpoints), nil
+		return s.asPeers(ctx, endpoints), nil
 	}
 	return nil, lastErr
+}
+
+func (s *ChannelService) asPeers(ctx contextAPI.Client, endpoints []*discclient.Peer) []fab.Peer {
+	var peers []fab.Peer
+	for _, endpoint := range endpoints {
+		peer, ok := asPeer(ctx, endpoint)
+		if !ok {
+			continue
+		}
+
+		//check if cache is updated with tlscert if this is a new org joined and membership is not done yet updating cache
+		if s.membership.ContainsMSP(peer.MSPID()) {
+			peers = append(peers, &peerEndpoint{
+				Peer:        peer,
+				blockHeight: endpoint.StateInfoMessage.GetStateInfo().GetProperties().LedgerHeight,
+			})
+		}
+	}
+	return peers
+}
+
+type peerEndpoint struct {
+	fab.Peer
+	blockHeight uint64
+}
+
+func (p *peerEndpoint) BlockHeight() uint64 {
+	return p.blockHeight
+}
+
+//pickRandomNPeerConfigs picks N random  unique peer configs from given channel peer list
+func pickRandomNPeerConfigs(chPeers []fab.ChannelPeer, n int) []fab.PeerConfig {
+
+	var result []fab.PeerConfig
+	for _, index := range rand.Perm(len(chPeers)) {
+		result = append(result, chPeers[index].PeerConfig)
+		if len(result) == n {
+			break
+		}
+	}
+	return result
 }

@@ -88,19 +88,38 @@ type EndpointConfig interface {
 	ChannelPeers(name string) ([]ChannelPeer, bool)
 	ChannelOrderers(name string) ([]OrdererConfig, bool)
 	TLSCACertPool() CertPool
-	EventServiceType() EventServiceType
+	EventServiceConfig() EventServiceConfig
 	TLSClientCerts() []tls.Certificate
 	CryptoConfigPath() string
+}
+
+// EventServiceConfig specifies configuration options for the event service
+type EventServiceConfig interface {
+	// BlockHeightLagThreshold returns the block height lag threshold. This value is used for choosing a peer
+	// to connect to. If a peer is lagging behind the most up-to-date peer by more than the given number of
+	// blocks then it will be excluded from selection.
+	// If set to 0 then only the most up-to-date peers are considered.
+	// If set to -1 then all peers (regardless of block height) are considered for selection.
+	BlockHeightLagThreshold() int
+
+	// ReconnectBlockHeightLagThreshold - if >0 then the event client will disconnect from the peer if the peer's
+	// block height falls behind the specified number of blocks and will reconnect to a better performing peer.
+	// If set to 0 (default) then the peer will not disconnect based on block height.
+	// NOTE: Setting this value too low may cause the event client to disconnect/reconnect too frequently, thereby
+	// affecting performance.
+	ReconnectBlockHeightLagThreshold() int
+
+	// BlockHeightMonitorPeriod is the period in which the connected peer's block height is monitored. Note that this
+	// value is only relevant if reconnectBlockHeightLagThreshold >0.
+	BlockHeightMonitorPeriod() time.Duration
 }
 
 // TimeoutType enumerates the different types of outgoing connections
 type TimeoutType int
 
 const (
-	// EndorserConnection connection timeout
-	EndorserConnection TimeoutType = iota
-	// EventHubConnection connection timeout
-	EventHubConnection
+	// PeerConnection connection timeout
+	PeerConnection TimeoutType = iota
 	// EventReg connection timeout
 	EventReg
 	// Query timeout
@@ -137,18 +156,6 @@ const (
 	SelectionServiceRefresh
 )
 
-// EventServiceType specifies the type of event service to use
-type EventServiceType int
-
-const (
-	// AutoDetectEventServiceType uses channel capabilities to determine which event service to use
-	AutoDetectEventServiceType EventServiceType = iota
-	// DeliverEventServiceType uses the Deliver Service for block and filtered-block events
-	DeliverEventServiceType
-	// EventHubEventServiceType uses the Event Hub for block events
-	EventHubEventServiceType
-)
-
 // Providers represents the SDK configured service providers context.
 type Providers interface {
 	LocalDiscoveryProvider() LocalDiscoveryProvider
@@ -161,5 +168,8 @@ type Providers interface {
 // cert pool implementation.
 type CertPool interface {
 	// Get returns the cert pool, optionally adding the provided certs
-	Get(certs ...*x509.Certificate) (*x509.CertPool, error)
+	Get() (*x509.CertPool, error)
+	//Add allows adding certificates to CertPool
+	//Call Get() after Add() to get the updated certpool
+	Add(certs ...*x509.Certificate)
 }

@@ -8,6 +8,8 @@ import (
 	"github.com/meilier/smartphone-supply-chain/web/controllers"
 )
 
+var Global = "myvalue"
+
 func main() {
 	// Definition of the Fabric SDK properties
 	fSetup := blockchain.FabricSetup{
