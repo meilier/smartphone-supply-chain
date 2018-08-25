@@ -5,7 +5,7 @@ import (
 )
 
 func (app *Application) RequestHandler(w http.ResponseWriter, r *http.Request) {
-	data := &struct {
+	data := struct {
 		TransactionId string
 		Success       bool
 		Response      bool
