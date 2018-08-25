@@ -11,11 +11,9 @@ func (app *Application) HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, "Unable to query the blockchain", 500)
 	}
+	var data map[string]interface{}
+	data = make(map[string]interface{})
+	data["SupplierInfo"] = supplierValue
 
-	data := struct {
-		SupplierInfo string
-	}{
-		SupplierInfo: supplierValue,
-	}
 	renderTemplate(w, r, "home.html", data)
 }

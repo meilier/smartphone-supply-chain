@@ -1,6 +1,7 @@
 package webutil
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gorilla/securecookie"
@@ -22,7 +23,10 @@ func (t *MSession) GetUserName(request *http.Request) (userName string) {
 		if err = MySession.cookieHandler.Decode("session", cookie.Value, &cookieValue); err == nil {
 			userName = cookieValue["name"]
 		}
+		fmt.Println("getusername cookie :", cookie)
 	}
+
+	fmt.Println(MySession)
 	return userName
 }
 
@@ -37,8 +41,10 @@ func (t *MSession) SetSession(userName string, response http.ResponseWriter) {
 			Value: encoded,
 			Path:  "/",
 		}
+		fmt.Println("setsession cookie :", cookie)
 		http.SetCookie(response, cookie)
 	}
+	fmt.Println(MySession)
 }
 
 func (t *MSession) ClearSession(response http.ResponseWriter) {
@@ -48,5 +54,7 @@ func (t *MSession) ClearSession(response http.ResponseWriter) {
 		Path:   "/",
 		MaxAge: -1,
 	}
+	fmt.Println("clearsession cookie :", cookie)
+	fmt.Println(MySession)
 	http.SetCookie(response, cookie)
 }

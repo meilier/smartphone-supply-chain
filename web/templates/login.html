@@ -6,24 +6,36 @@
 </div>
 <h1>Login</h1>
 
-<form class="form-inline" action="login.html" method="post">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" id="usernameValue" placeholder="enter username..." name="username">
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="text" class="form-control" id="passwordValue" placeholder="enter password..." name="password">
-    </div>
-    <select name="org">
-        <option value="smartphone">Smartphone</option>
-        <option value="supplier">Supplier</option>
-        <option value="assembly">Assembly</option>
-        <option value="logistics">Logistics</option>
-        <option value="store">Store</option>
-      </select>
-    <input type="hidden" name="submitted" value="true">
-    <button type="submit" class="btn btn-default">Send the request</button>
+<form class="form-horizontal" role="form" action="login.html" method="post">
+	<div class="form-group">
+		<label for="uname" class="col-sm-2 control-label">username</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" id="usernameValue" placeholder="please input your username" name="username">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="pword" class="col-sm-2 control-label">password</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" id="passwordValue"  placeholder="please input you password" name="password">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="lastname" class="col-sm-2 control-label">orginazation</label>
+		<div class="col-sm-10">
+					<select class= "form-control"name="org">
+						<option value="smartphone">Smartphone</option>
+						<option value="supplier">Supplier</option>
+						<option value="assembly">Assembly</option>
+						<option value="logistics">Logistics</option>
+						<option value="store">Store</option>
+      				</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<input type="hidden" name="submitted" value="true">
+			<button type="submit" class="btn btn-default">Login</button>
+		</div>
+	</div>
 </form>
-
 {{end}}

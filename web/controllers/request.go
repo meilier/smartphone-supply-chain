@@ -5,15 +5,9 @@ import (
 )
 
 func (app *Application) RequestHandler(w http.ResponseWriter, r *http.Request) {
-	data := struct {
-		TransactionId string
-		Success       bool
-		Response      bool
-	}{
-		TransactionId: "",
-		Success:       false,
-		Response:      false,
-	}
+
+	var data map[string]interface{}
+	data = make(map[string]interface{})
 
 	//befor send request we need to check session
 	var passargs []string
@@ -26,9 +20,9 @@ func (app *Application) RequestHandler(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			http.Error(w, "Unable to invoke hello in the blockchain", 500)
 		}
-		data.TransactionId = txid
-		data.Success = true
-		data.Response = true
+		data["TransactionId"] = txid
+		data["Success"] = true
+		data["Response"] = true
 	}
 	renderTemplate(w, r, "request.html", data)
 }
