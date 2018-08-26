@@ -54,7 +54,7 @@ func (t *AddAssemblyInfoChaincode) addAssemblyInfo(APIstub shim.ChaincodeStubInt
 	if len(args) != 3 {
 		return shim.Error("Incorrect number of arguments. Expecting 4")
 	}
-	var assemblyinfo AssemblyInfo
+	var assemblyinfo = AssemblyInfo{Name: args[1], Location: args[2], Manager: args[3]}
 
 	assemblyInfoAsBytes, _ := json.Marshal(assemblyinfo)
 	APIstub.PutState(args[0], assemblyInfoAsBytes)
