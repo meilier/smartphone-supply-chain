@@ -17,10 +17,10 @@ func (app *Application) LoginHandler(w http.ResponseWriter, r *http.Request) {
 		pword := r.FormValue("password")
 		org := r.FormValue("org")
 		println(uname, pword, org)
-		if uname == "wzx" && pword == "arclabw401wzx" {
+		if uname == "wzx" && pword == "arclabw401wzx" && org == "smartphone" {
 			//login successfully set session and redirect to home page
 			//登录成功设置session
-			webutil.MySession.SetSession(uname, w)
+			webutil.MySession.SetSession(uname, org, w)
 			http.Redirect(w, r, "./home.html", 302)
 			return
 		} else {

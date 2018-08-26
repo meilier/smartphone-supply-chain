@@ -15,5 +15,7 @@ func (app *Application) HomeHandler(w http.ResponseWriter, r *http.Request) {
 	data = make(map[string]interface{})
 	data["SupplierInfo"] = supplierValue
 
+	//different nav bar for different organizations
+
 	renderTemplate(w, r, "home.html", data)
 }

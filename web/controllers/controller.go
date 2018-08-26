@@ -48,15 +48,18 @@ func renderTemplate(w http.ResponseWriter, r *http.Request, templateName string,
 
 	//get session
 	uname := webutil.MySession.GetUserName(r)
+	uorg := webutil.MySession.GetOrgName(r)
 	fmt.Println("uname is ", uname)
 	if uname != "" {
 		//set data
 		newData["Username"] = uname
 		newData["LoginStatus"] = true
+		newData["OrgName"] = uorg
 	} else {
 		//redirect to login
 		http.Redirect(w, r, "./login.html", 302)
 		newData["Username"] = ""
+		newData["OrgName"] = ""
 		newData["LoginStatus"] = false
 	}
 	fmt.Println("second")

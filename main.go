@@ -27,10 +27,10 @@ func init() {
 	Accout["wyh"] = "arclabw401wyh"
 	Accout["yzx"] = "arclabw401yzx"
 	Accout["xjx"] = "arclabw401xjx"
-	smsc := CodeInfo{"wzx", "supplychannel", "addsupplier", "./profile/smartphone/connection-profile-wzx.yaml"}
-	smac := CodeInfo{"wzx", "assemblychannel", "assembly", "./profile/smartphone/connection-profile-wzx.yaml"}
-	Orgnization["smartphone"] = append(Orgnization["smartphone"], smsc)
-	Orgnization["smartphone"] = append(Orgnization["smartphone"], smac)
+	// smsc := CodeInfo{"wzx", "supplychannel", "addsupplier", "./profile/smartphone/connection-profile-wzx.yaml"}
+	// smac := CodeInfo{"wzx", "assemblychannel", "assembly", "./profile/smartphone/connection-profile-wzx.yaml"}
+	// Orgnization["smartphone"] = append(Orgnization["smartphone"], smsc)
+	// Orgnization["smartphone"] = append(Orgnization["smartphone"], smac)
 
 	// su := CodeInfo{"lwh", "supplychannel", "addsupplier", "./profile/supplier/connection-profile-lwh.yaml"}
 	// Orgnization["smartphone"] = append(Orgnization["smartphone"], smsc)
