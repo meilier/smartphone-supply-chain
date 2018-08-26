@@ -67,11 +67,11 @@ func (t *AddLogisticsInfoChaincode) addLogistics(APIstub shim.ChaincodeStubInter
 	if err != nil {
 		return shim.Error(err.Error())
 	}
-	json.Unmarshal(transitInfoBeforAsBytes, &bTransit)
+	json.Unmarshal(transitInfoBeforAsBytes, &transitInfoBefor)
 
 	transitInfoBefor.ConcreteTransitInfo = append(transitInfoBefor.ConcreteTransitInfo, bTransit)
 
-	transitInfoAsBytes, _ := json.Marshal(bTransit)
+	transitInfoAsBytes, _ := json.Marshal(transitInfoBefor)
 	APIstub.PutState(args[0], transitInfoAsBytes)
 
 	return shim.Success(nil)
