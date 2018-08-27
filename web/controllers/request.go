@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-func (app *Application) RequestHandler(w http.ResponseWriter, r *http.Request) {
+func (app *Application) AddSupplierHandler(w http.ResponseWriter, r *http.Request) {
 
 	var data map[string]interface{}
 	data = make(map[string]interface{})
@@ -24,5 +24,5 @@ func (app *Application) RequestHandler(w http.ResponseWriter, r *http.Request) {
 		data["Success"] = true
 		data["Response"] = true
 	}
-	renderTemplate(w, r, "request.html", data)
+	renderTemplate(w, r, "addsupplier.html", data)
 }

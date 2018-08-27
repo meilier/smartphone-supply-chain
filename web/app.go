@@ -12,7 +12,7 @@ func Serve(app *controllers.Application) {
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
 	http.HandleFunc("/home.html", app.HomeHandler)
-	http.HandleFunc("/request.html", app.RequestHandler)
+	http.HandleFunc("/addsupplier.html", app.AddSupplierHandler)
 	http.HandleFunc("/register.html", app.RegisterHandler)
 	http.HandleFunc("/login.html", app.LoginHandler)
 	http.HandleFunc("/logout.html", app.LogoutHandler)

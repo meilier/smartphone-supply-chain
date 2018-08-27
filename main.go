@@ -10,6 +10,9 @@ import (
 
 var Accout map[string]string
 
+var AphoneSerialNumber = [5]string{"10000000", "10000001", "10000002", "10000003", "10000004"}
+var XphoneSerialNumber = [5]string{"20000000", "20000001", "20000002", "20000003", "20000004"}
+
 type CodeInfo struct {
 	User        string
 	ChannelName string
