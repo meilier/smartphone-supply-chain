@@ -3,12 +3,24 @@
 {{define "body"}}
 <div class="container">
 
-</div>
-<h1>Home</h1>
+<div class="table-responsive">
+    <table class="table">
+        <caption class="h1">SupplierInfo</caption>
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                 <th>Company Location</th>
+            </tr>
+        </thead>
+         <tbody>
+            {{range $info := .SupplierInfo}}
+            <tr>
+                <td>{{.Name}}</td>
+                <td>{{.Location}}</td>
+            </tr>
+            {{end}}
+        </tbody>
+     </table>
+</div>  	
 
-<pre>
-    SupplierInfo: {{.SupplierInfo}}
-</pre>
-
-<a href="request.html">Change the Supplier Info</a>
 {{end}}
