@@ -16,10 +16,9 @@ type FabricSetup struct {
 	User        string
 	Secret      string
 	ChannelName string
-	Cc          string
 	ConfigFile  string
 	initialized bool
-	client      *channel.Client
+	client      map[string]*channel.Client
 	sdk         *fabsdk.FabricSDK
 }
 
@@ -46,7 +45,31 @@ func (setup *FabricSetup) Initialize() error {
 
 	fmt.Println("\n====== Chaincode =========")
 
-	setup.client, _ = channel.New(clientChannelContext)
+	cfg, err := setup.sdk.Config()
+	if err != nil {
+		fmt.Println("Failed to get sdk config. Maybe connection-profile.yaml is invalid.")
+		return err
+	}
+	channels, ok := cfg.Lookup("channels")
+	if !ok {
+		fmt.Println("Failed to get channels from connection-profile.yaml.")
+	}
+
+	channelsCfg, ok := channels.(map[string]interface{})
+
+	setup.ChannelNames = make([]string, 0)
+	setup.clients = make(map[string]*channel.Client)
+	if ok {
+		for ch := range channelsCfg {
+			setup.ChannelNames = append(setup.ChannelNames, ch)
+			clientChannelContext := setup.sdk.ChannelContext(ch, fabsdk.WithUser(setup.UserName))
+			client, err := channel.New(clientChannelContext)
+			if err != nil {
+				return err
+			}
+			setup.clients[ch] = client
+		}
+	}
 
 	fmt.Println("SDK created")
 	fmt.Println("Initialization Successful")

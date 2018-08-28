@@ -17,6 +17,8 @@ func (app *Application) LoginHandler(w http.ResponseWriter, r *http.Request) {
 		pword := r.FormValue("password")
 		org := r.FormValue("org")
 		println(uname, pword, org)
+		//according uname, comparing pword with map[uname]
+
 		if uname == "wzx" && pword == "arclabw401wzx" && org == "smartphone" {
 			//login successfully set session and redirect to home page
 			//登录成功设置session

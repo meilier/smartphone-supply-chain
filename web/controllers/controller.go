@@ -13,7 +13,7 @@ import (
 )
 
 type Application struct {
-	Fabric *blockchain.FabricSetup
+	Fabric map[string]*blockchain.FabricSetup
 }
 
 func renderTemplate(w http.ResponseWriter, r *http.Request, templateName string, data interface{}) {
