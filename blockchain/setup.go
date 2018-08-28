@@ -18,7 +18,7 @@ type FabricSetup struct {
 	ChannelName string
 	ConfigFile  string
 	initialized bool
-	client      map[string]*channel.Client
+	clients     map[string]*channel.Client
 	sdk         *fabsdk.FabricSDK
 }
 
@@ -41,8 +41,6 @@ func (setup *FabricSetup) Initialize() error {
 	setup.setupLogLevel()
 	setup.enrollUser(sdk)
 
-	clientChannelContext := setup.sdk.ChannelContext(setup.ChannelName, fabsdk.WithUser(setup.User))
-
 	fmt.Println("\n====== Chaincode =========")
 
 	cfg, err := setup.sdk.Config()
@@ -57,16 +55,17 @@ func (setup *FabricSetup) Initialize() error {
 
 	channelsCfg, ok := channels.(map[string]interface{})
 
-	setup.ChannelNames = make([]string, 0)
+	//setup.ChannelNames = make([]string, 0)
 	setup.clients = make(map[string]*channel.Client)
 	if ok {
 		for ch := range channelsCfg {
-			setup.ChannelNames = append(setup.ChannelNames, ch)
-			clientChannelContext := setup.sdk.ChannelContext(ch, fabsdk.WithUser(setup.UserName))
+			//setup.ChannelNames = append(setup.ChannelNames, ch)
+			clientChannelContext := setup.sdk.ChannelContext(ch, fabsdk.WithUser(setup.User))
 			client, err := channel.New(clientChannelContext)
 			if err != nil {
 				return err
 			}
+			fmt.Println("add new channel client", ch)
 			setup.clients[ch] = client
 		}
 	}

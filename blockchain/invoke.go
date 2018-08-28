@@ -2,25 +2,23 @@ package blockchain
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
 )
 
-//InvokeSupplier invoke addsupplier
-func (setup *FabricSetup) InvokeSupplier(value []string) (string, error) {
-
+//InvokeCC add info to chain
+func (setup *FabricSetup) InvokeCC(channelName, chainCode, fcn string, newValue []string) (string, error) {
+	fmt.Println("Invoke cc with new value:", newValue)
+	client := setup.clients[channelName]
 	// Prepare arguments
-	var args []string
-	args = append(args, "addSupplier")
-	args = append(args, "smartisan-u2-pro-zuzhuang")
-	args = append(args, value[0])
-	args = append(args, value[1])
-
+	invokeArgs := [][]byte{[]byte(strings.Join(newValue, ""))}
 	// Create a request (proposal) and send it
-	response, err := setup.client.Execute(channel.Request{ChaincodeID: setup.Cc, Fcn: args[0], Args: [][]byte{[]byte(args[1]), []byte(args[2]), []byte(args[3])}})
+	response, err := client.Execute(channel.Request{ChaincodeID: chainCode, Fcn: fcn, Args: invokeArgs})
+
 	if err != nil {
 		return "", fmt.Errorf("failed to move funds: %v", err)
 	}
-
 	return string(response.TransactionID), nil
+
 }

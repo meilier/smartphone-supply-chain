@@ -27,8 +27,9 @@ type CompanyInfo struct {
 
 //BaseCompanyInfo define basic company info
 type BaseCompanyInfo struct {
-	Name     string `json:"name"`
-	Location string `json:"location"`
+	SupplierType string `json:"suppliertype"`
+	Name         string `json:"name"`
+	Location     string `json:"location"`
 }
 
 //Init init fuction
@@ -55,11 +56,11 @@ func (t *AddSupplierChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Respo
 // // key smartisan U2 pro - battery
 // ============================================================
 func (t *AddSupplierChaincode) addSupplier(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
-	if len(args) != 3 {
-		return shim.Error("Incorrect number of arguments. Expecting 3")
+	if len(args) != 4 {
+		return shim.Error("Incorrect number of arguments. Expecting 4")
 	}
 	var ccompany CompanyInfo
-	var record = BaseCompanyInfo{Name: args[1], Location: args[2]}
+	var record = BaseCompanyInfo{SupplierType: args[1], Name: args[2], Location: args[3]}
 
 	// Get the state from the ledger first
 	ccompanyBeforAsBytes, err := APIstub.GetState(args[0])

@@ -56,11 +56,11 @@ func renderTemplate(w http.ResponseWriter, r *http.Request, templateName string,
 		newData["LoginStatus"] = true
 		newData["OrgName"] = uorg
 	} else {
-		//redirect to login
-		http.Redirect(w, r, "./login.html", 302)
 		newData["Username"] = ""
 		newData["OrgName"] = ""
 		newData["LoginStatus"] = false
+		//redirect to login
+		http.Redirect(w, r, "./login.html", 302)
 	}
 	fmt.Println("second")
 	if err := resultTemplate.ExecuteTemplate(w, "layout", newData); err != nil {

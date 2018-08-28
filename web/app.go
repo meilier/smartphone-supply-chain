@@ -18,7 +18,7 @@ func Serve(app *controllers.Application) {
 	http.HandleFunc("/logout.html", app.LogoutHandler)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "/home.html", http.StatusTemporaryRedirect)
+		http.Redirect(w, r, "/login.html", http.StatusTemporaryRedirect)
 	})
 
 	fmt.Println("Listening (http://localhost:3000/) ...")
