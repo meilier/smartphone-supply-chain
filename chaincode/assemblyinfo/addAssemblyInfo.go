@@ -25,6 +25,7 @@ type AssemblyInfo struct {
 	Name     string `json:"name"`
 	Location string `json:"location"`
 	Manager  string `json:"manager"`
+	Date     string `json:"date"`
 }
 
 //Init init fuction
@@ -51,10 +52,10 @@ func (t *AddAssemblyInfoChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.R
 // // key smartisan U2 pro - battery
 // ============================================================
 func (t *AddAssemblyInfoChaincode) addAssemblyInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
-	if len(args) != 3 {
-		return shim.Error("Incorrect number of arguments. Expecting 4")
+	if len(args) != 5 {
+		return shim.Error("Incorrect number of arguments. Expecting 5")
 	}
-	var assemblyinfo = AssemblyInfo{Name: args[1], Location: args[2], Manager: args[3]}
+	var assemblyinfo = AssemblyInfo{Name: args[1], Location: args[2], Manager: args[3], Date: args[4]}
 
 	assemblyInfoAsBytes, _ := json.Marshal(assemblyinfo)
 	APIstub.PutState(args[0], assemblyInfoAsBytes)

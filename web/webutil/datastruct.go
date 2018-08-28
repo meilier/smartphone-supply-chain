@@ -11,6 +11,13 @@ type BaseCompanyInfo struct {
 	Location string `json:"location"`
 }
 
+type AssemblyInfo struct {
+	Name     string `json:"name"`
+	Location string `json:"location"`
+	Manager  string `json:"manager"`
+	Date     string `json:"date"`
+}
+
 var AphoneSerialNumber = [5]string{"10000000", "10000001", "10000002", "10000003", "10000004"}
 var XphoneSerialNumber = [5]string{"20000000", "20000001", "20000002", "20000003", "20000004"}
 
@@ -34,7 +41,7 @@ var Orgnization map[string][]OrgMember
 
 func init() {
 	Orgnization = make(map[string][]OrgMember)
-
+	//smartphone
 	wzxop := make(map[string]BaseFuncInfo)
 	wzxop["AddSupplier"] = BaseFuncInfo{"supplychannel", "addsupplier", "addSupplier"}
 	wzxop["GetSupplier"] = BaseFuncInfo{"supplychannel", "addsupplier", "getSupplier"}
@@ -42,6 +49,7 @@ func init() {
 	mwzx := OrgMember{"wzx", "arclabw401wzx", wzxChannel, wzxop, "./profile/smartphone/connection-profile-wzx.yaml"}
 	Orgnization["smartphone"] = append(Orgnization["smartphone"], mwzx)
 
+	//supplier
 	lwhop := make(map[string]BaseFuncInfo)
 	lwhop["AddSupplier"] = BaseFuncInfo{"supplychannel", "ccbattery", "record"}
 	lwhop["AddSupplier"] = BaseFuncInfo{"supplychannel", "ccbattery", "query"}
@@ -49,13 +57,15 @@ func init() {
 	mlwh := OrgMember{"lwh", "arclabw401lwh", lwhChannel, wzxop, "./profile/supplier/connection-profile-lwh.yaml"}
 	Orgnization["supplier"] = append(Orgnization["supplier"], mlwh)
 
+	//assembly
 	wyhop := make(map[string]BaseFuncInfo)
-	wyhop["AddSupplier"] = BaseFuncInfo{"supplychannel", "addsupplier", "addSupplier"}
-	wyhop["AddSupplier"] = BaseFuncInfo{"supplychannel", "addsupplier", "getSupplier"}
+	wyhop["AddAssembly"] = BaseFuncInfo{"assemblychannel", "addassembly", "addAssembly"}
+	wyhop["GetAssembly"] = BaseFuncInfo{"assemblychannel", "addassembly", "getAssembly"}
 	wyhChannel := []string{"assemblychannel"}
 	mwyh := OrgMember{"wyh", "arclabw401wyh", wyhChannel, wyhop, "./profile/assembly/connection-profile-wyh.yaml"}
 	Orgnization["assembly"] = append(Orgnization["assembly"], mwyh)
 
+	//logistics
 	yzxop := make(map[string]BaseFuncInfo)
 	yzxop["AddSupplier"] = BaseFuncInfo{"supplychannel", "addsupplier", "addSupplier"}
 	yzxop["AddSupplier"] = BaseFuncInfo{"supplychannel", "addsupplier", "getSupplier"}
@@ -63,6 +73,7 @@ func init() {
 	myzx := OrgMember{"yzx", "arclabw401yzx", yzxChannel, yzxop, "./profile/logistics/connection-profile-yzx.yaml"}
 	Orgnization["logistics"] = append(Orgnization["logistics"], myzx)
 
+	//store
 	xjxop := make(map[string]BaseFuncInfo)
 	xjxop["AddSupplier"] = BaseFuncInfo{"supplychannel", "addsupplier", "addSupplier"}
 	xjxop["AddSupplier"] = BaseFuncInfo{"supplychannel", "addsupplier", "getSupplier"}

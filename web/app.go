@@ -16,6 +16,8 @@ func Serve(app *controllers.Application) {
 	http.HandleFunc("/register.html", app.RegisterHandler)
 	http.HandleFunc("/login.html", app.LoginHandler)
 	http.HandleFunc("/logout.html", app.LogoutHandler)
+	http.HandleFunc("/getassembly.html", app.GetAssemblyHandler)
+	http.HandleFunc("/addassembly.html", app.AddAssemblyHandler)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/login.html", http.StatusTemporaryRedirect)
