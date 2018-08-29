@@ -12,6 +12,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
+
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
 )
@@ -20,12 +21,9 @@ import (
 type AddSupplierChaincode struct {
 }
 
-
-type BatchInfo struct{
-    Batch []string `json:"batch"`
+type BatchInfo struct {
+	Batch []string `json:"batch"`
 }
-
-
 
 //CompanyInfo define the company structure, with x properties.  Structure tags are used by encoding/json library
 type CompanyInfo struct {
@@ -54,7 +52,6 @@ func (t *AddSupplierChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Respo
 	function, args := stub.GetFunctionAndParameters()
 	// Route to the appropriate handler function to interact with the ledger appropriately
 
-
 	if function == "addSupplier" {
 		return t.addSupplier(stub, args)
 	} else if function == "getSupplier" {
@@ -63,23 +60,23 @@ func (t *AddSupplierChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Respo
 		return t.updateSupplier(stub, args)
 	} else if function == "deleteSupplier" {
 		return t.deleteSupplier(stub, args)
-	} else if function == "addBatchInfo"{
-        return t.addBatchInfo(stub,args)
-    } else if function == "getBatchInfo"{
-        return t.getBatchInfo(stub,args)
-    } else if function == "updateBatchInfo"{
-        return t.updateBatchInfo(stub,args)
-    } else if function == "deleteBatchInfo"{
-        return t.deleteBatchInfo(stub,args)
-    } else if function == "addCompanyInfo"{
-        return t.addCompanyInfo(stub,args)
-    } else if function == "getCompanyInfo"{
-        return t.getCompanyInfo(stub,args)
-    } else if function == "updateCompanyInfo"{
-        return t.updateCompanyInfo(stub,args)
-    } else if function == "deleteCompanyInfo"{
-        return t.deleteCompanyInfo(stub,args)
-    }
+	} else if function == "addBatchInfo" {
+		return t.addBatchInfo(stub, args)
+	} else if function == "getBatchInfo" {
+		return t.getBatchInfo(stub, args)
+	} else if function == "updateBatchInfo" {
+		return t.updateBatchInfo(stub, args)
+	} else if function == "deleteBatchInfo" {
+		return t.deleteBatchInfo(stub, args)
+	} else if function == "addCompanyInfo" {
+		return t.addCompanyInfo(stub, args)
+	} else if function == "getCompanyInfo" {
+		return t.getCompanyInfo(stub, args)
+	} else if function == "updateCompanyInfo" {
+		return t.updateCompanyInfo(stub, args)
+	} else if function == "deleteCompanyInfo" {
+		return t.deleteCompanyInfo(stub, args)
+	}
 	return shim.Error("Invalid invoke function name. Expecting \"addRecord\" \"getRecord\"")
 }
 
@@ -88,21 +85,21 @@ func (t *AddSupplierChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Respo
 // // key smartisan U2 pro - battery
 // ============================================================
 func (t *AddSupplierChaincode) addBatchInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
-    if len(args)!=2{
-        return shim.Error("Incorrect number of arguments. Expecting 2")
-    }
-    var batchInfo BatchInfo
-    batch:=args[1]
-    batchInfoAsBytes,err := APIstub.GetState(args[0])
-    if err!= nil {
-        return shim.Error(err.Error())
-    }
-    json.Unmarshal(batchInfoAsBytes,&batchInfo)
-    batchInfo.Batch=append(batchInfo.Batch,batch)
-    batchInfoAsBytes,_ = json.Marshal(batchInfo)
-    APIstub.PutState(args[0],batchInfoAsBytes)
+	if len(args) != 2 {
+		return shim.Error("Incorrect number of arguments. Expecting 2")
+	}
+	var batchInfo BatchInfo
+	batch := args[1]
+	batchInfoAsBytes, err := APIstub.GetState(args[0])
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+	json.Unmarshal(batchInfoAsBytes, &batchInfo)
+	batchInfo.Batch = append(batchInfo.Batch, batch)
+	batchInfoAsBytes, _ = json.Marshal(batchInfo)
+	APIstub.PutState(args[0], batchInfoAsBytes)
 
-    return shim.Success(nil)
+	return shim.Success(nil)
 
 }
 
@@ -134,22 +131,20 @@ func (t *AddSupplierChaincode) updateBatchInfo(APIstub shim.ChaincodeStubInterfa
 
 	var batchInfo BatchInfo
 	batch := batchInfo.Batch
-	json.Unmarshal(batchInfoAsBytes,&batch)
+	json.Unmarshal(batchInfoAsBytes, &batch)
 
-	for i,_ := range(batch){
-		if strconv.Itoa(i)==args[1] {
+	for i, _ := range batch {
+		if strconv.Itoa(i) == args[1] {
 			batch[i] = args[2]
 		}
 	}
 
-	batchInfoAsBytes , _ = json.Marshal(batch)
+	batchInfoAsBytes, _ = json.Marshal(batch)
 
-	APIstub.PutState(args[0],batchInfoAsBytes)
+	APIstub.PutState(args[0], batchInfoAsBytes)
 
 	return shim.Success([]byte("Delete successfully"))
 }
-
-
 
 func (t *AddSupplierChaincode) deleteBatchInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
 	if len(args) != 1 {
@@ -165,8 +160,6 @@ func (t *AddSupplierChaincode) deleteBatchInfo(APIstub shim.ChaincodeStubInterfa
 
 	return shim.Success([]byte("Delete successfully"))
 }
-
-
 
 func (t *AddSupplierChaincode) addSupplier(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
 	if len(args) != 4 {
@@ -199,14 +192,14 @@ func (t *AddSupplierChaincode) getSupplier(APIstub shim.ChaincodeStubInterface, 
 	// Get the state from the ledger
 	ccompanyAsBytes, err := APIstub.GetState(args[0])
 	var ccompany CompanyInfo
-	json.Unmarshal(ccompanyAsBytes,&ccompany)
+	json.Unmarshal(ccompanyAsBytes, &ccompany)
 
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 
-	supplierInfo:=ccompany.Subcomponent
-	supplierInfoAsbytes,_:=json.Marshal(supplierInfo)
+	supplierInfo := ccompany.Subcomponent
+	supplierInfoAsbytes, _ := json.Marshal(supplierInfo)
 
 	return shim.Success(supplierInfoAsbytes)
 }
@@ -216,29 +209,29 @@ func (t *AddSupplierChaincode) updateSupplier(APIstub shim.ChaincodeStubInterfac
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}
 
-	ccompanyAsBytes,err:=APIstub.GetState(args[0])
+	ccompanyAsBytes, err := APIstub.GetState(args[0])
 
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 
 	var ccompany CompanyInfo
-	json.Unmarshal(ccompanyAsBytes,&ccompany)
-	supplier:=ccompany.Subcomponent
+	json.Unmarshal(ccompanyAsBytes, &ccompany)
+	supplier := ccompany.Subcomponent
 
 	var newSupplier []SubComponentInfo
-	for _,v:=range(supplier) {
-		if v.SubName!= args[1] {
-			newSupplier=append(newSupplier,v)
-		}else{
-			newSub:=SubComponentInfo{SubName:args[1],SubCompanyName:args[2],SubLocation:args[3]}
-			newSupplier=append(newSupplier,newSub)
+	for _, v := range supplier {
+		if v.SubName != args[1] {
+			newSupplier = append(newSupplier, v)
+		} else {
+			newSub := SubComponentInfo{SubName: args[1], SubCompanyName: args[2], SubLocation: args[3]}
+			newSupplier = append(newSupplier, newSub)
 		}
 	}
 
-	ccompany.Subcomponent=newSupplier
-	ccompanyAsBytes,_=json.Marshal(ccompany)
-	APIstub.PutState(args[0],ccompanyAsBytes)
+	ccompany.Subcomponent = newSupplier
+	ccompanyAsBytes, _ = json.Marshal(ccompany)
+	APIstub.PutState(args[0], ccompanyAsBytes)
 
 	return shim.Success([]byte("success delete"))
 
@@ -251,46 +244,42 @@ func (t *AddSupplierChaincode) deleteSupplier(APIstub shim.ChaincodeStubInterfac
 	}
 	//args[0] key,args[1] subName
 	// Get the state from the ledger
-	ccompanyAsBytes,err:=APIstub.GetState(args[0])
+	ccompanyAsBytes, err := APIstub.GetState(args[0])
 
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 
 	var ccompany CompanyInfo
-	json.Unmarshal(ccompanyAsBytes,&ccompany)
-	supplier:=ccompany.Subcomponent
+	json.Unmarshal(ccompanyAsBytes, &ccompany)
+	supplier := ccompany.Subcomponent
 
 	var newSupplier []SubComponentInfo
-	for _,v:=range(supplier) {
-		if v.SubName!= args[1] {
-			newSupplier=append(newSupplier,v)
+	for _, v := range supplier {
+		if v.SubName != args[1] {
+			newSupplier = append(newSupplier, v)
 		}
 	}
 
-	ccompany.Subcomponent=newSupplier
-	ccompanyAsBytes,_=json.Marshal(ccompany)
-	APIstub.PutState(args[0],ccompanyAsBytes)
+	ccompany.Subcomponent = newSupplier
+	ccompanyAsBytes, _ = json.Marshal(ccompany)
+	APIstub.PutState(args[0], ccompanyAsBytes)
 
 	return shim.Success([]byte("success delete"))
 }
-
-
-
-
 
 func (t *AddSupplierChaincode) addCompanyInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
 	if len(args) != 4 {
 		return shim.Error("Incorrect number of arguments. Expecting 4")
 	}
-	cc:=CompanyInfo{Name: args[1], Location: args[2], ComponentInfo: args[3]}
+	cc := CompanyInfo{Name: args[1], Location: args[2], ComponentInfo: args[3]}
 	var ccompany CompanyInfo
 	ccompanyBeforAsBytes, err := APIstub.GetState(args[0])
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 	json.Unmarshal(ccompanyBeforAsBytes, &ccompany)
-	cc.Subcomponent=ccompany.Subcomponent
+	cc.Subcomponent = ccompany.Subcomponent
 
 	ccompanyAsBytes, _ := json.Marshal(cc)
 	APIstub.PutState(args[0], ccompanyAsBytes)
@@ -343,7 +332,6 @@ func (t *AddSupplierChaincode) deleteCompanyInfo(APIstub shim.ChaincodeStubInter
 
 	return shim.Success([]byte("successfully delete"))
 }
-
 
 // ======================================AddSupplierChaincode=============================================
 // Main

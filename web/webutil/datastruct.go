@@ -41,23 +41,68 @@ var Orgnization map[string][]OrgMember
 
 func init() {
 	Orgnization = make(map[string][]OrgMember)
-	//smartphone
+	//-----------smartphone-------------
 	wzxop := make(map[string]BaseFuncInfo)
-	wzxop["AddSupplier"] = BaseFuncInfo{"supplychannel", "addsupplier", "addSupplier"}
-	wzxop["GetSupplier"] = BaseFuncInfo{"supplychannel", "addsupplier", "getSupplier"}
-	wzxChannel := []string{"supplychannel", "assemblychannel", "logisticschannel", "salechannel"}
+
+	//for batch
+	wzxop["AddBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "addBatchInfo"}
+	wzxop["GetBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "getBatchInfo"}
+
+	wzxop["AddBatchDisplay"] = BaseFuncInfo{"displaychannel", "adddisplay", "addBatchInfo"}
+	wzxop["GetBatchDisplay"] = BaseFuncInfo{"displaychannel", "adddisplay", "getBatchInfo"}
+
+	wzxop["AddBatchCpu"] = BaseFuncInfo{"cpuchannel", "addcpu", "addBatchInfo"}
+	wzxop["GetBatchCpu"] = BaseFuncInfo{"cpuchannel", "addcpu", "getBatchInfo"}
+
+	wzxop["AddBatchAssembly"] = BaseFuncInfo{"assemblychannel", "addassembly", "addBatchInfo"}
+	wzxop["GetBatchAssembly"] = BaseFuncInfo{"assemblychannel", "addassembly", "getBatchInfo"}
+
+	wzxop["AddBatchLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "addBatchInfo"}
+	wzxop["GetBatchLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "getBatchInfo"}
+
+	//for supply chain info
+	wzxop["GetBatterytInfo"] = BaseFuncInfo{"batterychannel", "addbattery", "getSupplier"}
+	wzxop["GetDisplayInfo"] = BaseFuncInfo{"displaychannel", "adddisplay", "getSupplier"}
+	wzxop["GetCpuInfo"] = BaseFuncInfo{"cpuchannel", "addcpu", "getSupplier"}
+	wzxop["GetAssemblyInfo"] = BaseFuncInfo{"assemblychannel", "addassembly", "getSupplier"}
+	wzxop["GetLogisticsInfo"] = BaseFuncInfo{"logisticschannel", "addlogistics", "getSupplier"}
+	wzxop["GetStore"] = BaseFuncInfo{"storechannel", "addsale", "getSupplier"}
+
+	wzxChannel := []string{"batterychannel", "displaychannel", "cpuchannel", "assemblychannel", "logisticschannel", "salechannel"}
 	mwzx := OrgMember{"wzx", "arclabw401wzx", wzxChannel, wzxop, "./profile/smartphone/connection-profile-wzx.yaml"}
 	Orgnization["smartphone"] = append(Orgnization["smartphone"], mwzx)
 
-	//supplier
+	//--------------battery---------------
 	lwhop := make(map[string]BaseFuncInfo)
-	lwhop["AddSupplier"] = BaseFuncInfo{"supplychannel", "ccbattery", "record"}
-	lwhop["AddSupplier"] = BaseFuncInfo{"supplychannel", "ccbattery", "query"}
-	lwhChannel := []string{"supplierchannel"}
-	mlwh := OrgMember{"lwh", "arclabw401lwh", lwhChannel, wzxop, "./profile/supplier/connection-profile-lwh.yaml"}
-	Orgnization["supplier"] = append(Orgnization["supplier"], mlwh)
+	lwhop["AddSupplier"] = BaseFuncInfo{"batterychannel", "addbattery", "addSupplier"}
+	lwhop["GetSupplier"] = BaseFuncInfo{"batterychannel", "addbattery", "getSupplier"}
+	lwhop["AddCompanyInfo"] = BaseFuncInfo{"batterychannel", "addbattery", "addCompanyInfo"}
+	lwhop["GetCompanyInfo"] = BaseFuncInfo{"batterychannel", "addbattery", "getCompanyInfo"}
+	lwhChannel := []string{"batterychannel"}
+	mlwh := OrgMember{"lwh", "arclabw401lwh", lwhChannel, lwhop, "./profile/supplier/connection-profile-lwh.yaml"}
+	Orgnization["battery"] = append(Orgnization["battery"], mlwh)
 
-	//assembly
+	//-------------display-----------------
+	lwhop1 := make(map[string]BaseFuncInfo)
+	lwhop1["AddSupplier"] = BaseFuncInfo{"displaychannel", "adddisplay", "addSupplier"}
+	lwhop1["GetSupplier"] = BaseFuncInfo{"displaychannel", "adddisplay", "getSupplier"}
+	lwhop1["AddCompanyInfo"] = BaseFuncInfo{"displaychannel", "adddisplay", "addCompanyInfo"}
+	lwhop1["GetCompanyInfo"] = BaseFuncInfo{"displaychannel", "adddisplay", "getCompanyInfo"}
+	lwhChannel1 := []string{"displaychannel"}
+	mlwh1 := OrgMember{"lwh", "arclabw401lwh", lwhChannel1, lwhop1, "./profile/supplier/connection-profile-lwh.yaml"}
+	Orgnization["display"] = append(Orgnization["display"], mlwh1)
+
+	//--------------cpu------------------
+	lwhop2 := make(map[string]BaseFuncInfo)
+	lwhop2["AddSupplier"] = BaseFuncInfo{"cpuchannel", "addcpu", "addSupplier"}
+	lwhop2["GetSupplier"] = BaseFuncInfo{"cpuchannel", "addcpu", "getSupplier"}
+	lwhop2["AddCompanyInfo"] = BaseFuncInfo{"cpuchannel", "addcpu", "addCompanyInfo"}
+	lwhop2["GetCompanyInfo"] = BaseFuncInfo{"cpuchannel", "addcpu", "getCompanyInfo"}
+	lwhChannel2 := []string{"cpuchannel"}
+	mlwh2 := OrgMember{"lwh", "arclabw401lwh", lwhChannel2, lwhop2, "./profile/supplier/connection-profile-lwh.yaml"}
+	Orgnization["cpu"] = append(Orgnization["cpu"], mlwh2)
+
+	//-------------assembly---------------
 	wyhop := make(map[string]BaseFuncInfo)
 	wyhop["AddAssembly"] = BaseFuncInfo{"assemblychannel", "addassembly", "addAssembly"}
 	wyhop["GetAssembly"] = BaseFuncInfo{"assemblychannel", "addassembly", "getAssembly"}
@@ -65,20 +110,20 @@ func init() {
 	mwyh := OrgMember{"wyh", "arclabw401wyh", wyhChannel, wyhop, "./profile/assembly/connection-profile-wyh.yaml"}
 	Orgnization["assembly"] = append(Orgnization["assembly"], mwyh)
 
-	//logistics
+	//-------------logistics---------------
 	yzxop := make(map[string]BaseFuncInfo)
-	yzxop["AddLogistics"] = BaseFuncInfo{"logisticschannel", "addsupplier", "addSupplier"}
-	yzxop["GetLogistics"] = BaseFuncInfo{"logisticschannel", "addsupplier", "getSupplier"}
+	yzxop["AddLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "addLogistics"}
+	yzxop["GetLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "getLogistics"}
 	yzxChannel := []string{"logisticschannel"}
 	myzx := OrgMember{"yzx", "arclabw401yzx", yzxChannel, yzxop, "./profile/logistics/connection-profile-yzx.yaml"}
 	Orgnization["logistics"] = append(Orgnization["logistics"], myzx)
 
-	//store
+	//---------------sale---------------
 	xjxop := make(map[string]BaseFuncInfo)
-	xjxop["AddSupplier"] = BaseFuncInfo{"supplychannel", "addsupplier", "addSupplier"}
-	xjxop["AddSupplier"] = BaseFuncInfo{"supplychannel", "addsupplier", "getSupplier"}
-	xjxChannel := []string{"supplierchannel"}
+	xjxop["AddSale"] = BaseFuncInfo{"salechannel", "addsale", "addSale"}
+	xjxop["AddSale"] = BaseFuncInfo{"salechannel", "addsale", "getSale"}
+	xjxChannel := []string{"salechannel"}
 	mxjx := OrgMember{"xjx", "arclabw401xjx", xjxChannel, xjxop, "./profile/store/connection-profile-xjx.yaml"}
-	Orgnization["store"] = append(Orgnization["logistics"], mxjx)
+	Orgnization["sale"] = append(Orgnization["sale"], mxjx)
 
 }
