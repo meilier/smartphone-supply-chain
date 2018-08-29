@@ -67,8 +67,8 @@ func init() {
 
 	//logistics
 	yzxop := make(map[string]BaseFuncInfo)
-	yzxop["AddSupplier"] = BaseFuncInfo{"supplychannel", "addsupplier", "addSupplier"}
-	yzxop["AddSupplier"] = BaseFuncInfo{"supplychannel", "addsupplier", "getSupplier"}
+	yzxop["AddLogistics"] = BaseFuncInfo{"logisticschannel", "addsupplier", "addSupplier"}
+	yzxop["GetLogistics"] = BaseFuncInfo{"logisticschannel", "addsupplier", "getSupplier"}
 	yzxChannel := []string{"logisticschannel"}
 	myzx := OrgMember{"yzx", "arclabw401yzx", yzxChannel, yzxop, "./profile/logistics/connection-profile-yzx.yaml"}
 	Orgnization["logistics"] = append(Orgnization["logistics"], myzx)

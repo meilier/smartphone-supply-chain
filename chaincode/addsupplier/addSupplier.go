@@ -22,14 +22,17 @@ type AddSupplierChaincode struct {
 
 //CompanyInfo define the company structure, with x properties.  Structure tags are used by encoding/json library
 type CompanyInfo struct {
-	ConcreteCompanyInfo []BaseCompanyInfo `json:"concretecompanyinfo"`
+	Name          string             `json:"name"`
+	Location      string             `json:"location"`
+	ComponentInfo string             `json:"componentinfo"`
+	Subcomponent  []SubComponentInfo `json:"subcomponent"`
 }
 
-//BaseCompanyInfo define basic company info
-type BaseCompanyInfo struct {
-	SupplierType string `json:"suppliertype"`
-	Name         string `json:"name"`
-	Location     string `json:"location"`
+//
+type SubComponentInfo struct {
+	SubName        string
+	SubCompanyName string
+	SubLocation    string
 }
 
 //Init init fuction
@@ -47,6 +50,10 @@ func (t *AddSupplierChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Respo
 		return t.addSupplier(stub, args)
 	} else if function == "getSupplier" {
 		return t.getSupplier(stub, args)
+	} else if fucntion == "updateSupplier" {
+		return t.updateSupplier(stub, args)
+	} else if function == "deleteSupplier" {
+		return t.deleteSupplier(stub, args)
 	}
 	return shim.Error("Invalid invoke function name. Expecting \"addRecord\" \"getRecord\"")
 }
@@ -79,6 +86,36 @@ func (t *AddSupplierChaincode) addSupplier(APIstub shim.ChaincodeStubInterface, 
 }
 
 func (t *AddSupplierChaincode) getSupplier(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
+	if len(args) != 1 {
+		return shim.Error("Incorrect number of arguments. Expecting 1")
+	}
+
+	// Get the state from the ledger
+	ccompanyAsBytes, err := APIstub.GetState(args[0])
+
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	return shim.Success(ccompanyAsBytes)
+}
+
+func (t *AddSupplierChaincode) updateSupplier(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
+	if len(args) != 1 {
+		return shim.Error("Incorrect number of arguments. Expecting 1")
+	}
+
+	// Get the state from the ledger
+	ccompanyAsBytes, err := APIstub.GetState(args[0])
+
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	return shim.Success(ccompanyAsBytes)
+}
+
+func (t *AddSupplierChaincode) deleteSupplier(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}
