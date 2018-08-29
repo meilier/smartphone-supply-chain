@@ -304,18 +304,22 @@ func (t *AddSupplierChaincode) getCompanyInfo(APIstub shim.ChaincodeStubInterfac
 }
 
 func (t *AddSupplierChaincode) updateCompanyInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
-	if len(args) != 1 {
-		return shim.Error("Incorrect number of arguments. Expecting 1")
+	if len(args) != 4 {
+		return shim.Error("Incorrect number of arguments. Expecting 4")
 	}
-
-	// Get the state from the ledger
-	ccompanyAsBytes, err := APIstub.GetState(args[0])
-
+	cc:=CompanyInfo{Name: args[1], Location: args[2], ComponentInfo: args[3]}
+	var ccompany CompanyInfo
+	ccompanyBeforAsBytes, err := APIstub.GetState(args[0])
 	if err != nil {
 		return shim.Error(err.Error())
 	}
+	json.Unmarshal(ccompanyBeforAsBytes, &ccompany)
+	cc.Subcomponent=ccompany.Subcomponent
 
-	return shim.Success(ccompanyAsBytes)
+	ccompanyAsBytes, _ := json.Marshal(cc)
+	APIstub.PutState(args[0], ccompanyAsBytes)
+
+	return shim.Success(nil)
 }
 
 func (t *AddSupplierChaincode) deleteCompanyInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
