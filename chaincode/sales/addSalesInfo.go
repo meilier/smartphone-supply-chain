@@ -1,5 +1,5 @@
 /*
-This chaincode is implemented to add Logistics to ledger.
+This chaincode is implemented to add sales info to ledger.
 */
 
 package main
@@ -17,46 +17,39 @@ import (
 	pb "github.com/hyperledger/fabric/protos/peer"
 )
 
-//AddLogisticsInfoChaincode chaincode implement
-type AddLogisticsInfoChaincode struct {
+type AddSalesInfoChaincode struct {
 }
 
 type BatchInfo struct {
 	Batch []string `json:"batch"`
 }
 
-//TransitInfo define the transit structure, with x properties.  Structure tags are used by encoding/json library
-type TransitInfo struct {
-	ConcreteTransitInfo []BaseTransitInfo `json:"concretetransitinfo"`
-}
-
-//BaseTransitInfo define basic transit info
-type BaseTransitInfo struct {
+type SalesInfo struct {
 	Name    string `json:"name"`
-	Transit string `json:"transit"`
+	Address string `json:"address"`
 	Manager string `json:"manager"`
 	Date    string `json:"date"`
 }
 
 //Init init fuction
-func (t *AddLogisticsInfoChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
+func (t *AddSalesInfoChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
 	return shim.Success(nil)
 }
 
 // Invoke function
-func (t *AddLogisticsInfoChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
+func (t *AddSalesInfoChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	fmt.Println("ex02 Invoke")
 	// Retrieve the requested Smart Contract function , arguments and transient
 	function, args := stub.GetFunctionAndParameters()
 	// Route to the appropriate handler function to interact with the ledger appropriately
-	if function == "addLogistics" {
-		return t.addLogistics(stub, args)
-	} else if function == "getLogistics" {
-		return t.getLogistics(stub, args)
-	} else if function == "updateLogistics" {
-		return t.updateLogistics(stub, args)
-	} else if function == "deleteLogistics" {
-		return t.deleteLogistics(stub, args)
+	if function == "addSalesInfo" {
+		return t.addSalesInfo(stub, args)
+	} else if function == "getSalesInfo" {
+		return t.getSalesInfo(stub, args)
+	} else if function == "updateSalesInfo" {
+		return t.updateSalesInfo(stub, args)
+	} else if function == "deleteSalesInfo" {
+		return t.deleteSalesInfo(stub, args)
 	} else if function == "addBatchInfo" {
 		return t.addBatchInfo(stub, args)
 	} else if function == "getBatchInfo" {
@@ -74,7 +67,7 @@ func (t *AddLogisticsInfoChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.
 // // key smartisan U2 pro - battery
 // ============================================================
 
-func (t *AddLogisticsInfoChaincode) addBatchInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *AddSalesInfoChaincode) addBatchInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
 	if len(args) != 2 {
 		return shim.Error("Incorrect number of arguments. Expecting 2")
 	}
@@ -93,7 +86,7 @@ func (t *AddLogisticsInfoChaincode) addBatchInfo(APIstub shim.ChaincodeStubInter
 
 }
 
-func (t *AddLogisticsInfoChaincode) getBatchInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *AddSalesInfoChaincode) getBatchInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}
@@ -108,7 +101,7 @@ func (t *AddLogisticsInfoChaincode) getBatchInfo(APIstub shim.ChaincodeStubInter
 	return shim.Success(batchInfoAsBytes)
 }
 
-func (t *AddLogisticsInfoChaincode) updateBatchInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *AddSalesInfoChaincode) updateBatchInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
 	if len(args) != 4 {
 		return shim.Error("Incorrect number of arguments. Expecting 4")
 	}
@@ -168,7 +161,7 @@ func (t *AddLogisticsInfoChaincode) updateBatchInfo(APIstub shim.ChaincodeStubIn
 	return shim.Success([]byte("Update successfully"))
 }
 
-func (t *AddLogisticsInfoChaincode) deleteBatchInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *AddSalesInfoChaincode) deleteBatchInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}
@@ -183,100 +176,68 @@ func (t *AddLogisticsInfoChaincode) deleteBatchInfo(APIstub shim.ChaincodeStubIn
 	return shim.Success([]byte("Delete successfully"))
 }
 
-func (t *AddLogisticsInfoChaincode) addLogistics(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *AddSalesInfoChaincode) addSalesInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
 	if len(args) != 5 {
 		return shim.Error("Incorrect number of arguments. Expecting 5")
 	}
-	var transitInfoBefor TransitInfo
-	var bTransit = BaseTransitInfo{Name: args[1], Transit: args[2], Manager: args[3], Date: args[4]}
+	var salesInfo = SalesInfo{Name: args[1], Address: args[2], Manager: args[3], Date: args[4]}
 
-	// Get the state from the ledger first
-	transitInfoBeforAsBytes, err := APIstub.GetState(args[0])
-	if err != nil {
-		return shim.Error(err.Error())
-	}
-	json.Unmarshal(transitInfoBeforAsBytes, &transitInfoBefor)
-
-	transitInfoBefor.ConcreteTransitInfo = append(transitInfoBefor.ConcreteTransitInfo, bTransit)
-
-	transitInfoAsBytes, _ := json.Marshal(transitInfoBefor)
-	APIstub.PutState(args[0], transitInfoAsBytes)
+	salesInfoAsBytes, _ := json.Marshal(salesInfo)
+	APIstub.PutState(args[0], salesInfoAsBytes)
 
 	return shim.Success(nil)
 
 }
 
-func (t *AddLogisticsInfoChaincode) getLogistics(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *AddSalesInfoChaincode) getSalesInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}
 
 	// Get the state from the ledger
-	transitInfoAsBytes, err := APIstub.GetState(args[0])
+	salesInfoAsBytes, err := APIstub.GetState(args[0])
 
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 
-	return shim.Success(transitInfoAsBytes)
+	return shim.Success(salesInfoAsBytes)
 }
 
-func (t *AddLogisticsInfoChaincode) updateLogistics(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
-	if len(args) != 6 {
-		return shim.Error("Incorrect number of arguments. Expecting 6")
+func (t *AddSalesInfoChaincode) updateSalesInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
+	if len(args) != 5 {
+		return shim.Error("Incorrect number of arguments. Expecting 5")
 	}
-	//args[0] key,args[1] idx,args[2] name,args[3] transit,args[4] data
-	// Get the state from the ledger
+	var salesinfo = SalesInfo{Name: args[1], Address: args[2], Manager: args[3], Date: args[4]}
 
-	idx, err := strconv.Atoi(args[1])
-	if err != nil {
-		return shim.Error(err.Error())
-	}
+	salesInfoAsBytes, _ := json.Marshal(salesinfo)
+	APIstub.PutState(args[0], salesInfoAsBytes)
 
-	transitInfoAsBytes, err := APIstub.GetState(args[0])
-	if err != nil {
-		return shim.Error(err.Error())
-	}
+	return shim.Success(nil)
 
-	var transitInfo TransitInfo
-	json.Unmarshal(transitInfoAsBytes, &transitInfo)
-
-	concretetransitinfo := transitInfo.ConcreteTransitInfo
-
-	for i, _ := range concretetransitinfo {
-		if i == idx {
-			baseTransitInfo := BaseTransitInfo{Name: args[2], Transit: args[3], Manager: args[4], Date: args[5]}
-			concretetransitinfo[i] = baseTransitInfo
-		}
-	}
-	transitInfo.ConcreteTransitInfo = concretetransitinfo
-	transitInfoAsBytes, _ = json.Marshal(transitInfo)
-	APIstub.PutState(args[0], transitInfoAsBytes)
-
-	return shim.Success([]byte("Successfully update"))
 }
 
-func (t *AddLogisticsInfoChaincode) deleteLogistics(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *AddSalesInfoChaincode) deleteSalesInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}
 
-	// Get the state from the ledger
 	err := APIstub.DelState(args[0])
 
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 
-	return shim.Success([]byte("successfully delete"))
+	return shim.Success(nil)
+
 }
 
-// ======================================AddLogisticsInfoChaincode=============================================
+// ======================================AddAssemblyInfoChaincode=============================================
 // Main
 // ===================================================================================
 func main() {
-	err := shim.Start(new(AddLogisticsInfoChaincode))
+	err := shim.Start(new(AddSalesInfoChaincode))
 	if err != nil {
-		fmt.Printf("Error starting AddLogisticsInfo chaincode: %s", err)
+		fmt.Printf("Error starting Consensual Letter chaincode: %s", err)
 	}
 }
