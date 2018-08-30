@@ -80,3 +80,15 @@ func loginTemplate(w http.ResponseWriter, r *http.Request, templateName string, 
 		http.Error(w, http.StatusText(500), 500)
 	}
 }
+
+func queryphoneTemplate(w http.ResponseWriter, r *http.Request, templateName string, data interface{}) {
+	lp := filepath.Join("web", "templates", "layout.html")
+	tp := filepath.Join("web", "templates", templateName)
+
+	resultTemplate, _ := template.ParseFiles(tp, lp)
+
+	if err := resultTemplate.ExecuteTemplate(w, "layout", data); err != nil {
+		fmt.Println(err.Error())
+		http.Error(w, http.StatusText(500), 500)
+	}
+}

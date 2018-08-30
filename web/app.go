@@ -51,6 +51,9 @@ func Serve(app *controllers.Application) {
 		http.Redirect(w, r, "/login.html", http.StatusTemporaryRedirect)
 	})
 
+	//admin
+	http.HandleFunc("/queryphoneinfo.html", app.QueryPhoneHandler)
+
 	fmt.Println("Listening (http://localhost:3000/) ...")
 	http.ListenAndServe(":3000", nil)
 
