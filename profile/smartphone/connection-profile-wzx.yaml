@@ -1,22 +1,22 @@
 version: 1.0.0
 peers:
-  peer2.store.aliyunbaas.com:31521:
-    url: grpcs://peer2.store.aliyunbaas.com:31521
+  peer2.assembly.aliyunbaas.com:31421:
+    url: grpcs://peer2.assembly.aliyunbaas.com:31421
     tlsCACerts:
       pem: |
         -----BEGIN CERTIFICATE-----
-        MIICIDCCAcegAwIBAgIUSTLcqQFLgL8I+4aXnRfTz3sd+1cwCgYIKoZIzj0EAwIw
+        MIICIDCCAcegAwIBAgIUacKTl/gDxBhVdXKlu+Ib5AEaLdQwCgYIKoZIzj0EAwIw
         bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
         emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
-        IFRMUyBSb290IENlcnQwHhcNMTgwODIyMDMyOTAwWhcNMzgwODE3MDMyOTAwWjBt
+        IFRMUyBSb290IENlcnQwHhcNMTgwODI5MTUzMDAwWhcNMzgwODI0MTUzMDAwWjBt
         MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
         aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
-        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABG9HslLRCSZG
-        x2pD4EHOjnJz5veyHx/L0VhcC9LoDm4/gwkzzyqoTsUZ4V6PxSJA3Vd8MoacGHMW
-        1Zy++wZ225yjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
-        MB0GA1UdDgQWBBSenelP+xQ3/3yzwzQ488lqqVmyTTAKBggqhkjOPQQDAgNHADBE
-        AiAu1Qn3ipfo9XmNh0U71tqcImChYvQdEYPL+v0i2BQRHAIgLxlBwQCMbW1tRoJU
-        TXPxn2qIofZBS2qGzkmaO2dmZxo=
+        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABL/kgM5zQVjz
+        yCbuHlXeG3HSuISVxP4zlWabiCHAAHRkl2V3q8+4duG59xNZY7MPGloKMADpudba
+        OiVd3wRY3DajRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
+        MB0GA1UdDgQWBBQtIuLfaMPNRRWBysdwgiCLnAGevDAKBggqhkjOPQQDAgNHADBE
+        AiB2z8JyY4ip39qU4m6w5990WmMvkim7iq26f/h9k+ooVAIgEjSc+qDOedpHZCtm
+        +8I9CFGnwBsA1gby1MoSXY97dGs=
         -----END CERTIFICATE-----
     grpcOptions:
       allow-insecure: false
@@ -24,24 +24,199 @@ peers:
       keep-alive-permit: false
       keep-alive-time: 0s
       keep-alive-timeout: 20s
-      ssl-target-name-override: peer2.store.aliyunbaas.com
+      ssl-target-name-override: peer2.assembly.aliyunbaas.com
+  peer2.sales.aliyunbaas.com:31621:
+    url: grpcs://peer2.sales.aliyunbaas.com:31621
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICITCCAcegAwIBAgIUQpEo83HAnXqr9RitL5m5JPjo3yQwCgYIKoZIzj0EAwIw
+        bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
+        emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
+        IFRMUyBSb290IENlcnQwHhcNMTgwODI5MTUzMDAwWhcNMzgwODI0MTUzMDAwWjBt
+        MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
+        aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
+        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABNAxuN642mcC
+        sbvsfHVI/P+T42NFeQYCrYUykUOFkqGjxWROy28swlIhzGFQls0IXLt/VVXZGQVy
+        Wklp4pbKdK2jRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
+        MB0GA1UdDgQWBBTHHZgdGp6SiHOmJTlBnH6JOUKx8TAKBggqhkjOPQQDAgNIADBF
+        AiEAgKcFPf2JUH+mxpch91pMWJUMhTozTpXd5b6gTiSeLocCIC2ALb8fGuzbpuEf
+        2HFuAKwk47cN7THowYjWRwxK1+e4
+        -----END CERTIFICATE-----
+    grpcOptions:
+      allow-insecure: false
+      fail-fast: false
+      keep-alive-permit: false
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      ssl-target-name-override: peer2.sales.aliyunbaas.com
+  peer1.cpu.aliyunbaas.com:31311:
+    url: grpcs://peer1.cpu.aliyunbaas.com:31311
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICITCCAcegAwIBAgIUCAbcohAXxt04PE6KXKW/rEaF3QwwCgYIKoZIzj0EAwIw
+        bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
+        emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
+        IFRMUyBSb290IENlcnQwHhcNMTgwODI5MTUzMDAwWhcNMzgwODI0MTUzMDAwWjBt
+        MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
+        aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
+        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABIiDw8mMwAD7
+        VHt+BnHKST0ODg9HO+LL5gLBhaM/zpYa7+2PFrwuPt7uowMBZt9YjGi6sRJvwFFz
+        rRcJbFx/t7OjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
+        MB0GA1UdDgQWBBRJ+SzQJ2vXGbh5PrjZlPjlllwGozAKBggqhkjOPQQDAgNIADBF
+        AiEA7TP/GULOK5uyt6M3KD8kkW7nA++C2USz8zFPhesXEfMCIAWwwbgPXCmx/Hqf
+        6IKxpm3tuWCPZEB84kHrQvtZwuCI
+        -----END CERTIFICATE-----
+    grpcOptions:
+      allow-insecure: false
+      fail-fast: false
+      keep-alive-permit: false
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      ssl-target-name-override: peer1.cpu.aliyunbaas.com
+  peer1.display.aliyunbaas.com:31211:
+    url: grpcs://peer1.display.aliyunbaas.com:31211
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICITCCAcegAwIBAgIUAfWWGzONnSLlnV32qRL+tb8wpNgwCgYIKoZIzj0EAwIw
+        bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
+        emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
+        IFRMUyBSb290IENlcnQwHhcNMTgwODI5MTUzMDAwWhcNMzgwODI0MTUzMDAwWjBt
+        MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
+        aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
+        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABMfq07BFSHEG
+        7p8LTgzN6umcXdLO6dkU+IcLeA0fd58MlXDWQDs7HFJiNt2RuiMPOSXNgIvbmxrU
+        5zvOXTDmLemjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
+        MB0GA1UdDgQWBBS5OePPDzDAvm9rYmaqf8UG+u2ePTAKBggqhkjOPQQDAgNIADBF
+        AiEA2WhuuzZ55DJxnMNVc70mL+rzgwBc2J/QhUQQBj2lmAMCIGf43V+3ti0gUP6+
+        0R8tkhZrI66iAe83HXhfZMOnicV9
+        -----END CERTIFICATE-----
+    grpcOptions:
+      allow-insecure: false
+      fail-fast: false
+      keep-alive-permit: false
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      ssl-target-name-override: peer1.display.aliyunbaas.com
+  peer1.sales.aliyunbaas.com:31611:
+    url: grpcs://peer1.sales.aliyunbaas.com:31611
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICITCCAcegAwIBAgIUQpEo83HAnXqr9RitL5m5JPjo3yQwCgYIKoZIzj0EAwIw
+        bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
+        emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
+        IFRMUyBSb290IENlcnQwHhcNMTgwODI5MTUzMDAwWhcNMzgwODI0MTUzMDAwWjBt
+        MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
+        aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
+        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABNAxuN642mcC
+        sbvsfHVI/P+T42NFeQYCrYUykUOFkqGjxWROy28swlIhzGFQls0IXLt/VVXZGQVy
+        Wklp4pbKdK2jRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
+        MB0GA1UdDgQWBBTHHZgdGp6SiHOmJTlBnH6JOUKx8TAKBggqhkjOPQQDAgNIADBF
+        AiEAgKcFPf2JUH+mxpch91pMWJUMhTozTpXd5b6gTiSeLocCIC2ALb8fGuzbpuEf
+        2HFuAKwk47cN7THowYjWRwxK1+e4
+        -----END CERTIFICATE-----
+    grpcOptions:
+      allow-insecure: false
+      fail-fast: false
+      keep-alive-permit: false
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      ssl-target-name-override: peer1.sales.aliyunbaas.com
+  peer1.assembly.aliyunbaas.com:31411:
+    url: grpcs://peer1.assembly.aliyunbaas.com:31411
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICIDCCAcegAwIBAgIUacKTl/gDxBhVdXKlu+Ib5AEaLdQwCgYIKoZIzj0EAwIw
+        bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
+        emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
+        IFRMUyBSb290IENlcnQwHhcNMTgwODI5MTUzMDAwWhcNMzgwODI0MTUzMDAwWjBt
+        MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
+        aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
+        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABL/kgM5zQVjz
+        yCbuHlXeG3HSuISVxP4zlWabiCHAAHRkl2V3q8+4duG59xNZY7MPGloKMADpudba
+        OiVd3wRY3DajRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
+        MB0GA1UdDgQWBBQtIuLfaMPNRRWBysdwgiCLnAGevDAKBggqhkjOPQQDAgNHADBE
+        AiB2z8JyY4ip39qU4m6w5990WmMvkim7iq26f/h9k+ooVAIgEjSc+qDOedpHZCtm
+        +8I9CFGnwBsA1gby1MoSXY97dGs=
+        -----END CERTIFICATE-----
+    grpcOptions:
+      allow-insecure: false
+      fail-fast: false
+      keep-alive-permit: false
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      ssl-target-name-override: peer1.assembly.aliyunbaas.com
+  peer2.cpu.aliyunbaas.com:31321:
+    url: grpcs://peer2.cpu.aliyunbaas.com:31321
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICITCCAcegAwIBAgIUCAbcohAXxt04PE6KXKW/rEaF3QwwCgYIKoZIzj0EAwIw
+        bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
+        emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
+        IFRMUyBSb290IENlcnQwHhcNMTgwODI5MTUzMDAwWhcNMzgwODI0MTUzMDAwWjBt
+        MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
+        aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
+        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABIiDw8mMwAD7
+        VHt+BnHKST0ODg9HO+LL5gLBhaM/zpYa7+2PFrwuPt7uowMBZt9YjGi6sRJvwFFz
+        rRcJbFx/t7OjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
+        MB0GA1UdDgQWBBRJ+SzQJ2vXGbh5PrjZlPjlllwGozAKBggqhkjOPQQDAgNIADBF
+        AiEA7TP/GULOK5uyt6M3KD8kkW7nA++C2USz8zFPhesXEfMCIAWwwbgPXCmx/Hqf
+        6IKxpm3tuWCPZEB84kHrQvtZwuCI
+        -----END CERTIFICATE-----
+    grpcOptions:
+      allow-insecure: false
+      fail-fast: false
+      keep-alive-permit: false
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      ssl-target-name-override: peer2.cpu.aliyunbaas.com
+  peer1.logistics.aliyunbaas.com:31511:
+    url: grpcs://peer1.logistics.aliyunbaas.com:31511
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICITCCAcegAwIBAgIUV4ll/n/UXy4YJsYszn/pzCQqBXYwCgYIKoZIzj0EAwIw
+        bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
+        emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
+        IFRMUyBSb290IENlcnQwHhcNMTgwODI5MTUzMDAwWhcNMzgwODI0MTUzMDAwWjBt
+        MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
+        aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
+        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABFEOG7KG7ZJR
+        Wv6KCWpWHZY3osIgEFF13oAQ4wQHvYWWHwEDz6B1DgN/5x+igpyZFp8QP85ARHfT
+        B4AmMde9FxmjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
+        MB0GA1UdDgQWBBS2ALPsL2+2t9jL4B4NQc2msT3LBjAKBggqhkjOPQQDAgNIADBF
+        AiEA/HNClyEnvYVWTMrKGLFcf7W3rJLcX6fJCbgingLy21kCIBPxQrN9HFsO/4yZ
+        xop+IYBXNoWUby1nMYgm1lgBa/gb
+        -----END CERTIFICATE-----
+    grpcOptions:
+      allow-insecure: false
+      fail-fast: false
+      keep-alive-permit: false
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      ssl-target-name-override: peer1.logistics.aliyunbaas.com
   peer1.smartphone.aliyunbaas.com:31111:
     url: grpcs://peer1.smartphone.aliyunbaas.com:31111
     tlsCACerts:
       pem: |
         -----BEGIN CERTIFICATE-----
-        MIICIDCCAcegAwIBAgIUImZVWtMIEfQjp2eJbv1NU+P9H+EwCgYIKoZIzj0EAwIw
+        MIICITCCAcegAwIBAgIUH9ISj0hubhBpfdVUNkTWvOBvz1gwCgYIKoZIzj0EAwIw
         bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
         emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
-        IFRMUyBSb290IENlcnQwHhcNMTgwODIyMDMyOTAwWhcNMzgwODE3MDMyOTAwWjBt
+        IFRMUyBSb290IENlcnQwHhcNMTgwODMwMDEyMjAwWhcNMzgwODI1MDEyMjAwWjBt
         MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
         aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
-        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABFfiXow0fL2q
-        cRCMdZiWJ2Z5EsYVxv9qaIF2m2rrbt1MZxdpwo7Oxv++TR5K9Q6Z0wIjFH7PL87q
-        xcBBby+As4WjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
-        MB0GA1UdDgQWBBTelTUpnVi5HOK+BaMUpwOM3TkcczAKBggqhkjOPQQDAgNHADBE
-        AiEA8BsSWED+OLlYNdaBDfoepURng9CjAyP87ntLGmwVFnMCH1e363VaMdyPjH6U
-        Cjyt0OmgNChdP74EnhA+vLqq6Fc=
+        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABKkK+7IQYFJZ
+        py2eH4T1S1K6R0h9PJvddp8516CY8ZQVIkpetq/r+nUzh+A9Mz+PZMkrPus2hzmr
+        mPy7A45AzVqjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
+        MB0GA1UdDgQWBBTayp6r3j4uwmc4EVunu3ExObShszAKBggqhkjOPQQDAgNIADBF
+        AiEAhfkFnC8PVCd5SiIl2P+ynYn7ssDJzEGFiHWhN14YCHUCIGPFjOOTGPgR8Mhu
+        DRQ35zeuv4SrK9KaRBG2SkPzFg+Z
         -----END CERTIFICATE-----
     grpcOptions:
       allow-insecure: false
@@ -51,23 +226,23 @@ peers:
       keep-alive-timeout: 20s
       ssl-target-name-override: peer1.smartphone.aliyunbaas.com
     eventUrl: grpcs://peer1.smartphone.aliyunbaas.com:31113
-  peer2.assembly.aliyunbaas.com:31321:
-    url: grpcs://peer2.assembly.aliyunbaas.com:31321
+  peer2.battery.aliyunbaas.com:31121:
+    url: grpcs://peer2.battery.aliyunbaas.com:31121
     tlsCACerts:
       pem: |
         -----BEGIN CERTIFICATE-----
-        MIICITCCAcegAwIBAgIUc0I35Tvk9uHp/+zbxA6MrMYo5lgwCgYIKoZIzj0EAwIw
+        MIICIDCCAcegAwIBAgIUNhwogVRD3R98Y6iapylxwv0Qr+YwCgYIKoZIzj0EAwIw
         bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
         emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
-        IFRMUyBSb290IENlcnQwHhcNMTgwODIyMDMyOTAwWhcNMzgwODE3MDMyOTAwWjBt
+        IFRMUyBSb290IENlcnQwHhcNMTgwODI5MTUzMDAwWhcNMzgwODI0MTUzMDAwWjBt
         MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
         aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
-        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABOjiNygXYrYl
-        g+1X9M6kNeqjoerzwZiSTX4/OPbTJfqy/TdzHtgWijeQwIpSXFoVdvqNMix5Qxzu
-        0JrdYtZweXOjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
-        MB0GA1UdDgQWBBRh6mgwP12/RDUc8AX3BfCn7rEAuTAKBggqhkjOPQQDAgNIADBF
-        AiEAuB6xJ71Ce/Woys+JagGI7fkiHT0csZALHEWOXeK1CRACICPgpUxfHLWIx3Bt
-        I+ZfiVrtsWtPFw7DArmezvm72h5N
+        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABE4TbvNGf4gU
+        S+P2WaxjVWGKhNx6hMeK5ZQNhLR7NFh/zzBqt1nVMwqJN4YzWBBCPR72SEzrMK5g
+        25f5ZpcSSzSjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
+        MB0GA1UdDgQWBBRYyZnZEGDsHgcaxmWVBvDPid7KiDAKBggqhkjOPQQDAgNHADBE
+        AiB9WMknJW3EVGszp0xfcAq4R8CVp9Pm7fVW/grJUdeq9QIgGCgmdMmf77toNpxk
+        BAStqJzKrYHRIWVCxpHUysmzs6Y=
         -----END CERTIFICATE-----
     grpcOptions:
       allow-insecure: false
@@ -75,49 +250,24 @@ peers:
       keep-alive-permit: false
       keep-alive-time: 0s
       keep-alive-timeout: 20s
-      ssl-target-name-override: peer2.assembly.aliyunbaas.com
-  peer1.supplier.aliyunbaas.com:31211:
-    url: grpcs://peer1.supplier.aliyunbaas.com:31211
-    tlsCACerts:
-      pem: |
-        -----BEGIN CERTIFICATE-----
-        MIICITCCAcegAwIBAgIUI8oHICqK4TZX2pCMRUfA5aEEv2EwCgYIKoZIzj0EAwIw
-        bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
-        emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
-        IFRMUyBSb290IENlcnQwHhcNMTgwODIyMDMyOTAwWhcNMzgwODE3MDMyOTAwWjBt
-        MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
-        aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
-        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABHWwMsF9tUzT
-        Lnelfj4eitnOub4iuBRI1uVysIuHjZ9Y8MkNkFwded80dzR+PBThho4LVXAmv8No
-        JnmXPxcjH9KjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
-        MB0GA1UdDgQWBBR3Y5abA4SWlTk7zCbs8OBIUq8/KDAKBggqhkjOPQQDAgNIADBF
-        AiEAgpssoliSIJPnXVliIfa4GBTN4/YBOUs9tzC0AijahfUCIDyKTYfg2oSYTy3H
-        eqm4/B5STOWLhZj6PE4s/UBGAIIJ
-        -----END CERTIFICATE-----
-    grpcOptions:
-      allow-insecure: false
-      fail-fast: false
-      keep-alive-permit: false
-      keep-alive-time: 0s
-      keep-alive-timeout: 20s
-      ssl-target-name-override: peer1.supplier.aliyunbaas.com
+      ssl-target-name-override: peer2.battery.aliyunbaas.com
   peer2.smartphone.aliyunbaas.com:31121:
     url: grpcs://peer2.smartphone.aliyunbaas.com:31121
     tlsCACerts:
       pem: |
         -----BEGIN CERTIFICATE-----
-        MIICIDCCAcegAwIBAgIUImZVWtMIEfQjp2eJbv1NU+P9H+EwCgYIKoZIzj0EAwIw
+        MIICITCCAcegAwIBAgIUH9ISj0hubhBpfdVUNkTWvOBvz1gwCgYIKoZIzj0EAwIw
         bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
         emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
-        IFRMUyBSb290IENlcnQwHhcNMTgwODIyMDMyOTAwWhcNMzgwODE3MDMyOTAwWjBt
+        IFRMUyBSb290IENlcnQwHhcNMTgwODMwMDEyMjAwWhcNMzgwODI1MDEyMjAwWjBt
         MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
         aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
-        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABFfiXow0fL2q
-        cRCMdZiWJ2Z5EsYVxv9qaIF2m2rrbt1MZxdpwo7Oxv++TR5K9Q6Z0wIjFH7PL87q
-        xcBBby+As4WjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
-        MB0GA1UdDgQWBBTelTUpnVi5HOK+BaMUpwOM3TkcczAKBggqhkjOPQQDAgNHADBE
-        AiEA8BsSWED+OLlYNdaBDfoepURng9CjAyP87ntLGmwVFnMCH1e363VaMdyPjH6U
-        Cjyt0OmgNChdP74EnhA+vLqq6Fc=
+        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABKkK+7IQYFJZ
+        py2eH4T1S1K6R0h9PJvddp8516CY8ZQVIkpetq/r+nUzh+A9Mz+PZMkrPus2hzmr
+        mPy7A45AzVqjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
+        MB0GA1UdDgQWBBTayp6r3j4uwmc4EVunu3ExObShszAKBggqhkjOPQQDAgNIADBF
+        AiEAhfkFnC8PVCd5SiIl2P+ynYn7ssDJzEGFiHWhN14YCHUCIGPFjOOTGPgR8Mhu
+        DRQ35zeuv4SrK9KaRBG2SkPzFg+Z
         -----END CERTIFICATE-----
     grpcOptions:
       allow-insecure: false
@@ -127,23 +277,23 @@ peers:
       keep-alive-timeout: 20s
       ssl-target-name-override: peer2.smartphone.aliyunbaas.com
     eventUrl: grpcs://peer2.smartphone.aliyunbaas.com:31123
-  peer1.assembly.aliyunbaas.com:31311:
-    url: grpcs://peer1.assembly.aliyunbaas.com:31311
+  peer1.battery.aliyunbaas.com:31111:
+    url: grpcs://peer1.battery.aliyunbaas.com:31111
     tlsCACerts:
       pem: |
         -----BEGIN CERTIFICATE-----
-        MIICITCCAcegAwIBAgIUc0I35Tvk9uHp/+zbxA6MrMYo5lgwCgYIKoZIzj0EAwIw
+        MIICIDCCAcegAwIBAgIUNhwogVRD3R98Y6iapylxwv0Qr+YwCgYIKoZIzj0EAwIw
         bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
         emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
-        IFRMUyBSb290IENlcnQwHhcNMTgwODIyMDMyOTAwWhcNMzgwODE3MDMyOTAwWjBt
+        IFRMUyBSb290IENlcnQwHhcNMTgwODI5MTUzMDAwWhcNMzgwODI0MTUzMDAwWjBt
         MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
         aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
-        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABOjiNygXYrYl
-        g+1X9M6kNeqjoerzwZiSTX4/OPbTJfqy/TdzHtgWijeQwIpSXFoVdvqNMix5Qxzu
-        0JrdYtZweXOjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
-        MB0GA1UdDgQWBBRh6mgwP12/RDUc8AX3BfCn7rEAuTAKBggqhkjOPQQDAgNIADBF
-        AiEAuB6xJ71Ce/Woys+JagGI7fkiHT0csZALHEWOXeK1CRACICPgpUxfHLWIx3Bt
-        I+ZfiVrtsWtPFw7DArmezvm72h5N
+        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABE4TbvNGf4gU
+        S+P2WaxjVWGKhNx6hMeK5ZQNhLR7NFh/zzBqt1nVMwqJN4YzWBBCPR72SEzrMK5g
+        25f5ZpcSSzSjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
+        MB0GA1UdDgQWBBRYyZnZEGDsHgcaxmWVBvDPid7KiDAKBggqhkjOPQQDAgNHADBE
+        AiB9WMknJW3EVGszp0xfcAq4R8CVp9Pm7fVW/grJUdeq9QIgGCgmdMmf77toNpxk
+        BAStqJzKrYHRIWVCxpHUysmzs6Y=
         -----END CERTIFICATE-----
     grpcOptions:
       allow-insecure: false
@@ -151,24 +301,49 @@ peers:
       keep-alive-permit: false
       keep-alive-time: 0s
       keep-alive-timeout: 20s
-      ssl-target-name-override: peer1.assembly.aliyunbaas.com
-  peer2.logistics.aliyunbaas.com:31421:
-    url: grpcs://peer2.logistics.aliyunbaas.com:31421
+      ssl-target-name-override: peer1.battery.aliyunbaas.com
+  peer2.display.aliyunbaas.com:31221:
+    url: grpcs://peer2.display.aliyunbaas.com:31221
     tlsCACerts:
       pem: |
         -----BEGIN CERTIFICATE-----
-        MIICIDCCAcegAwIBAgIUSvYFeghjHzexvPWxzF1I1fNNsjwwCgYIKoZIzj0EAwIw
+        MIICITCCAcegAwIBAgIUAfWWGzONnSLlnV32qRL+tb8wpNgwCgYIKoZIzj0EAwIw
         bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
         emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
-        IFRMUyBSb290IENlcnQwHhcNMTgwODIyMDMyOTAwWhcNMzgwODE3MDMyOTAwWjBt
+        IFRMUyBSb290IENlcnQwHhcNMTgwODI5MTUzMDAwWhcNMzgwODI0MTUzMDAwWjBt
         MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
         aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
-        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABCeBuML6BAUN
-        c/CJbFH8IR1lMsqll47z9uYiY/WTlg9VUPlnAKJnkRs2a+QgUof9saO0Bk1jAj0F
-        s1rk6PkyzcWjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
-        MB0GA1UdDgQWBBQuiFtOG81hlor/rTb1xLhiDb8GJjAKBggqhkjOPQQDAgNHADBE
-        AiAhoYrHRzOH7ub9PsheMt4anM7D+MsuGdSPyb121qwpPwIgFCGFOH7Oxvr6qdjo
-        wQ32NAOkMsY92EtH+aT/GV8LNwQ=
+        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABMfq07BFSHEG
+        7p8LTgzN6umcXdLO6dkU+IcLeA0fd58MlXDWQDs7HFJiNt2RuiMPOSXNgIvbmxrU
+        5zvOXTDmLemjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
+        MB0GA1UdDgQWBBS5OePPDzDAvm9rYmaqf8UG+u2ePTAKBggqhkjOPQQDAgNIADBF
+        AiEA2WhuuzZ55DJxnMNVc70mL+rzgwBc2J/QhUQQBj2lmAMCIGf43V+3ti0gUP6+
+        0R8tkhZrI66iAe83HXhfZMOnicV9
+        -----END CERTIFICATE-----
+    grpcOptions:
+      allow-insecure: false
+      fail-fast: false
+      keep-alive-permit: false
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      ssl-target-name-override: peer2.display.aliyunbaas.com
+  peer2.logistics.aliyunbaas.com:31521:
+    url: grpcs://peer2.logistics.aliyunbaas.com:31521
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICITCCAcegAwIBAgIUV4ll/n/UXy4YJsYszn/pzCQqBXYwCgYIKoZIzj0EAwIw
+        bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
+        emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
+        IFRMUyBSb290IENlcnQwHhcNMTgwODI5MTUzMDAwWhcNMzgwODI0MTUzMDAwWjBt
+        MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
+        aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
+        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABFEOG7KG7ZJR
+        Wv6KCWpWHZY3osIgEFF13oAQ4wQHvYWWHwEDz6B1DgN/5x+igpyZFp8QP85ARHfT
+        B4AmMde9FxmjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
+        MB0GA1UdDgQWBBS2ALPsL2+2t9jL4B4NQc2msT3LBjAKBggqhkjOPQQDAgNIADBF
+        AiEA/HNClyEnvYVWTMrKGLFcf7W3rJLcX6fJCbgingLy21kCIBPxQrN9HFsO/4yZ
+        xop+IYBXNoWUby1nMYgm1lgBa/gb
         -----END CERTIFICATE-----
     grpcOptions:
       allow-insecure: false
@@ -177,94 +352,26 @@ peers:
       keep-alive-time: 0s
       keep-alive-timeout: 20s
       ssl-target-name-override: peer2.logistics.aliyunbaas.com
-  peer2.supplier.aliyunbaas.com:31221:
-    url: grpcs://peer2.supplier.aliyunbaas.com:31221
-    tlsCACerts:
-      pem: |
-        -----BEGIN CERTIFICATE-----
-        MIICITCCAcegAwIBAgIUI8oHICqK4TZX2pCMRUfA5aEEv2EwCgYIKoZIzj0EAwIw
-        bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
-        emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
-        IFRMUyBSb290IENlcnQwHhcNMTgwODIyMDMyOTAwWhcNMzgwODE3MDMyOTAwWjBt
-        MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
-        aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
-        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABHWwMsF9tUzT
-        Lnelfj4eitnOub4iuBRI1uVysIuHjZ9Y8MkNkFwded80dzR+PBThho4LVXAmv8No
-        JnmXPxcjH9KjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
-        MB0GA1UdDgQWBBR3Y5abA4SWlTk7zCbs8OBIUq8/KDAKBggqhkjOPQQDAgNIADBF
-        AiEAgpssoliSIJPnXVliIfa4GBTN4/YBOUs9tzC0AijahfUCIDyKTYfg2oSYTy3H
-        eqm4/B5STOWLhZj6PE4s/UBGAIIJ
-        -----END CERTIFICATE-----
-    grpcOptions:
-      allow-insecure: false
-      fail-fast: false
-      keep-alive-permit: false
-      keep-alive-time: 0s
-      keep-alive-timeout: 20s
-      ssl-target-name-override: peer2.supplier.aliyunbaas.com
-  peer1.logistics.aliyunbaas.com:31411:
-    url: grpcs://peer1.logistics.aliyunbaas.com:31411
-    tlsCACerts:
-      pem: |
-        -----BEGIN CERTIFICATE-----
-        MIICIDCCAcegAwIBAgIUSvYFeghjHzexvPWxzF1I1fNNsjwwCgYIKoZIzj0EAwIw
-        bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
-        emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
-        IFRMUyBSb290IENlcnQwHhcNMTgwODIyMDMyOTAwWhcNMzgwODE3MDMyOTAwWjBt
-        MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
-        aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
-        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABCeBuML6BAUN
-        c/CJbFH8IR1lMsqll47z9uYiY/WTlg9VUPlnAKJnkRs2a+QgUof9saO0Bk1jAj0F
-        s1rk6PkyzcWjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
-        MB0GA1UdDgQWBBQuiFtOG81hlor/rTb1xLhiDb8GJjAKBggqhkjOPQQDAgNHADBE
-        AiAhoYrHRzOH7ub9PsheMt4anM7D+MsuGdSPyb121qwpPwIgFCGFOH7Oxvr6qdjo
-        wQ32NAOkMsY92EtH+aT/GV8LNwQ=
-        -----END CERTIFICATE-----
-    grpcOptions:
-      allow-insecure: false
-      fail-fast: false
-      keep-alive-permit: false
-      keep-alive-time: 0s
-      keep-alive-timeout: 20s
-      ssl-target-name-override: peer1.logistics.aliyunbaas.com
-  peer1.store.aliyunbaas.com:31511:
-    url: grpcs://peer1.store.aliyunbaas.com:31511
-    tlsCACerts:
-      pem: |
-        -----BEGIN CERTIFICATE-----
-        MIICIDCCAcegAwIBAgIUSTLcqQFLgL8I+4aXnRfTz3sd+1cwCgYIKoZIzj0EAwIw
-        bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
-        emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
-        IFRMUyBSb290IENlcnQwHhcNMTgwODIyMDMyOTAwWhcNMzgwODE3MDMyOTAwWjBt
-        MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
-        aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
-        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABG9HslLRCSZG
-        x2pD4EHOjnJz5veyHx/L0VhcC9LoDm4/gwkzzyqoTsUZ4V6PxSJA3Vd8MoacGHMW
-        1Zy++wZ225yjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
-        MB0GA1UdDgQWBBSenelP+xQ3/3yzwzQ488lqqVmyTTAKBggqhkjOPQQDAgNHADBE
-        AiAu1Qn3ipfo9XmNh0U71tqcImChYvQdEYPL+v0i2BQRHAIgLxlBwQCMbW1tRoJU
-        TXPxn2qIofZBS2qGzkmaO2dmZxo=
-        -----END CERTIFICATE-----
-    grpcOptions:
-      allow-insecure: false
-      fail-fast: false
-      keep-alive-permit: false
-      keep-alive-time: 0s
-      keep-alive-timeout: 20s
-      ssl-target-name-override: peer1.store.aliyunbaas.com
 organizations:
-  storeMSP:
-    peers:
-    - peer1.store.aliyunbaas.com:31511
-    - peer2.store.aliyunbaas.com:31521
-    mspid: storeMSP
-    cryptoPath: /tmp/msp
-    certificateAuthorities: []
   assemblyMSP:
     peers:
-    - peer1.assembly.aliyunbaas.com:31311
-    - peer2.assembly.aliyunbaas.com:31321
+    - peer1.assembly.aliyunbaas.com:31411
+    - peer2.assembly.aliyunbaas.com:31421
     mspid: assemblyMSP
+    cryptoPath: /tmp/msp
+    certificateAuthorities: []
+  cpuMSP:
+    peers:
+    - peer1.cpu.aliyunbaas.com:31311
+    - peer2.cpu.aliyunbaas.com:31321
+    mspid: cpuMSP
+    cryptoPath: /tmp/msp
+    certificateAuthorities: []
+  batteryMSP:
+    peers:
+    - peer1.battery.aliyunbaas.com:31111
+    - peer2.battery.aliyunbaas.com:31121
+    mspid: batteryMSP
     cryptoPath: /tmp/msp
     certificateAuthorities: []
   smartphoneMSP:
@@ -275,17 +382,24 @@ organizations:
     cryptoPath: /tmp/msp
     certificateAuthorities:
     - ca1.smartphone.aliyunbaas.com
-  supplierMSP:
+  displayMSP:
     peers:
-    - peer1.supplier.aliyunbaas.com:31211
-    - peer2.supplier.aliyunbaas.com:31221
-    mspid: supplierMSP
+    - peer1.display.aliyunbaas.com:31211
+    - peer2.display.aliyunbaas.com:31221
+    mspid: displayMSP
+    cryptoPath: /tmp/msp
+    certificateAuthorities: []
+  salesMSP:
+    peers:
+    - peer1.sales.aliyunbaas.com:31611
+    - peer2.sales.aliyunbaas.com:31621
+    mspid: salesMSP
     cryptoPath: /tmp/msp
     certificateAuthorities: []
   logisticsMSP:
     peers:
-    - peer1.logistics.aliyunbaas.com:31411
-    - peer2.logistics.aliyunbaas.com:31421
+    - peer1.logistics.aliyunbaas.com:31511
+    - peer2.logistics.aliyunbaas.com:31521
     mspid: logisticsMSP
     cryptoPath: /tmp/msp
     certificateAuthorities: []
@@ -295,18 +409,18 @@ orderers:
     tlsCACerts:
       pem: |
         -----BEGIN CERTIFICATE-----
-        MIICDTCCAbOgAwIBAgIUEFyzSWCxdqzWWlEvTclRW6AylJowCgYIKoZIzj0EAwIw
+        MIICDTCCAbOgAwIBAgIUX81erTqVekgg+fX3AXpLFzj2+aswCgYIKoZIzj0EAwIw
         YzELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
         emhvdTEPMA0GA1UEChMGc3VwcGx5MR0wGwYDVQQDExRzdXBwbHkgVExTIFJvb3Qg
-        Q2VydDAeFw0xODA4MjIwMzM0MDBaFw0zODA4MTcwMzM0MDBaMGMxCzAJBgNVBAYT
+        Q2VydDAeFw0xODA4MjkxNTM2MDBaFw0zODA4MjQxNTM2MDBaMGMxCzAJBgNVBAYT
         AkNOMREwDwYDVQQIEwhaaGVqaWFuZzERMA8GA1UEBxMISGFuZ3pob3UxDzANBgNV
         BAoTBnN1cHBseTEdMBsGA1UEAxMUc3VwcGx5IFRMUyBSb290IENlcnQwWTATBgcq
-        hkjOPQIBBggqhkjOPQMBBwNCAARcrLmHc6fnC/ZqwppG8eri5BveKfafSYLJgf8x
-        6bRAGL4CbxY4nNK2yyCx3S5/+haHJPTQFW6NfEtY57m7QAwKo0UwQzAOBgNVHQ8B
-        Af8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU+OYLtCuPYFxy
-        E78PxnaAMvTjBRUwCgYIKoZIzj0EAwIDSAAwRQIhAPMIrEpzmQ7Ym7YNHxkROMOc
-        GYuj2UTdMKSaNfBs+Jp2AiAIbmK8k24ZSW5PL7s13YvI9p8WBdgMDBaZ99FQ601K
-        zA==
+        hkjOPQIBBggqhkjOPQMBBwNCAAScxM2/D3YwLK0BW+mDCayDwrtApnqRph/w+fw7
+        X4vKIMpsQ9ZUw9uI/D1gfsyqoEshn1SpuQ0dRPNkO8diHSBRo0UwQzAOBgNVHQ8B
+        Af8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQUR6KoXvsDrT+y
+        z0Qic5Lszhj61c8wCgYIKoZIzj0EAwIDSAAwRQIhAImVsyJ9RokelXVq1ELd6xH2
+        /+E752rJGgeYO2uAIX7rAiBR7irXEFZ+JhRhw1CT17UPhzLG0YUmSOjTQukwEdGG
+        SA==
         -----END CERTIFICATE-----
     grpcOptions:
       allow-insecure: false
@@ -320,18 +434,18 @@ orderers:
     tlsCACerts:
       pem: |
         -----BEGIN CERTIFICATE-----
-        MIICDTCCAbOgAwIBAgIUEFyzSWCxdqzWWlEvTclRW6AylJowCgYIKoZIzj0EAwIw
+        MIICDTCCAbOgAwIBAgIUX81erTqVekgg+fX3AXpLFzj2+aswCgYIKoZIzj0EAwIw
         YzELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
         emhvdTEPMA0GA1UEChMGc3VwcGx5MR0wGwYDVQQDExRzdXBwbHkgVExTIFJvb3Qg
-        Q2VydDAeFw0xODA4MjIwMzM0MDBaFw0zODA4MTcwMzM0MDBaMGMxCzAJBgNVBAYT
+        Q2VydDAeFw0xODA4MjkxNTM2MDBaFw0zODA4MjQxNTM2MDBaMGMxCzAJBgNVBAYT
         AkNOMREwDwYDVQQIEwhaaGVqaWFuZzERMA8GA1UEBxMISGFuZ3pob3UxDzANBgNV
         BAoTBnN1cHBseTEdMBsGA1UEAxMUc3VwcGx5IFRMUyBSb290IENlcnQwWTATBgcq
-        hkjOPQIBBggqhkjOPQMBBwNCAARcrLmHc6fnC/ZqwppG8eri5BveKfafSYLJgf8x
-        6bRAGL4CbxY4nNK2yyCx3S5/+haHJPTQFW6NfEtY57m7QAwKo0UwQzAOBgNVHQ8B
-        Af8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU+OYLtCuPYFxy
-        E78PxnaAMvTjBRUwCgYIKoZIzj0EAwIDSAAwRQIhAPMIrEpzmQ7Ym7YNHxkROMOc
-        GYuj2UTdMKSaNfBs+Jp2AiAIbmK8k24ZSW5PL7s13YvI9p8WBdgMDBaZ99FQ601K
-        zA==
+        hkjOPQIBBggqhkjOPQMBBwNCAAScxM2/D3YwLK0BW+mDCayDwrtApnqRph/w+fw7
+        X4vKIMpsQ9ZUw9uI/D1gfsyqoEshn1SpuQ0dRPNkO8diHSBRo0UwQzAOBgNVHQ8B
+        Af8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQUR6KoXvsDrT+y
+        z0Qic5Lszhj61c8wCgYIKoZIzj0EAwIDSAAwRQIhAImVsyJ9RokelXVq1ELd6xH2
+        /+E752rJGgeYO2uAIX7rAiBR7irXEFZ+JhRhw1CT17UPhzLG0YUmSOjTQukwEdGG
+        SA==
         -----END CERTIFICATE-----
     grpcOptions:
       allow-insecure: false
@@ -345,18 +459,18 @@ orderers:
     tlsCACerts:
       pem: |
         -----BEGIN CERTIFICATE-----
-        MIICDTCCAbOgAwIBAgIUEFyzSWCxdqzWWlEvTclRW6AylJowCgYIKoZIzj0EAwIw
+        MIICDTCCAbOgAwIBAgIUX81erTqVekgg+fX3AXpLFzj2+aswCgYIKoZIzj0EAwIw
         YzELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
         emhvdTEPMA0GA1UEChMGc3VwcGx5MR0wGwYDVQQDExRzdXBwbHkgVExTIFJvb3Qg
-        Q2VydDAeFw0xODA4MjIwMzM0MDBaFw0zODA4MTcwMzM0MDBaMGMxCzAJBgNVBAYT
+        Q2VydDAeFw0xODA4MjkxNTM2MDBaFw0zODA4MjQxNTM2MDBaMGMxCzAJBgNVBAYT
         AkNOMREwDwYDVQQIEwhaaGVqaWFuZzERMA8GA1UEBxMISGFuZ3pob3UxDzANBgNV
         BAoTBnN1cHBseTEdMBsGA1UEAxMUc3VwcGx5IFRMUyBSb290IENlcnQwWTATBgcq
-        hkjOPQIBBggqhkjOPQMBBwNCAARcrLmHc6fnC/ZqwppG8eri5BveKfafSYLJgf8x
-        6bRAGL4CbxY4nNK2yyCx3S5/+haHJPTQFW6NfEtY57m7QAwKo0UwQzAOBgNVHQ8B
-        Af8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU+OYLtCuPYFxy
-        E78PxnaAMvTjBRUwCgYIKoZIzj0EAwIDSAAwRQIhAPMIrEpzmQ7Ym7YNHxkROMOc
-        GYuj2UTdMKSaNfBs+Jp2AiAIbmK8k24ZSW5PL7s13YvI9p8WBdgMDBaZ99FQ601K
-        zA==
+        hkjOPQIBBggqhkjOPQMBBwNCAAScxM2/D3YwLK0BW+mDCayDwrtApnqRph/w+fw7
+        X4vKIMpsQ9ZUw9uI/D1gfsyqoEshn1SpuQ0dRPNkO8diHSBRo0UwQzAOBgNVHQ8B
+        Af8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQUR6KoXvsDrT+y
+        z0Qic5Lszhj61c8wCgYIKoZIzj0EAwIDSAAwRQIhAImVsyJ9RokelXVq1ELd6xH2
+        /+E752rJGgeYO2uAIX7rAiBR7irXEFZ+JhRhw1CT17UPhzLG0YUmSOjTQukwEdGG
+        SA==
         -----END CERTIFICATE-----
     grpcOptions:
       allow-insecure: false
@@ -384,14 +498,19 @@ client:
       enabled: true
       hashAlgorithm: SHA2
 channels:
-  supplychannel:
+  assemblychannel:
     peers:
+      peer1.assembly.aliyunbaas.com:31411:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
       peer1.smartphone.aliyunbaas.com:31111:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
         ledgerQuery: true
-      peer1.supplier.aliyunbaas.com:31211:
+      peer2.assembly.aliyunbaas.com:31421:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
@@ -401,18 +520,13 @@ channels:
         endorsingPeer: true
         eventSource: true
         ledgerQuery: true
-      peer2.supplier.aliyunbaas.com:31221:
-        chaincodeQuery: true
-        endorsingPeer: true
-        eventSource: true
-        ledgerQuery: true
     orderers:
     - orderer1
     - orderer2
     - orderer3
-  assemblychannel:
+  saleschannel:
     peers:
-      peer1.assembly.aliyunbaas.com:31311:
+      peer1.sales.aliyunbaas.com:31611:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
@@ -422,7 +536,33 @@ channels:
         endorsingPeer: true
         eventSource: true
         ledgerQuery: true
-      peer2.assembly.aliyunbaas.com:31321:
+      peer2.sales.aliyunbaas.com:31621:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
+      peer2.smartphone.aliyunbaas.com:31121:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
+    orderers:
+    - orderer1
+    - orderer2
+    - orderer3
+  cpuchannel:
+    peers:
+      peer1.cpu.aliyunbaas.com:31311:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
+      peer1.smartphone.aliyunbaas.com:31111:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
+      peer2.cpu.aliyunbaas.com:31321:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
@@ -438,7 +578,7 @@ channels:
     - orderer3
   logisticschannel:
     peers:
-      peer1.logistics.aliyunbaas.com:31411:
+      peer1.logistics.aliyunbaas.com:31511:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
@@ -448,7 +588,7 @@ channels:
         endorsingPeer: true
         eventSource: true
         ledgerQuery: true
-      peer2.logistics.aliyunbaas.com:31421:
+      peer2.logistics.aliyunbaas.com:31521:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
@@ -462,24 +602,24 @@ channels:
     - orderer1
     - orderer2
     - orderer3
-  salechannel:
+  displaychannel:
     peers:
+      peer1.display.aliyunbaas.com:31211:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
       peer1.smartphone.aliyunbaas.com:31111:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
         ledgerQuery: true
-      peer1.store.aliyunbaas.com:31511:
+      peer2.display.aliyunbaas.com:31221:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
         ledgerQuery: true
       peer2.smartphone.aliyunbaas.com:31121:
-        chaincodeQuery: true
-        endorsingPeer: true
-        eventSource: true
-        ledgerQuery: true
-      peer2.store.aliyunbaas.com:31521:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
@@ -490,12 +630,32 @@ channels:
     - orderer3
   first-channel:
     peers:
-      peer1.assembly.aliyunbaas.com:31311:
+      peer1.assembly.aliyunbaas.com:31411:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
         ledgerQuery: true
-      peer1.logistics.aliyunbaas.com:31411:
+      peer1.battery.aliyunbaas.com:31111:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
+      peer1.cpu.aliyunbaas.com:31311:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
+      peer1.display.aliyunbaas.com:31211:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
+      peer1.logistics.aliyunbaas.com:31511:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
+      peer1.sales.aliyunbaas.com:31611:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
@@ -505,22 +665,32 @@ channels:
         endorsingPeer: true
         eventSource: true
         ledgerQuery: true
-      peer1.store.aliyunbaas.com:31511:
+      peer2.assembly.aliyunbaas.com:31421:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
         ledgerQuery: true
-      peer1.supplier.aliyunbaas.com:31211:
+      peer2.battery.aliyunbaas.com:31121:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
         ledgerQuery: true
-      peer2.assembly.aliyunbaas.com:31321:
+      peer2.cpu.aliyunbaas.com:31321:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
         ledgerQuery: true
-      peer2.logistics.aliyunbaas.com:31421:
+      peer2.display.aliyunbaas.com:31221:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
+      peer2.logistics.aliyunbaas.com:31521:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
+      peer2.sales.aliyunbaas.com:31621:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
@@ -530,12 +700,28 @@ channels:
         endorsingPeer: true
         eventSource: true
         ledgerQuery: true
-      peer2.store.aliyunbaas.com:31521:
+    orderers:
+    - orderer1
+    - orderer2
+    - orderer3
+  batterychannel:
+    peers:
+      peer1.battery.aliyunbaas.com:31111:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
         ledgerQuery: true
-      peer2.supplier.aliyunbaas.com:31221:
+      peer1.smartphone.aliyunbaas.com:31111:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
+      peer2.battery.aliyunbaas.com:31121:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
+      peer2.smartphone.aliyunbaas.com:31121:
         chaincodeQuery: true
         endorsingPeer: true
         eventSource: true
@@ -551,17 +737,17 @@ certificateAuthorities:
       pem:
       - |
         -----BEGIN CERTIFICATE-----
-        MIICIDCCAcegAwIBAgIUImZVWtMIEfQjp2eJbv1NU+P9H+EwCgYIKoZIzj0EAwIw
+        MIICITCCAcegAwIBAgIUH9ISj0hubhBpfdVUNkTWvOBvz1gwCgYIKoZIzj0EAwIw
         bTELMAkGA1UEBhMCQ04xETAPBgNVBAgTCFpoZWppYW5nMREwDwYDVQQHEwhIYW5n
         emhvdTEWMBQGA1UEChMNQWxpYmFiYSBDbG91ZDEgMB4GA1UEAxMXRmFicmljLUNB
-        IFRMUyBSb290IENlcnQwHhcNMTgwODIyMDMyOTAwWhcNMzgwODE3MDMyOTAwWjBt
+        IFRMUyBSb290IENlcnQwHhcNMTgwODMwMDEyMjAwWhcNMzgwODI1MDEyMjAwWjBt
         MQswCQYDVQQGEwJDTjERMA8GA1UECBMIWmhlamlhbmcxETAPBgNVBAcTCEhhbmd6
         aG91MRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMSAwHgYDVQQDExdGYWJyaWMtQ0Eg
-        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABFfiXow0fL2q
-        cRCMdZiWJ2Z5EsYVxv9qaIF2m2rrbt1MZxdpwo7Oxv++TR5K9Q6Z0wIjFH7PL87q
-        xcBBby+As4WjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
-        MB0GA1UdDgQWBBTelTUpnVi5HOK+BaMUpwOM3TkcczAKBggqhkjOPQQDAgNHADBE
-        AiEA8BsSWED+OLlYNdaBDfoepURng9CjAyP87ntLGmwVFnMCH1e363VaMdyPjH6U
-        Cjyt0OmgNChdP74EnhA+vLqq6Fc=
+        VExTIFJvb3QgQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABKkK+7IQYFJZ
+        py2eH4T1S1K6R0h9PJvddp8516CY8ZQVIkpetq/r+nUzh+A9Mz+PZMkrPus2hzmr
+        mPy7A45AzVqjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEB
+        MB0GA1UdDgQWBBTayp6r3j4uwmc4EVunu3ExObShszAKBggqhkjOPQQDAgNIADBF
+        AiEAhfkFnC8PVCd5SiIl2P+ynYn7ssDJzEGFiHWhN14YCHUCIGPFjOOTGPgR8Mhu
+        DRQ35zeuv4SrK9KaRBG2SkPzFg+Z
         -----END CERTIFICATE-----
     caName: client
