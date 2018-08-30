@@ -70,5 +70,29 @@ func (app *Application) HomeAssemblyHandler(w http.ResponseWriter, r *http.Reque
 	var data map[string]interface{}
 	data = make(map[string]interface{})
 
-	renderTemplate(w, r, "homebattery.html", data)
+	renderTemplate(w, r, "homeassembly.html", data)
+}
+
+func (app *Application) HomeLogisticsHandler(w http.ResponseWriter, r *http.Request) {
+	uName := webutil.MySession.GetUserName(r)
+	if len(uName) == 0 {
+		http.Redirect(w, r, "./login.html", 302)
+		return
+	}
+	var data map[string]interface{}
+	data = make(map[string]interface{})
+
+	renderTemplate(w, r, "homeassembly.html", data)
+}
+
+func (app *Application) HomeSalesHandler(w http.ResponseWriter, r *http.Request) {
+	uName := webutil.MySession.GetUserName(r)
+	if len(uName) == 0 {
+		http.Redirect(w, r, "./login.html", 302)
+		return
+	}
+	var data map[string]interface{}
+	data = make(map[string]interface{})
+
+	renderTemplate(w, r, "homeassembly.html", data)
 }

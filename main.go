@@ -16,7 +16,7 @@ func main() {
 	fabricSetups = make(map[string]*blockchain.FabricSetup)
 	// Definition of the Fabric SDK properties
 	for k, am := range webutil.Orgnization {
-		if k == "assembly" || k == "smartphone" {
+		if k == "sales" || k == "smartphone" {
 			for _, user := range am {
 				fabricSetups[user.UserName] = &blockchain.FabricSetup{
 					User:       user.UserName,

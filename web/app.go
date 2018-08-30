@@ -37,6 +37,16 @@ func Serve(app *controllers.Application) {
 	http.HandleFunc("/getassembly.html", app.GetAssemblyHandler)
 	http.HandleFunc("/addassembly.html", app.AddAssemblyHandler)
 
+	//logistics
+	http.HandleFunc("/homelogistics.html", app.HomeLogisticsHandler)
+	http.HandleFunc("/getlogistics.html", app.GetLogisticsHandler)
+	http.HandleFunc("/addlogistics.html", app.AddLogisticsHandler)
+
+	//sales
+	http.HandleFunc("/homesales.html", app.HomeSalesHandler)
+	http.HandleFunc("/getsales.html", app.GetSalesHandler)
+	http.HandleFunc("/addsales.html", app.AddSalesHandler)
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/login.html", http.StatusTemporaryRedirect)
 	})

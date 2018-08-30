@@ -37,6 +37,26 @@ type AssemblyInfo struct {
 	Date     string `json:"date"`
 }
 
+//TransitInfo define the transit structure, with x properties.  Structure tags are used by encoding/json library
+type TransitInfo struct {
+	ConcreteTransitInfo []BaseTransitInfo `json:"concretetransitinfo"`
+}
+
+//BaseTransitInfo define basic transit info
+type BaseTransitInfo struct {
+	Name    string `json:"name"`
+	Transit string `json:"transit"`
+	Manager string `json:"manager"`
+	Date    string `json:"date"`
+}
+
+type SalesInfo struct {
+	Name    string `json:"name"`
+	Address string `json:"address"`
+	Manager string `json:"manager"`
+	Date    string `json:"date"`
+}
+
 var AphoneSerialNumber = [5]string{"10000000", "10000001", "10000002", "10000003", "10000004"}
 var XphoneSerialNumber = [5]string{"20000000", "20000001", "20000002", "20000003", "20000004"}
 
@@ -79,6 +99,9 @@ func init() {
 
 	wzxop["AddBatchLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "addBatchInfo"}
 	wzxop["GetBatchLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "getBatchInfo"}
+
+	wzxop["AddBatchSales"] = BaseFuncInfo{"saleschannel", "addsales", "addBatchInfo"}
+	wzxop["GetBatchSales"] = BaseFuncInfo{"saleschannel", "addsales", "getBatchInfo"}
 
 	//for supply chain info
 	wzxop["GetBatterytInfo"] = BaseFuncInfo{"batterychannel", "addbattery", "getSupplier"}
@@ -138,16 +161,16 @@ func init() {
 	yzxop := make(map[string]BaseFuncInfo)
 	yzxop["AddLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "addLogistics"}
 	yzxop["GetLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "getLogistics"}
-	wyhop["GetBatchLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "getBatchInfo"}
+	yzxop["GetBatchLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "getBatchInfo"}
 	yzxChannel := []string{"logisticschannel"}
 	myzx := OrgMember{"yzx", "arclabw401yzx", yzxChannel, yzxop, "./profile/logistics/connection-profile-yzx.yaml"}
 	Orgnization["logistics"] = append(Orgnization["logistics"], myzx)
 
 	//---------------sales---------------
 	xjxop := make(map[string]BaseFuncInfo)
-	xjxop["AddSale"] = BaseFuncInfo{"saleschannel", "addsale", "addSale"}
-	xjxop["AddSale"] = BaseFuncInfo{"saleschannel", "addsale", "getSale"}
-	wyhop["GetBatchSales"] = BaseFuncInfo{"saleschannel", "addsale", "getBatchInfo"}
+	xjxop["AddSales"] = BaseFuncInfo{"saleschannel", "addsales", "addSalesInfo"}
+	xjxop["GetSales"] = BaseFuncInfo{"saleschannel", "addsales", "getSalesInfo"}
+	xjxop["GetBatchSales"] = BaseFuncInfo{"saleschannel", "addsales", "getBatchInfo"}
 	xjxChannel := []string{"saleschannel"}
 	mxjx := OrgMember{"xjx", "arclabw401xjx", xjxChannel, xjxop, "./profile/sales/connection-profile-xjx.yaml"}
 	Orgnization["sales"] = append(Orgnization["sales"], mxjx)

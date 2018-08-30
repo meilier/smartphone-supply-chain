@@ -233,8 +233,9 @@
                 {{if .OrgName}}
                     {{if eq .OrgName "logistics"}}
                     {{if .LoginStatus}}
-                    <li><a href="/home.html">Home</a></li>
-                    <li><a href="/addsupplier.html">AddSupplier</a></li>
+                    <li><a href="/homelogistics.html">Home</a></li>
+                    <li><a href="/addlogistics.html">AddLogisticsInfo</a></li>
+                    <li><a href="/getlogistics.html">GetLogisticsInfo</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             Hey, {{.Username}}
@@ -250,10 +251,11 @@
                     {{end}}
                 {{end}}
                 {{if .OrgName}}
-                    {{if eq .OrgName "store"}}
+                    {{if eq .OrgName "sales"}}
                     {{if .LoginStatus}}
-                    <li><a href="/home.html">Home</a></li>
-                    <li><a href="/addsupplier.html">AddSupplier</a></li>
+                    <li><a href="/homesales.html">Home</a></li>
+                    <li><a href="/addsales.html">AddSalesInfo</a></li>
+                    <li><a href="/getsales.html">GetSalesInfo</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             Hey, {{.Username}}

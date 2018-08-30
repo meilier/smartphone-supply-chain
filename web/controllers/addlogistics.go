@@ -10,84 +10,111 @@ import (
 
 //HomeHandler : home page
 func (app *Application) AddLogisticsHandler(w http.ResponseWriter, r *http.Request) {
-	var supplierInfo webutil.CompanyInfo
+	var data map[string]interface{}
+	data = make(map[string]interface{})
 	uName := webutil.MySession.GetUserName(r)
 	oName := webutil.MySession.GetOrgName(r)
+	//oName := webutil.MySession.GetOrgName(r)
 	if len(uName) == 0 {
 		http.Redirect(w, r, "./login.html", 302)
 		return
 	}
-	fmt.Println(len(uName))
+	if r.FormValue("submitted") == "true" {
+		uName := webutil.MySession.GetUserName(r)
+		oName := webutil.MySession.GetOrgName(r)
+		if fSetup, ok := app.Fabric[uName]; ok {
+			//befor send request we need to check session
+			var passargs []string
 
-	fmt.Println("unameis", "gg", uName, "gg")
-	fmt.Printf("byte uname  is %x", uName)
-	var cn string
-	var ccn string
-	var fcn string
+			var cn string
+			var ccn string
+			var fcn string
+			//find cfg name
+			for _, v := range webutil.Orgnization[oName] {
+				if v.UserName == uName {
+					cn = v.UserOperation["AddLogistics"].ChannelName
+					ccn = v.UserOperation["AddLogistics"].CCName
+					fcn = v.UserOperation["AddLogistics"].Fcn
+					break
+				}
+			}
+			key1 := webutil.PhoneType
+			key2 := r.FormValue("bnumber")
+			key := key1 + key2
 
-	for _, v := range webutil.Orgnization[oName] {
-		fmt.Println("org user", v.UserName)
-		if v.UserName == uName {
-			cn = v.UserOperation["GetSupplier"].ChannelName
-			ccn = v.UserOperation["GetSupplier"].CCName
-			fcn = v.UserOperation["GetSupplier"].Fcn
-			fmt.Println("query channel is ", cn)
-			break
+			n := r.FormValue("name")
+			l := r.FormValue("location")
+			m := r.FormValue("manager")
+			d := r.FormValue("date")
+			//add properties to args
+			passargs = append(passargs, key)
+			passargs = append(passargs, n)
+			passargs = append(passargs, l)
+			passargs = append(passargs, m)
+			passargs = append(passargs, d)
+
+			txid, err := fSetup.InvokeCC(cn, ccn, fcn, passargs)
+			if err != nil {
+				http.Error(w, "Unable to invoke hello in the blockchain", 500)
+			}
+			data["TransactionId"] = txid
+			data["Success"] = true
+			data["Response"] = true
 		}
+		// txid, err := app.Fabric.InvokeSupplier(passargs)
 	}
-
-	supplierValue, err := app.Fabric[uName].QueryCC(cn, ccn, fcn, []byte("Aphone-10000000"))
-	json.Unmarshal([]byte(supplierValue), &supplierInfo)
-	println("suppliervalue is ", supplierValue)
-	if err != nil {
-		http.Error(w, "Unable to query the blockchain", 500)
-	}
-	var data map[string]interface{}
-	data = make(map[string]interface{})
-	//data["SupplierInfo"] = supplierInfo.ConcreteCompanyInfo
-
-	//different nav bar for different organizations
-
-	renderTemplate(w, r, "home.html", data)
+	fmt.Println("org and username", oName, uName)
+	batch := app.GetBatchInfo(oName, uName)
+	data["BatchInfo"] = batch
+	renderTemplate(w, r, "addlogistics.html", data)
 }
 
 //HomeHandler : home page
 func (app *Application) GetLogisticsHandler(w http.ResponseWriter, r *http.Request) {
-	var assemblyInfo webutil.AssemblyInfo
+	var data map[string]interface{}
+	var tInfo webutil.TransitInfo
+	data = make(map[string]interface{})
 	uName := webutil.MySession.GetUserName(r)
 	oName := webutil.MySession.GetOrgName(r)
+	//oName := webutil.MySession.GetOrgName(r)
 	if len(uName) == 0 {
 		http.Redirect(w, r, "./login.html", 302)
 		return
 	}
-	fmt.Println(len(uName))
 
-	var cn string
-	var ccn string
-	var fcn string
+	if r.FormValue("submitted") == "true" {
+		uName := webutil.MySession.GetUserName(r)
+		oName := webutil.MySession.GetOrgName(r)
+		if fSetup, ok := app.Fabric[uName]; ok {
+			//befor send request we need to check session
 
-	for _, v := range webutil.Orgnization[oName] {
-		fmt.Println("org user", v.UserName)
-		if v.UserName == uName {
-			cn = v.UserOperation["GetAssembly"].ChannelName
-			ccn = v.UserOperation["GetAssembly"].CCName
-			fcn = v.UserOperation["GetAssembly"].Fcn
-			fmt.Println("query channel is ", cn)
-			break
+			var cn string
+			var ccn string
+			var fcn string
+			//find cfg name
+			for _, v := range webutil.Orgnization[oName] {
+				if v.UserName == uName {
+					cn = v.UserOperation["GetLogistics"].ChannelName
+					ccn = v.UserOperation["GetLogistics"].CCName
+					fcn = v.UserOperation["GetLogistics"].Fcn
+					break
+				}
+			}
+			fmt.Println("cn,ccn,fcn GetLogistics is", cn, ccn, fcn)
+			key := webutil.PhoneType + r.FormValue("bnumber")
+
+			companyInfo, err := fSetup.QueryCC(cn, ccn, fcn, []byte(key))
+			if err != nil {
+				http.Error(w, "Unable to invoke hello in the blockchain", 500)
+			}
+			json.Unmarshal([]byte(companyInfo), &tInfo)
+			fmt.Println("logistics is cinfo is", companyInfo, tInfo)
 		}
+		data["LogisticsInfo"] = tInfo.ConcreteTransitInfo
+		// txid, err := app.Fabric.InvokeSupplier(passargs)
 	}
-
-	assemblyValue, err := app.Fabric[uName].QueryCC(cn, ccn, fcn, []byte("Aphone-10000000"))
-	json.Unmarshal([]byte(assemblyValue), &assemblyInfo)
-	println("assemblyvalue is ", assemblyValue)
-	if err != nil {
-		http.Error(w, "Unable to query the blockchain", 500)
-	}
-	var data map[string]interface{}
-	data = make(map[string]interface{})
-	data["AssemblyInfo"] = assemblyInfo
-
-	//different nav bar for different organizations
-
-	renderTemplate(w, r, "getassembly.html", data)
+	fmt.Println("org and username", oName, uName)
+	batch := app.GetBatchInfo(oName, uName)
+	data["BatchInfo"] = batch
+	renderTemplate(w, r, "getlogistics.html", data)
 }

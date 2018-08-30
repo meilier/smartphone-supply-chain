@@ -48,10 +48,14 @@ func (app *Application) AddBatchHandler(w http.ResponseWriter, r *http.Request) 
 						cn = v.UserOperation["AddBatchAssembly"].ChannelName
 						ccn = v.UserOperation["AddBatchAssembly"].CCName
 						fcn = v.UserOperation["AddBatchAssembly"].Fcn
-					case "sales":
+					case "logistics":
 						cn = v.UserOperation["AddBatchLogistics"].ChannelName
 						ccn = v.UserOperation["AddBatchLogistics"].CCName
 						fcn = v.UserOperation["AddBatchLogistics"].Fcn
+					case "sales":
+						cn = v.UserOperation["AddBatchSales"].ChannelName
+						ccn = v.UserOperation["AddBatchSales"].CCName
+						fcn = v.UserOperation["AddBatchSales"].Fcn
 					}
 					break
 				}
@@ -86,10 +90,14 @@ func (app *Application) AddBatchHandler(w http.ResponseWriter, r *http.Request) 
 						cnb = v.UserOperation["GetBatchAssembly"].ChannelName
 						ccnb = v.UserOperation["GetBatchAssembly"].CCName
 						fcnb = v.UserOperation["GetBatchAssembly"].Fcn
-					case "sales":
+					case "logistics":
 						cnb = v.UserOperation["GetBatchLogistics"].ChannelName
 						ccnb = v.UserOperation["GetBatchLogistics"].CCName
 						fcnb = v.UserOperation["GetBatchLogistics"].Fcn
+					case "sales":
+						cnb = v.UserOperation["GetBatchSales"].ChannelName
+						ccnb = v.UserOperation["GetBatchSales"].CCName
+						fcnb = v.UserOperation["GetBatchSales"].Fcn
 					}
 					break
 				}
@@ -163,10 +171,14 @@ func (app *Application) GetBatchHandler(w http.ResponseWriter, r *http.Request) 
 						cn = v.UserOperation["GetBatchAssembly"].ChannelName
 						ccn = v.UserOperation["GetBatchAssembly"].CCName
 						fcn = v.UserOperation["GetBatchAssembly"].Fcn
-					case "sales":
+					case "logistics":
 						cn = v.UserOperation["GetBatchLogistics"].ChannelName
 						ccn = v.UserOperation["GetBatchLogistics"].CCName
 						fcn = v.UserOperation["GetBatchLogistics"].Fcn
+					case "sales":
+						cn = v.UserOperation["GetBatchSales"].ChannelName
+						ccn = v.UserOperation["GetBatchSales"].CCName
+						fcn = v.UserOperation["GetBatchSales"].Fcn
 					}
 					break
 				}
