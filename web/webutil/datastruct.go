@@ -1,14 +1,33 @@
 package webutil
 
-//CompanyInfo define the company structure, with x properties.  Structure tags are used by encoding/json library
-type CompanyInfo struct {
-	ConcreteCompanyInfo []BaseCompanyInfo `json:"concretecompanyinfo"`
+type BatchInfo struct {
+	Batch []string `json:"batch"`
 }
 
 //BaseCompanyInfo define basic company info
 type BaseCompanyInfo struct {
 	Name     string `json:"name"`
 	Location string `json:"location"`
+}
+
+type Person struct {
+	UserName string
+	Sex      string
+}
+
+//CompanyInfo define the company structure, with x properties.  Structure tags are used by encoding/json library
+type CompanyInfo struct {
+	Name          string             `json:"name"`
+	Location      string             `json:"location"`
+	ComponentInfo string             `json:"componentinfo"`
+	Subcomponent  []SubComponentInfo `json:"subcomponent"`
+}
+
+//
+type SubComponentInfo struct {
+	SubName        string
+	SubCompanyName string
+	SubLocation    string
 }
 
 type AssemblyInfo struct {
@@ -79,6 +98,7 @@ func init() {
 	lwhop["GetSupplier"] = BaseFuncInfo{"batterychannel", "addbattery", "getSupplier"}
 	lwhop["AddCompanyInfo"] = BaseFuncInfo{"batterychannel", "addbattery", "addCompanyInfo"}
 	lwhop["GetCompanyInfo"] = BaseFuncInfo{"batterychannel", "addbattery", "getCompanyInfo"}
+	lwhop["GetBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "getBatchInfo"}
 	lwhChannel := []string{"batterychannel"}
 	mlwh := OrgMember{"lwh", "arclabw401lwh", lwhChannel, lwhop, "./profile/battery/connection-profile-lwh.yaml"}
 	Orgnization["battery"] = append(Orgnization["battery"], mlwh)
@@ -89,6 +109,7 @@ func init() {
 	lwhop1["GetSupplier"] = BaseFuncInfo{"displaychannel", "adddisplay", "getSupplier"}
 	lwhop1["AddCompanyInfo"] = BaseFuncInfo{"displaychannel", "adddisplay", "addCompanyInfo"}
 	lwhop1["GetCompanyInfo"] = BaseFuncInfo{"displaychannel", "adddisplay", "getCompanyInfo"}
+	lwhop1["GetBatchDisplay"] = BaseFuncInfo{"displaychannel", "adddisplay", "getBatchInfo"}
 	lwhChannel1 := []string{"displaychannel"}
 	mlwh1 := OrgMember{"lwh", "arclabw401lwh", lwhChannel1, lwhop1, "./profile/display/connection-profile-lwh.yaml"}
 	Orgnization["display"] = append(Orgnization["display"], mlwh1)
@@ -99,6 +120,7 @@ func init() {
 	lwhop2["GetSupplier"] = BaseFuncInfo{"cpuchannel", "addcpu", "getSupplier"}
 	lwhop2["AddCompanyInfo"] = BaseFuncInfo{"cpuchannel", "addcpu", "addCompanyInfo"}
 	lwhop2["GetCompanyInfo"] = BaseFuncInfo{"cpuchannel", "addcpu", "getCompanyInfo"}
+	lwhop2["GetBatchCpu"] = BaseFuncInfo{"cpuchannel", "addcpu", "getBatchInfo"}
 	lwhChannel2 := []string{"cpuchannel"}
 	mlwh2 := OrgMember{"lwh", "arclabw401lwh", lwhChannel2, lwhop2, "./profile/cpu/connection-profile-lwh.yaml"}
 	Orgnization["cpu"] = append(Orgnization["cpu"], mlwh2)

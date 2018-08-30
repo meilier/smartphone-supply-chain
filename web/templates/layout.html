@@ -38,11 +38,29 @@
                     {{if eq .OrgName "smartphone"}}
                     {{if .LoginStatus}}
                     <li><a href="/home.html">Home</a></li>
-                    <li><a href="/addbatch.html">AddBatch</a></li>
-                    <li><a href="/getbatch.html">GetBatch</a></li>
-                    <li><a href="/getbattery.html">GetBatteryInfo</a></li>
-                    <li><a href="/getdisplay.html">GetDisplayInfo</a></li>
-                    <li><a href="/getcpu.html">GetCpuInfo</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            BatchInfo
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/addbatch.html">AddBatch</a></li>
+                            <li><a href="/getbatch.html">GetBatch</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            GetSupplierInfo
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/getbattery.html">GetBatteryInfo</a></li>
+                            <li><a href="/getdisplay.html">GetDisplayInfo</a></li>
+                            <li><a href="/getcpu.html">GetCpuInfo</a></li>
+                        </ul>
+                    </li>
                     <li><a href="/getassembly.html">GetAssemblyInfo</a></li>
                     <li><a href="/getlogistics.html">GetLogisticsInfo</a></li>
                     <li><a href="/getsales.html">GetSalesInfo</a></li>
@@ -61,10 +79,33 @@
                     {{end}}
                 {{end}}
                 {{if .OrgName}}
-                    {{if eq .OrgName "supplier"}}
+                    {{if eq .OrgName "battery"}}
                     {{if .LoginStatus}}
-                    <li><a href="/home.html">Home</a></li>
-                    <li><a href="/addsupplier.html">AddSubcomponentInfo</a></li>
+                    <li><a href="/homebattery.html">Home</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            AddInfo
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/addcompany.html">AddCompanyInfo</a></li>
+                            <li><a href="/addcompanysubcomponent.html">AddSubcomponentInfo</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            GetInfo
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/getcompany.html">GetCompanyInfo</a></li>
+                        </ul>
+                    </li>
+
+
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             Hey, {{.Username}}
@@ -79,6 +120,96 @@
                     {{end}}
                     {{end}}
                 {{end}}
+            {{if .OrgName}}
+                {{if eq .OrgName "display"}}
+                {{if .LoginStatus}}
+                <li><a href="/homebattery.html">Home</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        AddInfo
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/addcompany.html">AddCompanyInfo</a></li>
+                        <li><a href="/addcompanysubcomponent.html">AddSubcomponentInfo</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        GetInfo
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/getcompany.html">GetCompanyInfo</a></li>
+                    </ul>
+                </li>
+
+
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Hey, {{.Username}}
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/logout.html">Logout</a></li>
+                    </ul>
+                </li>
+                {{else}}
+                <li><a href="/login.html">Login</a></li>
+                {{end}}
+                {{end}}
+            {{end}}
+
+        {{if .OrgName}}
+            {{if eq .OrgName "cpu"}}
+            {{if .LoginStatus}}
+            <li><a href="/homebattery.html">Home</a></li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    AddInfo
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/addcompany.html">AddCompanyInfo</a></li>
+                    <li><a href="/addcompanysubcomponent.html">AddSubcomponentInfo</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    GetInfo
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/getcompany.html">GetCompanyInfo</a></li>
+                </ul>
+            </li>
+
+
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Hey, {{.Username}}
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/logout.html">Logout</a></li>
+                </ul>
+            </li>
+            {{else}}
+            <li><a href="/login.html">Login</a></li>
+            {{end}}
+            {{end}}
+        {{end}}
+
+
+
+
+                
                 {{if .OrgName}}
                     {{if eq .OrgName "assembly"}}
                     {{if .LoginStatus}}

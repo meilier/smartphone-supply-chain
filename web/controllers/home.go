@@ -48,3 +48,15 @@ func (app *Application) HomeHandler(w http.ResponseWriter, r *http.Request) {
 
 	renderTemplate(w, r, "home.html", data)
 }
+
+func (app *Application) HomeBatteryHandler(w http.ResponseWriter, r *http.Request) {
+	uName := webutil.MySession.GetUserName(r)
+	if len(uName) == 0 {
+		http.Redirect(w, r, "./login.html", 302)
+		return
+	}
+	var data map[string]interface{}
+	data = make(map[string]interface{})
+
+	renderTemplate(w, r, "homebattery.html", data)
+}

@@ -44,7 +44,7 @@ func (app *Application) AddSalesHandler(w http.ResponseWriter, r *http.Request) 
 	}
 	var data map[string]interface{}
 	data = make(map[string]interface{})
-	data["SupplierInfo"] = supplierInfo.ConcreteCompanyInfo
+	//data["SupplierInfo"] = supplierInfo.ConcreteCompanyInfo
 
 	//different nav bar for different organizations
 
