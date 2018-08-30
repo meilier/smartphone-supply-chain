@@ -11,6 +11,15 @@ func Serve(app *controllers.Application) {
 	fs := http.FileServer(http.Dir("web/assets"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
+	//smartphone
+	http.HandleFunc("/addbatch.html", app.AddBatchHandler)
+	http.HandleFunc("/getbatch.html", app.GetBatchHandler)
+	// http.HandleFunc("/getbattery.html", app.AddBatchHandler)
+	// http.HandleFunc("/addbatch.html", app.AddBatchHandler)
+	// http.HandleFunc("/addbatch.html", app.AddBatchHandler)
+	// http.HandleFunc("/addbatch.html", app.AddBatchHandler)
+	// http.HandleFunc("/addbatch.html", app.AddBatchHandler)
+
 	http.HandleFunc("/home.html", app.HomeHandler)
 	http.HandleFunc("/addsupplier.html", app.AddSupplierHandler)
 	http.HandleFunc("/register.html", app.RegisterHandler)

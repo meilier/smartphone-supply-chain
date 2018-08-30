@@ -9,7 +9,7 @@ import (
 )
 
 //HomeHandler : home page
-func (app *Application) HomeHandler(w http.ResponseWriter, r *http.Request) {
+func (app *Application) AddSalesHandler(w http.ResponseWriter, r *http.Request) {
 	var supplierInfo webutil.CompanyInfo
 	uName := webutil.MySession.GetUserName(r)
 	oName := webutil.MySession.GetOrgName(r)
@@ -51,8 +51,8 @@ func (app *Application) HomeHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "home.html", data)
 }
 
-//HomeHandler : home page
-func (app *Application) GetAssemblyHandler(w http.ResponseWriter, r *http.Request) {
+//HomeHandler : home pagef
+func (app *Application) GetSalesHandler(w http.ResponseWriter, r *http.Request) {
 	var assemblyInfo webutil.AssemblyInfo
 	uName := webutil.MySession.GetUserName(r)
 	oName := webutil.MySession.GetOrgName(r)

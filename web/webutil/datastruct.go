@@ -124,7 +124,7 @@ func init() {
 	xjxop["AddSale"] = BaseFuncInfo{"saleschannel", "addsale", "addSale"}
 	xjxop["AddSale"] = BaseFuncInfo{"saleschannel", "addsale", "getSale"}
 	xjxChannel := []string{"saleschannel"}
-	mxjx := OrgMember{"xjx", "arclabw401xjx", xjxChannel, xjxop, "./profile/store/connection-profile-xjx.yaml"}
+	mxjx := OrgMember{"xjx", "arclabw401xjx", xjxChannel, xjxop, "./profile/sales/connection-profile-xjx.yaml"}
 	Orgnization["sales"] = append(Orgnization["sales"], mxjx)
 
 }

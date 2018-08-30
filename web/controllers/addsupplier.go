@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/meilier/smartphone-supply-chain/web/webutil"
@@ -23,28 +24,29 @@ func (app *Application) AddBatchHandler(w http.ResponseWriter, r *http.Request) 
 			var fcn string
 
 			suppliertypeValue := r.FormValue("suppliertype")
+			fmt.Println("suppliertype is", suppliertypeValue)
 			//find cfg name
 			//according supplier type to choose corresponding channel
 			for _, v := range webutil.Orgnization[oName] {
 				if v.UserName == uName {
 					switch suppliertypeValue {
-					case "Battery":
+					case "battery":
 						cn = v.UserOperation["AddBatchBattery"].ChannelName
 						ccn = v.UserOperation["AddBatchBattery"].CCName
 						fcn = v.UserOperation["AddBatchBattery"].Fcn
-					case "Display":
+					case "display":
 						cn = v.UserOperation["AddBatchDisplay"].ChannelName
 						ccn = v.UserOperation["AddBatchDisplay"].CCName
 						fcn = v.UserOperation["AddBatchDisplay"].Fcn
-					case "Cpu":
+					case "cpu":
 						cn = v.UserOperation["AddBatchCpu"].ChannelName
 						ccn = v.UserOperation["AddBatchCpu"].CCName
 						fcn = v.UserOperation["AddBatchCpu"].Fcn
-					case "Assembly":
+					case "assembly":
 						cn = v.UserOperation["AddBatchAssembly"].ChannelName
 						ccn = v.UserOperation["AddBatchAssembly"].CCName
 						fcn = v.UserOperation["AddBatchAssembly"].Fcn
-					case "Sales":
+					case "sales":
 						cn = v.UserOperation["AddBatchLogistics"].ChannelName
 						ccn = v.UserOperation["AddBatchLogistics"].CCName
 						fcn = v.UserOperation["AddBatchLogistics"].Fcn
@@ -57,10 +59,11 @@ func (app *Application) AddBatchHandler(w http.ResponseWriter, r *http.Request) 
 			//add properties to args
 			passargs = append(passargs, key)
 			passargs = append(passargs, batchnumber)
+			fmt.Println("cn,ccn,fcn", cn, ccn, fcn)
 
 			txid, err := fSetup.InvokeCC(cn, ccn, fcn, passargs)
 			if err != nil {
-				http.Error(w, "Unable to invoke hello in the blockchain", 500)
+				http.Error(w, "Unable to invoke chaincode in the blockchain", 500)
 			}
 			data["TransactionId"] = txid
 			data["Success"] = true
@@ -68,7 +71,7 @@ func (app *Application) AddBatchHandler(w http.ResponseWriter, r *http.Request) 
 		}
 		// txid, err := app.Fabric.InvokeSupplier(passargs)
 	}
-	renderTemplate(w, r, "addsupplier.html", data)
+	renderTemplate(w, r, "addbatch.html", data)
 }
 
 func (app *Application) GetBatchHandler(w http.ResponseWriter, r *http.Request) {
@@ -130,7 +133,7 @@ func (app *Application) GetBatchHandler(w http.ResponseWriter, r *http.Request) 
 		}
 		// txid, err := app.Fabric.InvokeSupplier(passargs)
 	}
-	renderTemplate(w, r, "addsupplier.html", data)
+	renderTemplate(w, r, "getbatch.html", data)
 }
 
 func (app *Application) AddSupplierHandler(w http.ResponseWriter, r *http.Request) {

@@ -14,8 +14,10 @@ func (setup *FabricSetup) InvokeCC(channelName, chainCode, fcn string, newValue 
 	// Prepare arguments
 	invokeArgs := [][]byte{[]byte(strings.Join(newValue, ""))}
 	// Create a request (proposal) and send it
+	fmt.Println("parameter is ", channelName, chainCode, fcn, newValue)
+	fmt.Println("len is", len(invokeArgs))
 	response, err := client.Execute(channel.Request{ChaincodeID: chainCode, Fcn: fcn, Args: invokeArgs})
-
+	fmt.Println("err is", err)
 	if err != nil {
 		return "", fmt.Errorf("failed to move funds: %v", err)
 	}
