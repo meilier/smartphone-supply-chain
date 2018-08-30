@@ -38,6 +38,7 @@ type OrgMember struct {
 }
 
 var Orgnization map[string][]OrgMember
+var PhoneType = "Aphone"
 
 func init() {
 	Orgnization = make(map[string][]OrgMember)

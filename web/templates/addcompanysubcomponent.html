@@ -1,0 +1,61 @@
+{{define "title"}}Request{{end}}
+
+{{define "body"}}
+<h1>Add Subcomponent Company Information In This Page</h1>
+
+{{ if .Response }}
+{{ if .Success }}
+<div class="alert alert-success" role="alert">
+    Successful request, transaction ID: {{ .TransactionId }}
+</div>
+{{ else }}
+<div class="alert alert-danger" role="alert">
+    Unable to submit the request, retry later.
+</div>
+{{ end }}
+{{ end }}
+
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label for="sname" class="col-sm-2 control-label">Subcomponet Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="supplierName" 
+                   placeholder="please input the name" name="subcomponetName">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="slocation" class="col-sm-2 control-label">Company Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="companyName" 
+                   placeholder="please input supplier location" name="companyName">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="slocation" class="col-sm-2 control-label">Location</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="location" 
+                   placeholder="please input component information" name="location">
+        </div>
+    </div>
+     <div class="form-group">
+    <label for="snumber" class="col-sm-2 control-label">Batch Number</label>
+    <div class="col-sm-10">
+                <select class= "form-control"name="bnumber">
+                    <option value="smartphone">10000000</option>
+                    <option value="supplier">11000000</option>
+                    <option value="supplier">12000000</option>
+                    <option value="supplier">13000000</option>
+                    <option value="supplier">14000000</option>
+                    </select>
+    </div>
+</div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="hidden" name="submitted" value="true">
+            <button type="submit" class="btn btn-default">Send The Request</button>
+        </div>
+    </div>
+</form>
+
+{{end}}
