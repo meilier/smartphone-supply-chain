@@ -25,14 +25,17 @@ func Serve(app *controllers.Application) {
 	http.HandleFunc("/register.html", app.RegisterHandler)
 	http.HandleFunc("/login.html", app.LoginHandler)
 	http.HandleFunc("/logout.html", app.LogoutHandler)
-	http.HandleFunc("/getassembly.html", app.GetAssemblyHandler)
-	http.HandleFunc("/addassembly.html", app.AddAssemblyHandler)
 
 	//battery,display,cpu
 	http.HandleFunc("/homebattery.html", app.HomeBatteryHandler)
 	http.HandleFunc("/addcompany.html", app.AddCompanyHandler)
 	http.HandleFunc("/getcompany.html", app.GetCompanyHandler)
 	http.HandleFunc("/addcompanysubcomponent.html", app.AddCompanySubcomponentHandler)
+
+	//assembly
+	http.HandleFunc("/homeassembly.html", app.HomeAssemblyHandler)
+	http.HandleFunc("/getassembly.html", app.GetAssemblyHandler)
+	http.HandleFunc("/addassembly.html", app.AddAssemblyHandler)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/login.html", http.StatusTemporaryRedirect)

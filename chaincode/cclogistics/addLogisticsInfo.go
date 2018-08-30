@@ -29,6 +29,7 @@ type TransitInfo struct {
 type BaseTransitInfo struct {
 	Name    string `json:"name"`
 	Transit string `json:"transit"`
+	Manager string `json:"manager"`
 	Date    string `json:"date"`
 }
 
@@ -56,11 +57,11 @@ func (t *AddLogisticsInfoChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.
 // // key smartisan U2 pro - battery
 // ============================================================
 func (t *AddLogisticsInfoChaincode) addLogistics(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
-	if len(args) != 4 {
-		return shim.Error("Incorrect number of arguments. Expecting 4")
+	if len(args) != 5 {
+		return shim.Error("Incorrect number of arguments. Expecting 5")
 	}
 	var transitInfoBefor TransitInfo
-	var bTransit = BaseTransitInfo{Name: args[1], Transit: args[2], Date: args[3]}
+	var bTransit = BaseTransitInfo{Name: args[1], Transit: args[2], Manager: args[3], Date: args[4]}
 
 	// Get the state from the ledger first
 	transitInfoBeforAsBytes, err := APIstub.GetState(args[0])

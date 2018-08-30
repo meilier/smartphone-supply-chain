@@ -27,24 +27,24 @@
 </form>
 {{$c := .CompanyInfo}}
 <div class="table-responsive">
-        <table class="table">
-            <caption class="h1">YourCompanyInfo</caption>
-            <thead>
-                <tr>
-                    <th>Subcomponent Name</th>
-                    <th>Company Name</th>
-                    <th>ComponentInfo</th>
-                </tr>
-            </thead>
-             <tbody>
-                <tr>
-                    <td>{{$c.Name}}</td>
-                    <td>{{$c.Location}}</td>
-                    <td>{{$c.ComponentInfo}}</td>
-                </tr>
-            </tbody>
-         </table>
-    </div> 
+    <table class="table">
+        <caption class="h1">YourCompanyInfo</caption>
+        <thead>
+            <tr>
+                <th>Subcomponent Name</th>
+                <th>Company Name</th>
+                <th>ComponentInfo</th>
+            </tr>
+        </thead>
+            <tbody>
+            <tr>
+                <td>{{$c.Name}}</td>
+                <td>{{$c.Location}}</td>
+                <td>{{$c.ComponentInfo}}</td>
+            </tr>
+        </tbody>
+        </table>
+</div> 
 <div class="table-responsive">
     <table class="table">
         <caption class="h1">SupplierCompanyInfo</caption>

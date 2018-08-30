@@ -220,10 +220,14 @@ func (app *Application) GetBatchInfo(suppliertype string, username string) []str
 					cn = v.UserOperation["GetBatchAssembly"].ChannelName
 					ccn = v.UserOperation["GetBatchAssembly"].CCName
 					fcn = v.UserOperation["GetBatchAssembly"].Fcn
-				case "sales":
+				case "logistics":
 					cn = v.UserOperation["GetBatchLogistics"].ChannelName
 					ccn = v.UserOperation["GetBatchLogistics"].CCName
 					fcn = v.UserOperation["GetBatchLogistics"].Fcn
+				case "sales":
+					cn = v.UserOperation["GetBatchSales"].ChannelName
+					ccn = v.UserOperation["GetBatchSales"].CCName
+					fcn = v.UserOperation["GetBatchSales"].Fcn
 				}
 				break
 			}
