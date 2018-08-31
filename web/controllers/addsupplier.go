@@ -213,7 +213,7 @@ func (app *Application) GetBatchInfo(suppliertype string, username string) []str
 		for _, v := range webutil.Orgnization[suppliertype] {
 			fmt.Println("v.Username is", v.UserName)
 			if v.UserName == username {
-				fmt.Println("aaaaaa suppliertype is ", suppliertype)
+				fmt.Println("aaaaaabbbbb suppliertype is ", suppliertype)
 				switch suppliertype {
 				case "battery":
 					cn = v.UserOperation["GetBatchBattery"].ChannelName

@@ -104,12 +104,12 @@ func init() {
 	wzxop["GetBatchSales"] = BaseFuncInfo{"saleschannel", "addsales", "getBatchInfo"}
 
 	//for supply chain info
-	wzxop["GetBatterytInfo"] = BaseFuncInfo{"batterychannel", "addbattery", "getSupplier"}
-	wzxop["GetDisplayInfo"] = BaseFuncInfo{"displaychannel", "adddisplay", "getSupplier"}
-	wzxop["GetCpuInfo"] = BaseFuncInfo{"cpuchannel", "addcpu", "getSupplier"}
-	wzxop["GetAssemblyInfo"] = BaseFuncInfo{"assemblychannel", "addassembly", "getSupplier"}
-	wzxop["GetLogisticsInfo"] = BaseFuncInfo{"logisticschannel", "addlogistics", "getSupplier"}
-	wzxop["GetStore"] = BaseFuncInfo{"saleschannel", "addsale", "getSupplier"}
+	wzxop["GetBatteryInfo"] = BaseFuncInfo{"batterychannel", "addbattery", "getCompanyInfo"}
+	wzxop["GetDisplayInfo"] = BaseFuncInfo{"displaychannel", "adddisplay", "getCompanyInfo"}
+	wzxop["GetCpuInfo"] = BaseFuncInfo{"cpuchannel", "addcpu", "getCompanyInfo"}
+	wzxop["GetAssembly"] = BaseFuncInfo{"assemblychannel", "addassembly", "getAssemblyInfo"}
+	wzxop["GetLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "getLogistics"}
+	wzxop["GetSales"] = BaseFuncInfo{"saleschannel", "addsales", "getSalesInfo"}
 
 	wzxChannel := []string{"batterychannel", "displaychannel", "cpuchannel", "assemblychannel", "logisticschannel", "salechannel"}
 	mwzx := OrgMember{"wzx", "arclabw401wzx", wzxChannel, wzxop, "./profile/smartphone/connection-profile-wzx.yaml"}
@@ -134,7 +134,7 @@ func init() {
 	lwhop1["GetCompanyInfo"] = BaseFuncInfo{"displaychannel", "adddisplay", "getCompanyInfo"}
 	lwhop1["GetBatchDisplay"] = BaseFuncInfo{"displaychannel", "adddisplay", "getBatchInfo"}
 	lwhChannel1 := []string{"displaychannel"}
-	mlwh1 := OrgMember{"lwh", "arclabw401lwh", lwhChannel1, lwhop1, "./profile/display/connection-profile-lwh.yaml"}
+	mlwh1 := OrgMember{"lwh1", "arclabw401lwh", lwhChannel1, lwhop1, "./profile/display/connection-profile-lwh1.yaml"}
 	Orgnization["display"] = append(Orgnization["display"], mlwh1)
 
 	//--------------cpu------------------
@@ -145,7 +145,7 @@ func init() {
 	lwhop2["GetCompanyInfo"] = BaseFuncInfo{"cpuchannel", "addcpu", "getCompanyInfo"}
 	lwhop2["GetBatchCpu"] = BaseFuncInfo{"cpuchannel", "addcpu", "getBatchInfo"}
 	lwhChannel2 := []string{"cpuchannel"}
-	mlwh2 := OrgMember{"lwh", "arclabw401lwh", lwhChannel2, lwhop2, "./profile/cpu/connection-profile-lwh.yaml"}
+	mlwh2 := OrgMember{"lwh2", "arclabw401lwh", lwhChannel2, lwhop2, "./profile/cpu/connection-profile-lwh2.yaml"}
 	Orgnization["cpu"] = append(Orgnization["cpu"], mlwh2)
 
 	//-------------assembly---------------

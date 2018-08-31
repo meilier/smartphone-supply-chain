@@ -25,6 +25,9 @@ func Serve(app *controllers.Application) {
 	http.HandleFunc("/register.html", app.RegisterHandler)
 	http.HandleFunc("/login.html", app.LoginHandler)
 	http.HandleFunc("/logout.html", app.LogoutHandler)
+	http.HandleFunc("/getbattery.html", app.GetBatteryHandler)
+	http.HandleFunc("/getdisplay.html", app.GetDisplayHandler)
+	http.HandleFunc("/getcpu.html", app.GetCpuHandler)
 
 	//battery,display,cpu
 	http.HandleFunc("/homebattery.html", app.HomeBatteryHandler)

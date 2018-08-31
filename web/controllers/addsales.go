@@ -115,7 +115,12 @@ func (app *Application) GetSalesHandler(w http.ResponseWriter, r *http.Request) 
 		// txid, err := app.Fabric.InvokeSupplier(passargs)
 	}
 	fmt.Println("org and username", oName, uName)
-	batch := app.GetBatchInfo(oName, uName)
+	var batch []string
+	if oName == "smartphone" {
+		batch = app.GetPhoneBatchInfo("sales", uName)
+	} else {
+		batch = app.GetBatchInfo(oName, uName)
+	}
 	data["BatchInfo"] = batch
 	renderTemplate(w, r, "getsales.html", data)
 }

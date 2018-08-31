@@ -114,7 +114,13 @@ func (app *Application) GetAssemblyHandler(w http.ResponseWriter, r *http.Reques
 		// txid, err := app.Fabric.InvokeSupplier(passargs)
 	}
 	fmt.Println("org and username", oName, uName)
-	batch := app.GetBatchInfo(oName, uName)
+	var batch []string
+	if oName == "smartphone" {
+		batch = app.GetPhoneBatchInfo("assembly", uName)
+	} else {
+		batch = app.GetBatchInfo(oName, uName)
+	}
+
 	data["BatchInfo"] = batch
 	renderTemplate(w, r, "getassembly.html", data)
 }
