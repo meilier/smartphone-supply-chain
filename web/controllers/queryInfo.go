@@ -179,7 +179,7 @@ func (app *Application) GetPhoneSupplierInfo(oName, uName, operation, key string
 	return cInfo
 }
 
-func (app *Application) GetPhoneAssemblyInfo(oName, uName, operation, key string) webutil.AssemblyInfo {
+func (app *Application) GetPhoneAssemblyInfo(oName, uName, key string) webutil.AssemblyInfo {
 	var cInfo webutil.AssemblyInfo
 
 	if fSetup, ok := app.Fabric[uName]; ok {
@@ -192,9 +192,9 @@ func (app *Application) GetPhoneAssemblyInfo(oName, uName, operation, key string
 		for _, v := range webutil.Orgnization[oName] {
 			fmt.Println("v.Username haha is", v.UserName)
 			if v.UserName == uName {
-				cn = v.UserOperation[operation].ChannelName
-				ccn = v.UserOperation[operation].CCName
-				fcn = v.UserOperation[operation].Fcn
+				cn = v.UserOperation["GetAssembly"].ChannelName
+				ccn = v.UserOperation["GetAssembly"].CCName
+				fcn = v.UserOperation["GetAssembly"].Fcn
 				break
 			}
 		}
@@ -212,7 +212,7 @@ func (app *Application) GetPhoneAssemblyInfo(oName, uName, operation, key string
 	return cInfo
 }
 
-func (app *Application) GetPhoneLogisticsInfo(oName, uName, operation, key string) webutil.TransitInfo {
+func (app *Application) GetPhoneLogisticsInfo(oName, uName, key string) webutil.TransitInfo {
 	var cInfo webutil.TransitInfo
 
 	if fSetup, ok := app.Fabric[uName]; ok {
@@ -225,9 +225,9 @@ func (app *Application) GetPhoneLogisticsInfo(oName, uName, operation, key strin
 		for _, v := range webutil.Orgnization[oName] {
 			fmt.Println("v.Username haha is", v.UserName)
 			if v.UserName == uName {
-				cn = v.UserOperation[operation].ChannelName
-				ccn = v.UserOperation[operation].CCName
-				fcn = v.UserOperation[operation].Fcn
+				cn = v.UserOperation["GetLogistics"].ChannelName
+				ccn = v.UserOperation["GetLogistics"].CCName
+				fcn = v.UserOperation["GetLogistics"].Fcn
 				break
 			}
 		}
@@ -245,7 +245,7 @@ func (app *Application) GetPhoneLogisticsInfo(oName, uName, operation, key strin
 	return cInfo
 }
 
-func (app *Application) GetPhoneSalesInfo(oName, uName, operation, key string) webutil.SalesInfo {
+func (app *Application) GetPhoneSalesInfo(oName, uName, key string) webutil.SalesInfo {
 	var cInfo webutil.SalesInfo
 
 	if fSetup, ok := app.Fabric[uName]; ok {
@@ -258,9 +258,9 @@ func (app *Application) GetPhoneSalesInfo(oName, uName, operation, key string) w
 		for _, v := range webutil.Orgnization[oName] {
 			fmt.Println("v.Username haha is", v.UserName)
 			if v.UserName == uName {
-				cn = v.UserOperation[operation].ChannelName
-				ccn = v.UserOperation[operation].CCName
-				fcn = v.UserOperation[operation].Fcn
+				cn = v.UserOperation["GetSales"].ChannelName
+				ccn = v.UserOperation["GetSales"].CCName
+				fcn = v.UserOperation["GetSales"].Fcn
 				break
 			}
 		}
