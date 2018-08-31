@@ -87,21 +87,33 @@ func init() {
 	//for batch
 	wzxop["AddBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "addBatchInfo"}
 	wzxop["GetBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "getBatchInfo"}
+	wzxop["DeleteBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "deleteBatchInfo"}
+	wzxop["UpdateBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "updateBatchInfo"}
 
 	wzxop["AddBatchDisplay"] = BaseFuncInfo{"displaychannel", "adddisplay", "addBatchInfo"}
 	wzxop["GetBatchDisplay"] = BaseFuncInfo{"displaychannel", "adddisplay", "getBatchInfo"}
+	wzxop["DeleteBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "deleteBatchInfo"}
+	wzxop["updateBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "updateBatchInfo"}
 
 	wzxop["AddBatchCpu"] = BaseFuncInfo{"cpuchannel", "addcpu", "addBatchInfo"}
 	wzxop["GetBatchCpu"] = BaseFuncInfo{"cpuchannel", "addcpu", "getBatchInfo"}
+	wzxop["DeleteBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "deleteBatchInfo"}
+	wzxop["UpdateBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "updateBatchInfo"}
 
 	wzxop["AddBatchAssembly"] = BaseFuncInfo{"assemblychannel", "addassembly", "addBatchInfo"}
 	wzxop["GetBatchAssembly"] = BaseFuncInfo{"assemblychannel", "addassembly", "getBatchInfo"}
+	wzxop["DeleteBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "deleteBatchInfo"}
+	wzxop["UpdateBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "updateBatchInfo"}
 
 	wzxop["AddBatchLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "addBatchInfo"}
 	wzxop["GetBatchLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "getBatchInfo"}
+	wzxop["DeleteBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "deleteBatchInfo"}
+	wzxop["UpdateBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "updateBatchInfo"}
 
 	wzxop["AddBatchSales"] = BaseFuncInfo{"saleschannel", "addsales", "addBatchInfo"}
 	wzxop["GetBatchSales"] = BaseFuncInfo{"saleschannel", "addsales", "getBatchInfo"}
+	wzxop["DeleteBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "deleteBatchInfo"}
+	wzxop["UpdateBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "updateBatchInfo"}
 
 	//for supply chain info
 	wzxop["GetBatteryInfo"] = BaseFuncInfo{"batterychannel", "addbattery", "getCompanyInfo"}

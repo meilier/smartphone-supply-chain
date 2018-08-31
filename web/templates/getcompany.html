@@ -25,6 +25,16 @@
         </div>
     </div>
 </form>
+{{if .BatteryQuery}}
+<h2>{{.BatteryQuery}}</h2>
+{{end}}
+{{if .DisplayQuery}}
+<h2>{{.DisplayQuery}}</h2>
+{{end}}
+{{if .CpuQuery}}
+<h2>{{.CpuQuery}}</h2>
+{{end}}
+
 {{$c := .CompanyInfo}}
 <div class="table-responsive">
     <table class="table">

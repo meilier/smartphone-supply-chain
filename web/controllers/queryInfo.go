@@ -31,6 +31,7 @@ func (app *Application) GetBatteryHandler(w http.ResponseWriter, r *http.Request
 	fmt.Println("org and username", oName, uName)
 	batch := app.GetPhoneBatchInfo("battery", uName)
 	data["BatchInfo"] = batch
+	data["BatteryQuery"] = "Query Battery Info"
 	renderTemplate(w, r, "getcompany.html", data)
 }
 
@@ -55,8 +56,9 @@ func (app *Application) GetDisplayHandler(w http.ResponseWriter, r *http.Request
 		// txid, err := app.Fabric.InvokeSupplier(passargs)
 	}
 	fmt.Println("org and username", oName, uName)
-	batch := app.GetPhoneBatchInfo("battery", uName)
+	batch := app.GetPhoneBatchInfo("display", uName)
 	data["BatchInfo"] = batch
+	data["DisplayQuery"] = "Query Display Info"
 	renderTemplate(w, r, "getcompany.html", data)
 }
 
@@ -81,8 +83,9 @@ func (app *Application) GetCpuHandler(w http.ResponseWriter, r *http.Request) {
 		// txid, err := app.Fabric.InvokeSupplier(passargs)
 	}
 	fmt.Println("org and username", oName, uName)
-	batch := app.GetPhoneBatchInfo("battery", uName)
+	batch := app.GetPhoneBatchInfo("cpu", uName)
 	data["BatchInfo"] = batch
+	data["CpuQuery"] = "Query Cpu Info"
 	renderTemplate(w, r, "getcompany.html", data)
 }
 

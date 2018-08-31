@@ -15,13 +15,27 @@ func (app *Application) HomeHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "./login.html", 302)
 		return
 	}
+	// var cn string
+	// var ccn string
+	// var fcn string
+	// var passargs []string
+	// passargs = append(passargs,2,)
+
+	// for _, v := range webutil.Orgnization[oName] {
+	// 	fmt.Println("org user", v.UserName)
+	// 	if v.UserName == uName {
+	// 		cn = v.UserOperation["DeleteBatchBattery"].ChannelName
+	// 		ccn = v.UserOperation["DeleteBatchBattery"].CCName
+	// 		fcn = v.UserOperation["DeleteBatchBattery"].Fcn
+	// 	}
+	// }
+	// supplierValue, err := app.Fabric[uName].UpdateCC(cn, ccn, fcn, []byte("Aphone-10000000"))
+	// 		fmt.Println("query channel is ", cn
 	// fmt.Println(len(uName))
 
 	// fmt.Println("unameis", "gg", uName, "gg")
 	// fmt.Printf("byte uname  is %x", uName)
-	// var cn string
-	// var ccn string
-	// var fcn string
+	//
 
 	// for _, v := range webutil.Orgnization[oName] {
 	// 	fmt.Println("org user", v.UserName)

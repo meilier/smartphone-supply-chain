@@ -14,6 +14,7 @@ func Serve(app *controllers.Application) {
 	//smartphone
 	http.HandleFunc("/addbatch.html", app.AddBatchHandler)
 	http.HandleFunc("/getbatch.html", app.GetBatchHandler)
+	http.HandleFunc("/deletebatch.html", app.DeleteBatchHandler)
 	// http.HandleFunc("/getbattery.html", app.AddBatchHandler)
 	// http.HandleFunc("/addbatch.html", app.AddBatchHandler)
 	// http.HandleFunc("/addbatch.html", app.AddBatchHandler)

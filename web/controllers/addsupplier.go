@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/meilier/smartphone-supply-chain/web/webutil"
 )
@@ -197,6 +198,158 @@ func (app *Application) GetBatchHandler(w http.ResponseWriter, r *http.Request) 
 		// txid, err := app.Fabric.InvokeSupplier(passargs)
 	}
 	renderTemplate(w, r, "getbatch.html", data)
+}
+
+//to do get smartphone batch
+func (app *Application) DeleteBatchHandler(w http.ResponseWriter, r *http.Request) {
+	var data map[string]interface{}
+	data = make(map[string]interface{})
+	var bInfo webutil.BatchInfo
+	if r.FormValue("submitted") == "true" {
+		//befor send request we need to check session
+		uName := webutil.MySession.GetUserName(r)
+		oName := webutil.MySession.GetOrgName(r)
+		if fSetup, ok := app.Fabric[uName]; ok {
+
+			var cn string
+			var ccn string
+			var fcn string
+
+			suppliertypeValue := r.FormValue("suppliertype")
+			//find cfg name
+			//according supplier type to choose corresponding channel
+			for _, v := range webutil.Orgnization[oName] {
+				if v.UserName == uName {
+					switch suppliertypeValue {
+					case "battery":
+						cn = v.UserOperation["GetBatchBattery"].ChannelName
+						ccn = v.UserOperation["GetBatchBattery"].CCName
+						fcn = v.UserOperation["GetBatchBattery"].Fcn
+					case "display":
+						cn = v.UserOperation["GetBatchDisplay"].ChannelName
+						ccn = v.UserOperation["GetBatchDisplay"].CCName
+						fcn = v.UserOperation["GetBatchDisplay"].Fcn
+					case "cpu":
+						cn = v.UserOperation["GetBatchCpu"].ChannelName
+						ccn = v.UserOperation["GetBatchCpu"].CCName
+						fcn = v.UserOperation["GetBatchCpu"].Fcn
+					case "assembly":
+						cn = v.UserOperation["GetBatchAssembly"].ChannelName
+						ccn = v.UserOperation["GetBatchAssembly"].CCName
+						fcn = v.UserOperation["GetBatchAssembly"].Fcn
+					case "logistics":
+						cn = v.UserOperation["GetBatchLogistics"].ChannelName
+						ccn = v.UserOperation["GetBatchLogistics"].CCName
+						fcn = v.UserOperation["GetBatchLogistics"].Fcn
+					case "sales":
+						cn = v.UserOperation["GetBatchSales"].ChannelName
+						ccn = v.UserOperation["GetBatchSales"].CCName
+						fcn = v.UserOperation["GetBatchSales"].Fcn
+					}
+					break
+				}
+			}
+			key := r.FormValue("pmodel")
+			//add properties to args
+			//TODO: here to map batchinfo to data
+			batchinfo, err := fSetup.QueryCC(cn, ccn, fcn, []byte(key))
+			if err != nil {
+				http.Error(w, "Unable to invoke hello in the blockchain", 500)
+			}
+			json.Unmarshal([]byte(batchinfo), &bInfo)
+			data["PhoneModel"] = key
+			data["BatchInfo"] = bInfo.Batch[1:]
+			data["ShowBatch"] = true
+			data["HideBefor"] = true
+		}
+		// txid, err := app.Fabric.InvokeSupplier(passargs)
+	}
+	if r.FormValue("delete") == "true" {
+		//befor send request we need to check session
+		uName := webutil.MySession.GetUserName(r)
+		oName := webutil.MySession.GetOrgName(r)
+		if fSetup, ok := app.Fabric[uName]; ok {
+
+			var passargs []string
+			var cn string
+			var ccn string
+			var fcn string
+
+			suppliertypeValue := r.FormValue("dsuppliertype")
+			fmt.Println("suppliertype is", suppliertypeValue)
+			//find cfg name
+			//according supplier type to choose corresponding channel
+			for _, v := range webutil.Orgnization[oName] {
+				if v.UserName == uName {
+					switch suppliertypeValue {
+					case "battery":
+						cn = v.UserOperation["UpdateBatchBattery"].ChannelName
+						ccn = v.UserOperation["UpdateBatchBattery"].CCName
+						fcn = v.UserOperation["UpdateBatchBattery"].Fcn
+					case "display":
+						cn = v.UserOperation["UpdateBatchDisplay"].ChannelName
+						ccn = v.UserOperation["UpdateBatchDisplay"].CCName
+						fcn = v.UserOperation["UpdateBatchDisplay"].Fcn
+					case "cpu":
+						cn = v.UserOperation["UpdateBatchCpu"].ChannelName
+						ccn = v.UserOperation["UpdateBatchCpu"].CCName
+						fcn = v.UserOperation["UpdateBatchCpu"].Fcn
+					case "assembly":
+						cn = v.UserOperation["UpdateBatchAssembly"].ChannelName
+						ccn = v.UserOperation["UpdateBatchAssembly"].CCName
+						fcn = v.UserOperation["UpdateBatchAssembly"].Fcn
+					case "logistics":
+						cn = v.UserOperation["UpdateBatchLogistics"].ChannelName
+						ccn = v.UserOperation["UpdateBatchLogistics"].CCName
+						fcn = v.UserOperation["UpdateBatchLogistics"].Fcn
+					case "sales":
+						cn = v.UserOperation["UpdateBatchSales"].ChannelName
+						ccn = v.UserOperation["UpdateBatchSales"].CCName
+						fcn = v.UserOperation["UpdateBatchSales"].Fcn
+					}
+					break
+				}
+			}
+			var tmp int
+			key := r.FormValue("dpmodel")
+			batchnumber := r.FormValue("dbnumber")
+			stype := r.FormValue("dsuppliertype")
+			// batchinfo, err := fSetup.QueryCC(cn, ccn, fcn, []byte(key))
+			// if err != nil {
+			// 	http.Error(w, "Unable to invoke hello in the blockchain", 500)
+			// }
+			// json.Unmarshal([]byte(batchinfo), &bInfo)
+			batch := app.GetPhoneBatchInfo(stype, uName)
+			for k, v := range batch {
+				fmt.Println("kv---------------", k, v)
+				if v == batchnumber {
+					//delete original batch + 1
+					tmp = k + 1
+					fmt.Println("tmp is wzx ", tmp)
+					break
+				}
+			}
+			fmt.Println("tmp is wzx ", tmp)
+
+			fmt.Println("oooooname uuuuuuname is", stype, uName)
+
+			//add properties to args
+			passargs = append(passargs, key)
+			passargs = append(passargs, strconv.Itoa(tmp))
+			passargs = append(passargs, "delete")
+			passargs = append(passargs, "")
+			fmt.Println("cn,ccn,fcn", cn, ccn, fcn)
+
+			txid, err := fSetup.UpdateCC(cn, ccn, fcn, passargs)
+			if err != nil {
+				http.Error(w, "Unable to invoke chaincode in the blockchain", 500)
+			}
+			data["TransactionId"] = txid
+			data["Success"] = true
+			data["Response"] = true
+		}
+	}
+	renderTemplate(w, r, "deletebatch.html", data)
 }
 
 func (app *Application) GetBatchInfo(suppliertype string, username string) []string {
