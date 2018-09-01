@@ -86,6 +86,18 @@ func queryphoneTemplate(w http.ResponseWriter, r *http.Request, templateName str
 	tp := filepath.Join("web", "templates", templateName)
 
 	resultTemplate, _ := template.ParseFiles(tp, lp)
+
+	newData := data.(map[string]interface{})
+	//get session
+	uname := webutil.MySession.GetUserName(r)
+	uorg := webutil.MySession.GetOrgName(r)
+	fmt.Println("uname is ", uname)
+	if uname != "" {
+		//set data
+		newData["Username"] = uname
+		newData["LoginStatus"] = true
+		newData["OrgName"] = uorg
+	}
 	fmt.Println("resulttemplate is ", resultTemplate)
 	if err := resultTemplate.ExecuteTemplate(w, "layout", data); err != nil {
 		fmt.Println(err.Error())
