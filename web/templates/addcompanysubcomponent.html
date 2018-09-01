@@ -1,10 +1,7 @@
-{{define "title"}}Request{{end}}
-
-{{define "body"}}
+{{define "title"}}Request{{end}} {{define "body"}}
 <h1>Add Subcomponent Company Information In This Page</h1>
 
-{{ if .Response }}
-{{ if .Success }}
+{{ if .Response }} {{ if .Success }}
 <div class="alert alert-success" role="alert">
     Successful request, transaction ID: {{ .TransactionId }}
 </div>
@@ -12,35 +9,31 @@
 <div class="alert alert-danger" role="alert">
     Unable to submit the request, retry later.
 </div>
-{{ end }}
-{{ end }}
+{{ end }} {{ end }}
 
 <form class="form-horizontal" role="form" action="addcompanysubcomponent.html" method="post">
     <div class="form-group">
         <label for="sname" class="col-sm-2 control-label">Subcomponet Name</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="supplierName" 
-                   placeholder="please input the name" name="subcomponetName">
+            <input type="text" class="form-control" id="supplierName" placeholder="please input the name" name="subcomponetName">
         </div>
     </div>
     <div class="form-group">
         <label for="slocation" class="col-sm-2 control-label">Company Name</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="companyName" 
-                   placeholder="please input supplier location" name="companyName">
+            <input type="text" class="form-control" id="companyName" placeholder="please input supplier location" name="companyName">
         </div>
     </div>
     <div class="form-group">
         <label for="slocation" class="col-sm-2 control-label">Location</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="location" 
-                   placeholder="please input component information" name="location">
+            <input type="text" class="form-control" id="location" placeholder="please input component information" name="location">
         </div>
     </div>
     <div class="form-group">
         <label for="snumber" class="col-sm-2 control-label">Batch Number</label>
         <div class="col-sm-10">
-                    <select class= "form-control"name="bnumber">
+            <select class="form-control" name="bnumber">
                         {{range $index, $element:= .BatchInfo}}
                             <option value={{$element}}>{{$element}}</option>
                         {{end}}

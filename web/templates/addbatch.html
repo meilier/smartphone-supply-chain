@@ -1,14 +1,11 @@
-{{define "title"}}AddBatch{{end}}
-
-{{define "body"}}
+{{define "title"}}AddBatch{{end}} {{define "body"}}
 <div class="container">
 
 </div>
 <div class="text-center page-header">
-<h3 class= "active">Add Batch In This Page</h3>
+    <h3 class="active">Add Batch In This Page</h3>
 </div>
-{{ if .Response }}
-{{ if .Success }}
+{{ if .Response }} {{ if .Success }}
 <div class="alert alert-success" role="alert">
     Successful request, transaction ID: {{ .TransactionId }}
 </div>
@@ -16,32 +13,31 @@
 <div class="alert alert-danger" role="alert">
     Unable to submit the request, retry later.
 </div>
-{{ end }}
-{{ end }}
+{{ end }} {{ end }}
 
-	
-	
-	
+
+
+
 <form class="form-horizontal" role="form" action="addbatch.html" method="post">
-	<div class="form-group">
-		<label for="bnumber" class="col-sm-2 control-label">Batch Number</label>
-		<div class="col-sm-10">
-			<input type="text" class="form-control" id="usernameValue" placeholder="please input batch number" name="bnumber">
-		</div>
-	</div>
-	<div class="form-group">
+    <div class="form-group">
+        <label for="bnumber" class="col-sm-2 control-label">Batch Number</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="usernameValue" placeholder="please input batch number" name="bnumber">
+        </div>
+    </div>
+    <div class="form-group">
         <label for="pmodel" class="col-sm-2 control-label">Phone Model</label>
         <div class="col-sm-10">
-                    <select class= "form-control"name="pmodel">
+            <select class="form-control" name="pmodel">
                         <option value="Aphone">Aphone</option>
                         <option value="Xphone">Xphone</option>
                         </select>
         </div>
     </div>
-	<div class="form-group">
-		<label for="channellist" class="col-sm-2 control-label">Channel</label>
-		<div class="col-sm-10">
-					<select class= "form-control" name="suppliertype">
+    <div class="form-group">
+        <label for="channellist" class="col-sm-2 control-label">Channel</label>
+        <div class="col-sm-10">
+            <select class="form-control" name="suppliertype">
 						<option value="battery">Battery</option>
 						<option value="display">Display</option>
 						<option value="cpu"s>Cpu</option>
@@ -49,22 +45,20 @@
 						<option value="logistics">Logistics</option>
 						<option value="sales">Sales</option>
       				</select>
-		</div>
-	</div>
-	<div class="form-group">
-		<div class="col-sm-offset-2 col-sm-10">
-			<input type="hidden" name="submitted" value="true">
-			<button type="submit" class="btn btn-default">Submit</button>
-		</div>
-	</div>
-	{{if .CompareFailed}}
-	<div class="col-sm-offset-2 col-sm-10 alert alert-danger alert-dismissable">
-		<button type="button" class="close" data-dismiss="alert"
-				aria-hidden="true">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="hidden" name="submitted" value="true">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </div>
+    {{if .CompareFailed}}
+    <div class="col-sm-offset-2 col-sm-10 alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
 			&times;
-		</button>
-		you must input a batch number bigger than maximum value of batch number now, please try again.
-	</div>
-	{{end}}
+		</button> you must input a batch number bigger than maximum value of batch number now, please try again.
+    </div>
+    {{end}}
 </form>
 {{end}}

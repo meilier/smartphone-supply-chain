@@ -1,10 +1,7 @@
-{{define "title"}}Request{{end}}
-
-{{define "body"}}
+{{define "title"}}Request{{end}} {{define "body"}}
 <h1>Add Supplier Information In This Page</h1>
 
-{{ if .Response }}
-{{ if .Success }}
+{{ if .Response }} {{ if .Success }}
 <div class="alert alert-success" role="alert">
     Successful request, transaction ID: {{ .TransactionId }}
 </div>
@@ -12,42 +9,37 @@
 <div class="alert alert-danger" role="alert">
     Unable to submit the request, retry later.
 </div>
-{{ end }}
-{{ end }}
+{{ end }} {{ end }}
 
 <form class="form-horizontal" role="form">
     <div class="form-group">
         <label for="name" class="col-sm-2 control-label">Logistics Name</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="Name" 
-                   placeholder="please input logistics name" name="name">
+            <input type="text" class="form-control" id="Name" placeholder="please input logistics name" name="name">
         </div>
     </div>
     <div class="form-group">
         <label for="slocation" class="col-sm-2 control-label">Transit</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="supplierLocation" 
-                   placeholder="please input logistics location" name="location">
+            <input type="text" class="form-control" id="supplierLocation" placeholder="please input logistics location" name="location">
         </div>
     </div>
     <div class="form-group">
         <label for="slocation" class="col-sm-2 control-label">Manager</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="supplierLocation" 
-                   placeholder="please input the manager" name="manager">
+            <input type="text" class="form-control" id="supplierLocation" placeholder="please input the manager" name="manager">
         </div>
     </div>
     <div class="form-group">
         <label for="slocation" class="col-sm-2 control-label">Date</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="supplierLocation" 
-                   placeholder="example : 2018-08-21 " name="date">
+            <input type="text" class="form-control" id="supplierLocation" placeholder="example : 2018-08-21 " name="date">
         </div>
     </div>
     <div class="form-group">
         <label for="snumber" class="col-sm-2 control-label">Batch Number</label>
         <div class="col-sm-10">
-                    <select class= "form-control"name="bnumber">
+            <select class="form-control" name="bnumber">
                         {{range $index, $element:= .BatchInfo}}
                             <option value={{$element}}>{{$element}}</option>
                         {{end}}

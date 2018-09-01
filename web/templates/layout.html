@@ -1,6 +1,7 @@
 {{define "layout"}}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,29 +15,27 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body>
 
-<nav class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainMenu" aria-expanded="false">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainMenu" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">
-                <img src="/assets/images/chainhero.png" alt="chainHero" title="chainHero"/>
-                Smartphone Supply Chain
-            </a>
-        </div>
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/images/chainhero.png" alt="chainHero" title="chainHero" /> Smartphone Supply Chain
+                </a>
+            </div>
 
-        <div class="collapse navbar-collapse" id="mainMenu">
-            <ul class="nav navbar-nav">
+            <div class="collapse navbar-collapse" id="mainMenu">
+                <ul class="nav navbar-nav">
 
-                {{if .OrgName}}
-                    {{if eq .OrgName "smartphone"}}
-                    {{if .LoginStatus}}
+                    {{if .OrgName}} {{if eq .OrgName "smartphone"}} {{if .LoginStatus}}
                     <li><a href="/home.html">Home</a></li>
 
                     <li class="dropdown">
@@ -76,12 +75,7 @@
                     </li>
                     {{else}}
                     <li><a href="/login.html">Login</a></li>
-                    {{end}}
-                    {{end}}
-                {{end}}
-                {{if .OrgName}}
-                    {{if eq .OrgName "battery"}}
-                    {{if .LoginStatus}}
+                    {{end}} {{end}} {{end}} {{if .OrgName}} {{if eq .OrgName "battery"}} {{if .LoginStatus}}
                     <li><a href="/homebattery.html">Home</a></li>
 
                     <li class="dropdown">
@@ -118,102 +112,81 @@
                     </li>
                     {{else}}
                     <li><a href="/login.html">Login</a></li>
-                    {{end}}
-                    {{end}}
-                {{end}}
-            {{if .OrgName}}
-                {{if eq .OrgName "display"}}
-                {{if .LoginStatus}}
-                <li><a href="/homebattery.html">Home</a></li>
+                    {{end}} {{end}} {{end}} {{if .OrgName}} {{if eq .OrgName "display"}} {{if .LoginStatus}}
+                    <li><a href="/homebattery.html">Home</a></li>
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         AddInfo
                         <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/addcompany.html">AddCompanyInfo</a></li>
-                        <li><a href="/addcompanysubcomponent.html">AddSubcomponentInfo</a></li>
-                    </ul>
-                </li>
+                        <ul class="dropdown-menu">
+                            <li><a href="/addcompany.html">AddCompanyInfo</a></li>
+                            <li><a href="/addcompanysubcomponent.html">AddSubcomponentInfo</a></li>
+                        </ul>
+                    </li>
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         GetInfo
                         <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/getcompany.html">GetCompanyInfo</a></li>
-                    </ul>
-                </li>
+                        <ul class="dropdown-menu">
+                            <li><a href="/getcompany.html">GetCompanyInfo</a></li>
+                        </ul>
+                    </li>
 
 
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         Hey, {{.Username}}
                         <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/logout.html">Logout</a></li>
-                    </ul>
-                </li>
-                {{else}}
-                <li><a href="/login.html">Login</a></li>
-                {{end}}
-                {{end}}
-            {{end}}
+                        <ul class="dropdown-menu">
+                            <li><a href="/logout.html">Logout</a></li>
+                        </ul>
+                    </li>
+                    {{else}}
+                    <li><a href="/login.html">Login</a></li>
+                    {{end}} {{end}} {{end}} {{if .OrgName}} {{if eq .OrgName "cpu"}} {{if .LoginStatus}}
+                    <li><a href="/homebattery.html">Home</a></li>
 
-        {{if .OrgName}}
-            {{if eq .OrgName "cpu"}}
-            {{if .LoginStatus}}
-            <li><a href="/homebattery.html">Home</a></li>
-
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     AddInfo
                     <b class="caret"></b>
                 </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/addcompany.html">AddCompanyInfo</a></li>
-                    <li><a href="/addcompanysubcomponent.html">AddSubcomponentInfo</a></li>
-                </ul>
-            </li>
+                        <ul class="dropdown-menu">
+                            <li><a href="/addcompany.html">AddCompanyInfo</a></li>
+                            <li><a href="/addcompanysubcomponent.html">AddSubcomponentInfo</a></li>
+                        </ul>
+                    </li>
 
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     GetInfo
                     <b class="caret"></b>
                 </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/getcompany.html">GetCompanyInfo</a></li>
-                </ul>
-            </li>
+                        <ul class="dropdown-menu">
+                            <li><a href="/getcompany.html">GetCompanyInfo</a></li>
+                        </ul>
+                    </li>
 
 
 
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     Hey, {{.Username}}
                     <b class="caret"></b>
                 </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/logout.html">Logout</a></li>
-                </ul>
-            </li>
-            {{else}}
-            <li><a href="/login.html">Login</a></li>
-            {{end}}
-            {{end}}
-        {{end}}
-
-
-
-
-                
-                {{if .OrgName}}
-                    {{if eq .OrgName "assembly"}}
-                    {{if .LoginStatus}}
+                        <ul class="dropdown-menu">
+                            <li><a href="/logout.html">Logout</a></li>
+                        </ul>
+                    </li>
+                    {{else}}
+                    <li><a href="/login.html">Login</a></li>
+                    {{end}} {{end}} {{end}} {{if .OrgName}} {{if eq .OrgName "assembly"}} {{if .LoginStatus}}
                     <li><a href="/homeassembly.html">Home</a></li>
                     <li><a href="/addassembly.html">AddAssemblyInfo</a></li>
                     <li><a href="/getassembly.html">GetAssemblyInfo</a></li>
@@ -228,12 +201,7 @@
                     </li>
                     {{else}}
                     <li><a href="/login.html">Login</a></li>
-                    {{end}}
-                    {{end}}
-                {{end}}
-                {{if .OrgName}}
-                    {{if eq .OrgName "logistics"}}
-                    {{if .LoginStatus}}
+                    {{end}} {{end}} {{end}} {{if .OrgName}} {{if eq .OrgName "logistics"}} {{if .LoginStatus}}
                     <li><a href="/homelogistics.html">Home</a></li>
                     <li><a href="/addlogistics.html">AddLogisticsInfo</a></li>
                     <li><a href="/getlogistics.html">GetLogisticsInfo</a></li>
@@ -248,12 +216,7 @@
                     </li>
                     {{else}}
                     <li><a href="/login.html">Login</a></li>
-                    {{end}}
-                    {{end}}
-                {{end}}
-                {{if .OrgName}}
-                    {{if eq .OrgName "sales"}}
-                    {{if .LoginStatus}}
+                    {{end}} {{end}} {{end}} {{if .OrgName}} {{if eq .OrgName "sales"}} {{if .LoginStatus}}
                     <li><a href="/homesales.html">Home</a></li>
                     <li><a href="/addsales.html">AddSalesInfo</a></li>
                     <li><a href="/getsales.html">GetSalesInfo</a></li>
@@ -268,30 +231,29 @@
                     </li>
                     {{else}}
                     <li><a href="/login.html">Login</a></li>
-                    {{end}}
-                    {{end}}
-                {{end}}
+                    {{end}} {{end}} {{end}}
 
 
-                
-                <li><a href="/login.html">Login</a></li>
-                <li><a href="/queryphoneinfo.html">Query Phone</a></li>
-            </ul>
+
+                    <li><a href="/login.html">Login</a></li>
+                    <li><a href="/queryphoneinfo.html">Query Phone</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<main class="container">
-    {{template "body" .}}
-</main>
+    <main class="container">
+        {{template "body" .}}
+    </main>
 
-<footer class="container text-center">
-    Smartphone supply chain using the Hyperledger Fabric SDK Go developed by <a href="https://github.com/meilier/smartphone-supply-chain">Arclab</a>.
-    <br>
-</footer>
+    <footer class="container text-center">
+        Smartphone supply chain using the Hyperledger Fabric SDK Go developed by <a href="https://github.com/meilier/smartphone-supply-chain">Arclab</a>.
+        <br>
+    </footer>
 
-<script src="/assets/js/jquery-3.2.1.min.js"></script>
-<script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
 </body>
+
 </html>
 {{end}}
