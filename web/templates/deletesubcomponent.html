@@ -10,7 +10,7 @@
     Unable to submit the request, retry later.
 </div>
 {{ end }} {{ end }} {{if not .Hide}}
-<form class="form-horizontal" role="form" action="deletesubcomponent.html" method="post">
+<form class="form-horizontal" role="form">
     <div class="form-group">
         <label for="snumber" class="col-sm-2 control-label">Batch Number</label>
         <div class="col-sm-10">
@@ -30,7 +30,7 @@
     </div>
 </form>
 {{end}} {{$c := .CompanyInfo}} {{if .ShowInfo}}
-<form class="form-horizontal" role="form" action="deletesubcomponent.html" method="post">
+<form class="form-horizontal" role="form">
     <div class="form-group">
         <label for="snumber" class="col-sm-2 control-label">Batch Number</label>
         <div class="col-sm-10">
