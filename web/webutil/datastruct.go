@@ -131,6 +131,7 @@ func init() {
 	lwhop := make(map[string]BaseFuncInfo)
 	lwhop["AddSupplier"] = BaseFuncInfo{"batterychannel", "addbattery", "addSupplier"}
 	lwhop["GetSupplier"] = BaseFuncInfo{"batterychannel", "addbattery", "getSupplier"}
+	lwhop["DeleteSupplier"] = BaseFuncInfo{"batterychannel", "addbattery", "deleteSupplier"}
 	lwhop["AddCompanyInfo"] = BaseFuncInfo{"batterychannel", "addbattery", "addCompanyInfo"}
 	lwhop["GetCompanyInfo"] = BaseFuncInfo{"batterychannel", "addbattery", "getCompanyInfo"}
 	lwhop["GetBatchBattery"] = BaseFuncInfo{"batterychannel", "addbattery", "getBatchInfo"}
@@ -142,6 +143,7 @@ func init() {
 	lwhop1 := make(map[string]BaseFuncInfo)
 	lwhop1["AddSupplier"] = BaseFuncInfo{"displaychannel", "adddisplay", "addSupplier"}
 	lwhop1["GetSupplier"] = BaseFuncInfo{"displaychannel", "adddisplay", "getSupplier"}
+	lwhop1["DeleteSupplier"] = BaseFuncInfo{"displaychannel", "adddisplay", "deleteSupplier"}
 	lwhop1["AddCompanyInfo"] = BaseFuncInfo{"displaychannel", "adddisplay", "addCompanyInfo"}
 	lwhop1["GetCompanyInfo"] = BaseFuncInfo{"displaychannel", "adddisplay", "getCompanyInfo"}
 	lwhop1["GetBatchDisplay"] = BaseFuncInfo{"displaychannel", "adddisplay", "getBatchInfo"}
@@ -153,6 +155,7 @@ func init() {
 	lwhop2 := make(map[string]BaseFuncInfo)
 	lwhop2["AddSupplier"] = BaseFuncInfo{"cpuchannel", "addcpu", "addSupplier"}
 	lwhop2["GetSupplier"] = BaseFuncInfo{"cpuchannel", "addcpu", "getSupplier"}
+	lwhop2["DeleteSupplier"] = BaseFuncInfo{"cpuchannel", "addcpu", "deleteSupplier"}
 	lwhop2["AddCompanyInfo"] = BaseFuncInfo{"cpuchannel", "addcpu", "addCompanyInfo"}
 	lwhop2["GetCompanyInfo"] = BaseFuncInfo{"cpuchannel", "addcpu", "getCompanyInfo"}
 	lwhop2["GetBatchCpu"] = BaseFuncInfo{"cpuchannel", "addcpu", "getBatchInfo"}

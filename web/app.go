@@ -35,6 +35,7 @@ func Serve(app *controllers.Application) {
 	http.HandleFunc("/addcompany.html", app.AddCompanyHandler)
 	http.HandleFunc("/getcompany.html", app.GetCompanyHandler)
 	http.HandleFunc("/addcompanysubcomponent.html", app.AddCompanySubcomponentHandler)
+	http.HandleFunc("/deletesubcomponent.html", app.DeleteCompanySubcomponentHandler)
 
 	//assembly
 	http.HandleFunc("/homeassembly.html", app.HomeAssemblyHandler)

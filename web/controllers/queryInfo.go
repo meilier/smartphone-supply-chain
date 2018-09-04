@@ -171,7 +171,8 @@ func (app *Application) GetPhoneSupplierInfo(oName, uName, operation, key string
 
 		companyInfo, _ := fSetup.QueryCC(cn, ccn, fcn, []byte(key))
 		json.Unmarshal([]byte(companyInfo), &cInfo)
-		fmt.Println("companyInfo is cinfo is", companyInfo, cInfo)
+		fmt.Println("companyInfo is", companyInfo)
+		fmt.Println("wzx cinfo is", cInfo)
 	}
 	// txid, err := app.Fabric.InvokeSupplier(passargs)
 

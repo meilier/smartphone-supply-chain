@@ -51,8 +51,7 @@
         <label for="pmodel" class="col-sm-2 control-label">Phone Model</label>
         <div class="col-sm-10">
             <select class="form-control" name="dpmodel">
-                        <option value="Aphone">Aphone</option>
-                        <option value="Xphone">Xphone</option>
+                        <option value={{.PhoneModel}}>{{.PhoneModel}}</option>
                         </select>
         </div>
     </div>
@@ -60,12 +59,7 @@
         <label for="channellist" class="col-sm-2 control-label">Channel</label>
         <div class="col-sm-10">
             <select class="form-control" name="dsuppliertype">
-                        <option value="battery">Battery</option>
-                        <option value="display">Display</option>
-                        <option value="cpu"s>Cpu</option>
-                        <option value="assembly">Assembly</option>
-                        <option value="logistics">Logistics</option>
-                        <option value="sales">Sales</option>
+                        <option value={{.Channel}}>{{.Channel}}</option>
                         </select>
         </div>
     </div>
