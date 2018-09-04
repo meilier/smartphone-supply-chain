@@ -19,7 +19,7 @@ type Application struct {
 func renderTemplate(w http.ResponseWriter, r *http.Request, templateName string, data interface{}) {
 	lp := filepath.Join("web", "templates", "layout.html")
 	tp := filepath.Join("web", "templates", templateName)
-
+	fmt.Println("template name is ", templateName)
 	// Return a 404 if the template doesn't exist
 	info, err := os.Stat(tp)
 	if err != nil {
@@ -52,10 +52,12 @@ func renderTemplate(w http.ResponseWriter, r *http.Request, templateName string,
 	fmt.Println("uname is ", uname)
 	if uname != "" {
 		//set data
+		fmt.Println("no zero")
 		newData["Username"] = uname
 		newData["LoginStatus"] = true
 		newData["OrgName"] = uorg
 	} else {
+		fmt.Println("zero")
 		newData["Username"] = ""
 		newData["OrgName"] = ""
 		newData["LoginStatus"] = false

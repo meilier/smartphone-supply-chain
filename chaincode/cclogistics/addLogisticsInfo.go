@@ -10,10 +10,11 @@ package main
  */
 import (
 	"encoding/json"
-	"fmt"
-	"strconv"
 	"errors"
+	"fmt"
 	"regexp"
+	"strconv"
+
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
 )
@@ -75,55 +76,54 @@ func (t *AddLogisticsInfoChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.
 // // key smartisan U2 pro - battery
 // ============================================================
 
-func getBatchSerial(batch string) (int,error){
+func getBatchSerial(batch string) (int, error) {
 	pattern := `[\d]+`
 	reg := regexp.MustCompile(pattern)
 	serialString := reg.FindAllString(batch, 1)
 
-	if len(serialString)==0{
-		return -1 , errors.New("No Serial in Batch")
+	if len(serialString) == 0 {
+		return -1, errors.New("No Serial in Batch")
 	}
 
-	serial , _ := strconv.Atoi(serialString[0])
+	serial, _ := strconv.Atoi(serialString[0])
 
-	return serial , nil
+	return serial, nil
 }
 
-
 func (t *AddLogisticsInfoChaincode) addBatchInfo(APIstub shim.ChaincodeStubInterface, args []string) pb.Response {
-    if len(args)!=2{
-        return shim.Error("Incorrect number of arguments. Expecting 2")
-    }
+	if len(args) != 2 {
+		return shim.Error("Incorrect number of arguments. Expecting 2")
+	}
 
-    batch:=args[1]
-    batchSerial ,err := getBatchSerial(batch)
+	batch := args[1]
+	batchSerial, err := getBatchSerial(batch)
 
-    if err!= nil {
-        return shim.Error(err.Error())
-    }
+	if err != nil {
+		return shim.Error(err.Error())
+	}
 
-    batchInfoAsBytes,err := APIstub.GetState(args[0])
-    if err!= nil {
-        return shim.Error(err.Error())
-    }
+	batchInfoAsBytes, err := APIstub.GetState(args[0])
+	if err != nil {
+		return shim.Error(err.Error())
+	}
 
-    var batchInfo BatchInfo
-    json.Unmarshal(batchInfoAsBytes,&batchInfo)
+	var batchInfo BatchInfo
+	json.Unmarshal(batchInfoAsBytes, &batchInfo)
 
-    if(len(batchInfo.Batch)>0){
-    	lastBatch := batchInfo.Batch[len(batchInfo.Batch) -1]
-    	lastSerial , _ := getBatchSerial(lastBatch)
+	if len(batchInfo.Batch) > 0 {
+		lastBatch := batchInfo.Batch[len(batchInfo.Batch)-1]
+		lastSerial, _ := getBatchSerial(lastBatch)
 
-    	if lastSerial > batchSerial {
-    		return shim.Error("The new batchSerial should be larger than the latest batchSerial")
-    	}
-    }
+		if lastSerial > batchSerial {
+			return shim.Error("The new batchSerial should be larger than the latest batchSerial")
+		}
+	}
 
-    batchInfo.Batch=append(batchInfo.Batch,batch)
-    batchInfoAsBytes,_ = json.Marshal(batchInfo)
-    APIstub.PutState(args[0],batchInfoAsBytes)
+	batchInfo.Batch = append(batchInfo.Batch, batch)
+	batchInfoAsBytes, _ = json.Marshal(batchInfo)
+	APIstub.PutState(args[0], batchInfoAsBytes)
 
-    return shim.Success(nil)
+	return shim.Success(nil)
 
 }
 

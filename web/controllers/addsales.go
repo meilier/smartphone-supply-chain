@@ -124,3 +124,75 @@ func (app *Application) GetSalesHandler(w http.ResponseWriter, r *http.Request) 
 	data["BatchInfo"] = batch
 	renderTemplate(w, r, "getsales.html", data)
 }
+
+func (app *Application) DeleteSalesHandler(w http.ResponseWriter, r *http.Request) {
+	var data map[string]interface{}
+	data = make(map[string]interface{})
+	uName := webutil.MySession.GetUserName(r)
+	oName := webutil.MySession.GetOrgName(r)
+	//oName := webutil.MySession.GetOrgName(r)
+	if len(uName) == 0 {
+		http.Redirect(w, r, "./login.html", 302)
+		return
+	}
+	// get supplierinfo first
+	if r.FormValue("submitted") == "true" {
+		//befor send request we need to check session
+		uName := webutil.MySession.GetUserName(r)
+		oName := webutil.MySession.GetOrgName(r)
+
+		//add properties to args
+		//TODO: here to map batchinfo to data
+		snumber := r.FormValue("snumber")
+		key := snumber
+		saInfo := app.GetPhoneSalesInfo(oName, uName, key)
+		fmt.Println("cinfo is", saInfo)
+		data["SerialNumber"] = snumber
+		data["SalesInfo"] = saInfo
+		data["ShowInfo"] = true
+		data["Hide"] = true
+
+		// txid, err := app.Fabric.InvokeSupplier(passargs)
+	}
+	if r.FormValue("delete") == "true" {
+		uName := webutil.MySession.GetUserName(r)
+		oName := webutil.MySession.GetOrgName(r)
+		if fSetup, ok := app.Fabric[uName]; ok {
+			//befor send request we need to check session
+			var passargs []string
+
+			var cn string
+			var ccn string
+			var fcn string
+			//find cfg name
+			for _, v := range webutil.Orgnization[oName] {
+				if v.UserName == uName {
+					cn = v.UserOperation["DeleteSales"].ChannelName
+					ccn = v.UserOperation["DeleteSales"].CCName
+					fcn = v.UserOperation["DeleteSales"].Fcn
+					break
+				}
+			}
+			key1 := webutil.PhoneType
+			key2 := r.FormValue("snumber")
+			key := key1 + key2
+
+			//add properties to args
+			passargs = append(passargs, key)
+			fmt.Println("add sub aaaa", cn, ccn, fcn)
+			txid, err := fSetup.DeleteCC(cn, ccn, fcn, passargs)
+			if err != nil {
+				http.Error(w, "Unable to invoke hello in the blockchain", 500)
+			}
+			data["TransactionId"] = txid
+			data["Success"] = true
+			data["Response"] = true
+		}
+		// txid, err := app.Fabric.InvokeSupplier(passargs)
+	}
+	fmt.Println("org and username", oName, uName)
+	batch := app.GetBatchInfo(oName, uName)
+	fmt.Println("wzx batch is", batch)
+	data["BatchInfo"] = batch
+	renderTemplate(w, r, "deletesales.html", data)
+}

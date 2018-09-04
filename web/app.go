@@ -41,16 +41,19 @@ func Serve(app *controllers.Application) {
 	http.HandleFunc("/homeassembly.html", app.HomeAssemblyHandler)
 	http.HandleFunc("/getassembly.html", app.GetAssemblyHandler)
 	http.HandleFunc("/addassembly.html", app.AddAssemblyHandler)
+	http.HandleFunc("/deleteassembly.html", app.DeleteAssemblyHandler)
 
 	//logistics
 	http.HandleFunc("/homelogistics.html", app.HomeLogisticsHandler)
 	http.HandleFunc("/getlogistics.html", app.GetLogisticsHandler)
 	http.HandleFunc("/addlogistics.html", app.AddLogisticsHandler)
+	http.HandleFunc("/deletelogistics.html", app.DeleteLogisticsHandler)
 
 	//sales
 	http.HandleFunc("/homesales.html", app.HomeSalesHandler)
 	http.HandleFunc("/getsales.html", app.GetSalesHandler)
 	http.HandleFunc("/addsales.html", app.AddSalesHandler)
+	http.HandleFunc("/deletesales.html", app.DeleteSalesHandler)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/login.html", http.StatusTemporaryRedirect)

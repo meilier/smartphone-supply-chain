@@ -167,6 +167,7 @@ func init() {
 	wyhop := make(map[string]BaseFuncInfo)
 	wyhop["AddAssembly"] = BaseFuncInfo{"assemblychannel", "addassembly", "addAssemblyInfo"}
 	wyhop["GetAssembly"] = BaseFuncInfo{"assemblychannel", "addassembly", "getAssemblyInfo"}
+	wyhop["DeleteAssembly"] = BaseFuncInfo{"assemblychannel", "addassembly", "deleteAssemblyInfo"}
 	wyhop["GetBatchAssembly"] = BaseFuncInfo{"assemblychannel", "addassembly", "getBatchInfo"}
 	wyhChannel := []string{"assemblychannel"}
 	mwyh := OrgMember{"wyh", "arclabw401wyh", wyhChannel, wyhop, "./profile/assembly/connection-profile-wyh.yaml"}
@@ -176,6 +177,7 @@ func init() {
 	yzxop := make(map[string]BaseFuncInfo)
 	yzxop["AddLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "addLogistics"}
 	yzxop["GetLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "getLogistics"}
+	yzxop["DeleteLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "deleteLogistics"}
 	yzxop["GetBatchLogistics"] = BaseFuncInfo{"logisticschannel", "addlogistics", "getBatchInfo"}
 	yzxChannel := []string{"logisticschannel"}
 	myzx := OrgMember{"yzx", "arclabw401yzx", yzxChannel, yzxop, "./profile/logistics/connection-profile-yzx.yaml"}
@@ -185,6 +187,7 @@ func init() {
 	xjxop := make(map[string]BaseFuncInfo)
 	xjxop["AddSales"] = BaseFuncInfo{"saleschannel", "addsales", "addSalesInfo"}
 	xjxop["GetSales"] = BaseFuncInfo{"saleschannel", "addsales", "getSalesInfo"}
+	xjxop["DeleteSales"] = BaseFuncInfo{"saleschannel", "addsales", "deleteSalesInfo"}
 	xjxop["GetBatchSales"] = BaseFuncInfo{"saleschannel", "addsales", "getBatchInfo"}
 	xjxChannel := []string{"saleschannel"}
 	mxjx := OrgMember{"xjx", "arclabw401xjx", xjxChannel, xjxop, "./profile/sales/connection-profile-xjx.yaml"}

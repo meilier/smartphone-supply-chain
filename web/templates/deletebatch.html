@@ -43,8 +43,11 @@
 </form>
 {{end}} {{if .ShowBatch}}
 
-<div class="text-center page-header text-danger">
-    <h3 class="active">Delete batch will affect all channels data, supplier need to upload information again. Make sure you know what you are doning</h3>
+
+<div class="col-sm-offset-2 col-sm-10 alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+        &times;
+    </button>Delete batch will affect all channels data, supplier need to upload information again. Make sure you know what you are doing
 </div>
 <form class="form-horizontal" role="form" action="deletebatch.html" method="post">
     <div class="form-group">

@@ -1,0 +1,58 @@
+{{define "title"}}Home{{end}} {{define "body"}}
+<div class="container">
+</div>
+{{ if .Response }} {{ if .Success }}
+<div class="alert alert-success" role="alert">
+    Delete Successfully!
+</div>
+{{ else }}
+<div class="alert alert-danger" role="alert">
+    Unable to submit the request, retry later.
+</div>
+{{ end }} {{ end }} {{if not .Hide}}
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label for="snumber" class="col-sm-2 control-label">Batch Number</label>
+        <div class="col-sm-10">
+            <select class="form-control" name="bnumber">
+                {{range $index, $element:= .BatchInfo}}
+                <option value={{$element}}>{{$element}}</option>
+                {{end}}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="hidden" name="submitted" value="true">
+            <button type="submit" class="btn btn-default">Send The Request</button>
+        </div>
+    </div>
+</form>
+{{end}} {{$c := .AssemblyInfo}} {{if .ShowInfo}}
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label for="snumber" class="col-sm-2 control-label">Batch Number</label>
+        <div class="col-sm-10">
+            <select class="form-control" name="bnumber">
+                        <option value={{.BatchNumber}}>{{.BatchNumber}}</option>
+                </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="snumber" class="col-sm-2 control-label">Assembly Plant Name</label>
+        <div class="col-sm-10">
+            <select class="form-control" name="assemblyname">
+                            <option value={{$c.Name}}>{{$c.Name}}</option>
+                    </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="hidden" name="delete" value="true">
+            <button type="submit" class="btn btn-default">Delete</button>
+        </div>
+    </div>
+</form>
+{{end}} {{end}}

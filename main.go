@@ -17,7 +17,7 @@ func main() {
 	// Definition of the Fabric SDK properties
 	for k, am := range webutil.Orgnization {
 		//for _, am := range webutil.Orgnization {
-		if k == "battery" || k == "smartphone" {
+		if k == "sales" || k == "smartphone" {
 			for _, user := range am {
 				fabricSetups[user.UserName] = &blockchain.FabricSetup{
 					User:       user.UserName,
@@ -31,8 +31,8 @@ func main() {
 					return
 				}
 			}
-
 		}
+
 	}
 
 	// Close SDK
