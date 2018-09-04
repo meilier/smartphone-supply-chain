@@ -1,19 +1,27 @@
 # smartphone-supply-chain
 
-## 1. addsupplier
+## 1. blockchain
 
-add fisrt-tier suppliers into ledger
+fabric sdk go interface
 
-## 2. assemblyinfo 
+## 2. chaincode 
 
-add assembly information into ledger
+chaincode installed in baas
 
-## 3. ccbattery
+## 3. profile
 
-add sencond-tier supplliers and sub-components info to ledger
+connection-profile.yaml for users in baas
 
-### 3.1 todo
+## 4. web
 
-add any other possible sub-components information to ledger , not just battery
+go web application
+
+## 5. vendor 
+
+go dependencyies
+
+## 6. main.go
+
+main function
 
 
